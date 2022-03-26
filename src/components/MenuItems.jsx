@@ -22,6 +22,9 @@ function MenuItems() {
       <Menu.Item key="/gameQ/lobbies">
         <NavLink to="/gameQ/lobbies">Game</NavLink>
       </Menu.Item>
+      <Menu.Item key="/lobbies">
+        <NavLink to="/lobbies"> Lobbies</NavLink>
+      </Menu.Item>
     </Menu>
   );
 }
