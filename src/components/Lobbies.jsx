@@ -21,11 +21,11 @@ const styles = {
     height: "39px",
     left: "721px",
     top: "65px",
-    "font-family": "Inter",
-    "font-style": "normal",
-    "font-weight": "400",
-    "font-size": "32px",
-    "line-height": "39px",
+    fontFamily: "Inter",
+    fontStyle: "normal",
+    fontWeight: "400",
+    fontSize: "32px",
+    lineHeight: "39px",
     color: "#D0D0CF",
   },
 
@@ -50,9 +50,9 @@ const styles = {
   nfts: {
     width: "1880px",
     height: "260px",
-    "margin-top": "510px",
-    "margin-left": "20px",
-    "max-height": "260px",
+    marginTop: "510px",
+    marginLeft: "20px",
+    maxHeight: "260px",
   },
 
   play: {
@@ -62,9 +62,8 @@ const styles = {
     left: "834px",
     top: "839px",
     background: "#F7931E",
-    "box-shadow":
-      "4px 4px 10px rgba(255, 201, 64, 0.25), inset 10px 10px 20px #FFC940",
-    "border-radius": "15px",
+    boxShadow: "4px 4px 10px rgba(255, 201, 64, 0.25), inset 10px 10px 20px #FFC940",
+    borderRadius: "15px",
   },
 
   coin: {
@@ -82,9 +81,9 @@ const styles = {
     height: "30px",
     left: "312px",
     top: "265px",
-    "font-weight": "400",
-    "font-size": "25px",
-    "line-height": "30px",
+    fontWeight: "400",
+    fontSize: "25px",
+    lineHeight: "30px",
     color: "#D0D0CF",
   },
 
@@ -96,9 +95,9 @@ const styles = {
     top: "139px",
 
     border: "1px solid #6C6661",
-    "box-sizing": "border-box",
+    boxSizing: "border-box",
     filter: "drop-shadow(-11px 4px 25px rgba(31, 31, 31, 0.6))",
-    "border-radius": "20px",
+    borderRadius: "20px",
   },
   selectedNft: {
     width: "100%",
@@ -112,9 +111,9 @@ const styles = {
     top: "139px",
 
     border: "1px solid #6C6661",
-    "box-sizing": "border-box",
+    boxSizing: "border-box",
     filter: "drop-shadow(-11px 4px 25px rgba(31, 31, 31, 0.6))",
-    "border-radius": "20px",
+    borderRadius: "20px",
   },
   player2: {
     position: "absolute",
@@ -122,9 +121,9 @@ const styles = {
     height: "30px",
     left: "1516px",
     top: "265px",
-    "font-weight": "400",
-    "font-size": "25px",
-    "line-height": "30px",
+    fontWeight: "400",
+    fontSize: "25px",
+    lineHeight: "30px",
     color: "#D0D0CF",
   },
 
@@ -135,9 +134,8 @@ const styles = {
     left: "500px",
     top: "839px",
     background: "#F7931E",
-    "box-shadow":
-      "4px 4px 10px rgba(255, 201, 64, 0.25), inset 10px 10px 20px #FFC940",
-    "border-radius": "15px",
+    boxShadow: "4px 4px 10px rgba(255, 201, 64, 0.25), inset 10px 10px 20px #FFC940",
+    borderRadius: "15px",
   },
 };
 

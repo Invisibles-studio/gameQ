@@ -21,15 +21,15 @@ const styles = {
     gap: "10px",
     left: "20px",
     top: "510px",
-    "max-height": "260px",
+    maxHeight: "260px",
   },
 
   card: {
     width: "125px",
     height: "125px",
     border: "1px solid #6C6661",
-    "box-sizing": "border-box",
-    "border-radius": "20px",
+    boxSizing: "border-box",
+    borderRadius: "20px",
   },
 
   nfts: {
