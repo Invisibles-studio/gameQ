@@ -163,7 +163,7 @@ export default function Lobbies() {
     await tx.wait();
     console.log(tx);
     if (isOwner) {
-      signContract(nft);
+      return signContract(nft);
     } else {
       nonOwnerSignContract(nft);
     }
@@ -181,8 +181,16 @@ export default function Lobbies() {
       },
     };
     console.log(options);
-    const trn = await Moralis.executeFunction(options);
-    await trn.wait();
+    try{
+      const trn = await Moralis.executeFunction(options);
+      await trn.wait();
+      return true;
+    } catch (e){
+      console.log(e);
+      return false;
+    }
+    
+    
     console.log(trn);
   }
 
@@ -195,28 +203,35 @@ export default function Lobbies() {
     getValue((x, data) => {
       if (x == null) {
         console.log("Lobby not founded!");
-        setValue(
-          "1",
-          userID,
-          tokenAddress,
-          tokenID,
-          null,
-          tokenImage,
-          (json) => {
-            if (json == null) return;
-            if (json.hasOwnProperty("player-2")) {
-              const image2 = json["player-2"]["nftTransfer"]["tokenImage"];
-              document.getElementById("selectedImg2").src = image2;
-            }
-            console.log(json);
-          },
-        );
-        transfer(true);
-        console.log("Lobby was created!");
+        transfer(true).then(result => {
+          if (result){
+            setValue(
+              "1",
+              userID,
+              tokenAddress,
+              tokenID,
+              null,
+              tokenImage,
+              (json) => {
+                if (json == null) return;
+                if (json.hasOwnProperty("player-2")) {
+                  const image2 = json["player-2"]["nftTransfer"]["tokenImage"];
+                  document.getElementById("selectedImg2").src = image2;
+                }
+                console.log(json);
+                document.getElementById("GameStatus").innerHTML = "Game is start!";
+              },
+            );
+            console.log("Lobby was created!");
+            document.getElementById("GameStatus").innerHTML = "Waiting for the player";
+          }
+        })
+       
       } else {
         connectToLobby(x, userID, tokenAddress, tokenID, tokenImage);
         drawImage2NFT(data, "1");
         console.log("Connected to lobby!");
+        document.getElementById("GameStatus").innerHTML = "Game is start!";
         transfer();
       }
 
@@ -248,7 +263,7 @@ export default function Lobbies() {
 
   return (
     <div style={styles.screen1}>
-      <p style={styles.selectText}>Select NFT you want to play for</p>
+      <p style={styles.selectText} id="GameStatus">Select NFT you want to play for</p>
       <div id="player1Area" style={{ display: "none" }}>
         <p style={styles.player1}>Player 1</p>
         <img id="selectedImg" style={styles.player1Nft} />

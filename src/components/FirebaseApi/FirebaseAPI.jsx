@@ -46,8 +46,11 @@ export function setValue(
   }
 }
 
-export function connectToLobby(id, userID, nft_address, nft_id, nft_image) {
+export function connectToLobby(id, userID, nft_address, nft_id, nft_image, callback = null) {
   setValue("2", userID, nft_address, nft_id, id, nft_image);
+  if (callback != null) {
+      setOnValueChanged(id, callback)
+  }
   return true;
 }
 
@@ -70,4 +73,10 @@ export function getValue(callback) {
       callback(null, null);
     }
   });
+}
+
+export function setWrittenContract(id, player){
+    set(ref(database, "Lobbies/" + id + "/signature/player-" + player), {
+        written: true
+    })
 }
