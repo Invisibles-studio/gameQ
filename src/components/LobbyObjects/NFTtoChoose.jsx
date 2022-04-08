@@ -8,7 +8,6 @@ import { useVerifyMetadata } from "../../hooks/useVerifyMetadata";
 import { createNewLobby, closeNftChoose } from "../Lobbies";
 
 //import Moralis from "moralis/types";
-
 const { Meta } = Card;
 
 const styles = {
@@ -79,6 +78,7 @@ function NFTtoChoose() {
 }
 
 function selectNft(nft) {
+  window.chosenNFT = nft;
   document.getElementById("player1Area").style.display = "inline";
   document.getElementById("player2Area").style.display = "inline";
   document.getElementById("selectedImg").src = nft?.image || "error";
