@@ -183,7 +183,8 @@ export default function Lobbies() {
     console.log(options);
     try{
       const trn = await Moralis.executeFunction(options);
-      await trn.wait();
+      const reciept = await trn.wait(3);
+      console.log(reciept);
       return true;
     } catch (e){
       console.log(e);
@@ -255,10 +256,12 @@ export default function Lobbies() {
         _buyerNftId: nft?.token_id,
       },
     };
-    console.log(options);
+    //console.log(options);
     const trn = await Moralis.executeFunction(options);
-    await trn.wait();
-    console.log(trn);
+    //console.log(trn);
+    const reciept = await trn.wait(3);
+    //const winner = reciept.block
+    console.log(reciept);
   }
 
   return (
@@ -293,292 +296,292 @@ export default function Lobbies() {
   );
 }
 
-const game_contract = "0x9Ae7F78eF17cD3F8BD87a631811a372F4E340A47";
+const game_contract = "0x7c2d321db8771ebe3937d213cb9f03af2b947c32";
 
 const ABI = [
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_id",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "_buyerContract",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_buyerNftId",
-        type: "uint256",
-      },
-    ],
-    name: "joinBet",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "_id",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "_winner",
-        type: "address",
-      },
-    ],
-    name: "joinBetEvent",
-    type: "event",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-      {
-        internalType: "uint256[]",
-        name: "",
-        type: "uint256[]",
-      },
-      {
-        internalType: "uint256[]",
-        name: "",
-        type: "uint256[]",
-      },
-      {
-        internalType: "bytes",
-        name: "",
-        type: "bytes",
-      },
-    ],
-    name: "onERC1155BatchReceived",
-    outputs: [
-      {
-        internalType: "bytes4",
-        name: "",
-        type: "bytes4",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-      {
-        internalType: "bytes",
-        name: "",
-        type: "bytes",
-      },
-    ],
-    name: "onERC1155Received",
-    outputs: [
-      {
-        internalType: "bytes4",
-        name: "",
-        type: "bytes4",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-      {
-        internalType: "bytes",
-        name: "",
-        type: "bytes",
-      },
-    ],
-    name: "onERC721Received",
-    outputs: [
-      {
-        internalType: "bytes4",
-        name: "",
-        type: "bytes4",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_choice",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "_sellerContract",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_sellerNftId",
-        type: "uint256",
-      },
-    ],
-    name: "startBet",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "_id",
-        type: "uint256",
-      },
-    ],
-    name: "startBetEvent",
-    type: "event",
-  },
-  {
-    inputs: [],
-    name: "withdraw",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    name: "bets",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "id",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "seller",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "sellerContract",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "sellerNftId",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "sellerNFTCount",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "buyer",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "buyerContract",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "buyerNftId",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "buyerNFTCount",
-        type: "uint256",
-      },
-      {
-        internalType: "enum BetBook.Side",
-        name: "sellerCh",
-        type: "uint8",
-      },
-      {
-        internalType: "enum BetBook.Side",
-        name: "result",
-        type: "uint8",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "pendingWithdraws",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_buyerContract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_buyerNftId",
+				"type": "uint256"
+			}
+		],
+		"name": "joinBet",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "_winner",
+				"type": "address"
+			}
+		],
+		"name": "joinBetEvent",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "bytes",
+				"name": "",
+				"type": "bytes"
+			}
+		],
+		"name": "onERC1155BatchReceived",
+		"outputs": [
+			{
+				"internalType": "bytes4",
+				"name": "",
+				"type": "bytes4"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "",
+				"type": "bytes"
+			}
+		],
+		"name": "onERC1155Received",
+		"outputs": [
+			{
+				"internalType": "bytes4",
+				"name": "",
+				"type": "bytes4"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "",
+				"type": "bytes"
+			}
+		],
+		"name": "onERC721Received",
+		"outputs": [
+			{
+				"internalType": "bytes4",
+				"name": "",
+				"type": "bytes4"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_choice",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_sellerContract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_sellerNftId",
+				"type": "uint256"
+			}
+		],
+		"name": "startBet",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "startBetEvent",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "bets",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "seller",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "sellerContract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "sellerNftId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "sellerNFTCount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "buyer",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "buyerContract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "buyerNftId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "buyerNFTCount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "enum BetBook.Side",
+				"name": "sellerCh",
+				"type": "uint8"
+			},
+			{
+				"internalType": "enum BetBook.Side",
+				"name": "result",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "pendingWithdraws",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
 ];
