@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, get, child, onValue } from "firebase/database";
+import { getDatabase, ref, set, get, child, onValue, remove } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD-QqxBGWTquYLsdJb37S5MuYJiuaV3c58",
@@ -32,6 +32,7 @@ export function setValue(
 ) {
   if (id == null) {
     var id = "id" + Math.random().toString(16).slice(2);
+    window.gameId = id;
   }
   set(ref(database, "Lobbies/" + id + "/player-" + player), {
     nftTransfer: {
@@ -75,8 +76,12 @@ export function getValue(callback) {
   });
 }
 
-export function setWrittenContract(id, player){
-    set(ref(database, "Lobbies/" + id + "/signature/player-" + player), {
-        written: true
+export function setGameWinner(id, address){
+    set(ref(database, "Lobbies/" + id), {
+        winner: address
     })
+}
+
+export function removeLobbie(id){
+    remove(ref(database, "Lobbies/" + id))
 }

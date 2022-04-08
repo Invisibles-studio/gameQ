@@ -3,7 +3,10 @@ import NFTtoChoose from "./LobbyObjects/NFTtoChoose";
 import ReactDOM from "react-dom";
 import { useMoralis } from "react-moralis";
 import coin from "coin.png";
-import { setValue, getValue, connectToLobby } from "./FirebaseApi/FirebaseAPI";
+import coinBack from "coin2.png";
+import { setValue, getValue, connectToLobby, setGameWinner, removeLobbie } from "./FirebaseApi/FirebaseAPI";
+import "./coinFlip.css"
+import { async } from "@firebase/util";
 
 //const [modalActive, setModelActive] = useState(true);
 
@@ -67,13 +70,16 @@ const styles = {
     borderRadius: "15px",
   },
 
+  coinBlock: {
+    position: "absolute",
+    left: "806px",
+    top: "134px",
+  },
+
   coin: {
     position: "absolute",
     width: "308px",
     height: "311px",
-    left: "806px",
-    top: "134px",
-    background: "url(coin.png)",
   },
 
   player1: {
@@ -100,10 +106,12 @@ const styles = {
     filter: "drop-shadow(-11px 4px 25px rgba(31, 31, 31, 0.6))",
     borderRadius: "20px",
   },
+
   selectedNft: {
     width: "100%",
     height: "100%",
   },
+
   player2Nft: {
     position: "absolute",
     width: "292px",
@@ -116,6 +124,7 @@ const styles = {
     filter: "drop-shadow(-11px 4px 25px rgba(31, 31, 31, 0.6))",
     borderRadius: "20px",
   },
+
   player2: {
     position: "absolute",
     width: "92px",
@@ -195,7 +204,7 @@ export default function Lobbies() {
     console.log(trn);
   }
 
-  function createNewLobby(account) {
+  function createNewLobby() {
     const tokenAddress = document.getElementById("tokenAddress").value;
     const tokenID = document.getElementById("tokenID").value;
     const tokenImage = document.getElementById("tokenImage").value;
@@ -204,6 +213,7 @@ export default function Lobbies() {
     getValue((x, data) => {
       if (x == null) {
         console.log("Lobby not founded!");
+        document.getElementById("GameStatus").innerHTML = "Confirm the contract"
         transfer(true).then(result => {
           if (result){
             setValue(
@@ -218,9 +228,22 @@ export default function Lobbies() {
                 if (json.hasOwnProperty("player-2")) {
                   const image2 = json["player-2"]["nftTransfer"]["tokenImage"];
                   document.getElementById("selectedImg2").src = image2;
+                  document.getElementById("GameStatus").innerHTML = "Game is start!";
+                }
+                if (json.hasOwnProperty("winner")){
+                  rotate()
+                  const winner = json["winner"];
+                  console.log("winner: "+winner)
+                  console.log("My account: "+account)
+                  if (winner.toString() === account.toString()){
+                    document.getElementById("GameStatus").innerHTML = "You win!"
+                  } else{
+                    document.getElementById("GameStatus").innerHTML = "You loose!"
+                  }
+                  const id = window.gameId;
+                  removeLobbie(id)
                 }
                 console.log(json);
-                document.getElementById("GameStatus").innerHTML = "Game is start!";
               },
             );
             console.log("Lobby was created!");
@@ -229,11 +252,14 @@ export default function Lobbies() {
         })
        
       } else {
+        window.gameId = x;
         connectToLobby(x, userID, tokenAddress, tokenID, tokenImage);
         drawImage2NFT(data, "1");
         console.log("Connected to lobby!");
-        document.getElementById("GameStatus").innerHTML = "Game is start!";
-        transfer();
+        document.getElementById("GameStatus").innerHTML = "Confirm the contract"
+        transfer().then(() => {
+          document.getElementById("GameStatus").innerHTML = "Game is start!";
+        });
       }
 
       document.getElementById("play").disabled = true;
@@ -256,12 +282,26 @@ export default function Lobbies() {
         _buyerNftId: nft?.token_id,
       },
     };
-    //console.log(options);
     const trn = await Moralis.executeFunction(options);
-    //console.log(trn);
     const reciept = await trn.wait(3);
-    //const winner = reciept.block
+    const winner = reciept["events"][2]["args"]["_winner"].toLowerCase()
+    console.log("winner: "+winner)
+    console.log(account)
+    const gameID = window.gameId;
+    rotate()
+    if (account.toString() === winner.toString()){
+      document.getElementById("GameStatus").innerHTML = "You win!"
+    } else{
+      document.getElementById("GameStatus").innerHTML = "You loose!"
+    }
+    setGameWinner(gameID, winner)
     console.log(reciept);
+  }
+
+
+  function rotate(){
+    var red = document.querySelector('#myCard').style.setProperty('--animation-time', (Math.floor(Math.random() * 10)*180).toString()+"deg");
+    document.querySelector("#myCard").classList.toggle("flip-container-hover")
   }
 
   return (
@@ -278,7 +318,16 @@ export default function Lobbies() {
         <p style={styles.player2}>Player 2</p>
         <img id="selectedImg2" style={styles.player2Nft} />
       </div>
-      <img style={styles.coin} src={coin} />
+      <div className="flip-container vertical" id="myCard" style={styles.coinBlock} >
+        <div className="flipper">
+          <div className="front">
+            <img style={styles.coin} src={coin} />
+          </div>
+          <div className="back">
+          <img style={styles.coin} src={coinBack} />
+          </div>
+        </div>
+      </div>
       <div style={styles.line1} />
       <div style={styles.nfts}>
         <NFTtoChoose />
@@ -289,7 +338,7 @@ export default function Lobbies() {
         style={styles.play}
         id="play"
         value="Play"
-        onClick={() => createNewLobby(account)}
+        onClick={() => createNewLobby()}
       />
       <script></script>
     </div>
