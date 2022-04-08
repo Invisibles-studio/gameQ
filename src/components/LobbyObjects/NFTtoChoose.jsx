@@ -87,5 +87,4 @@ function selectNft(nft) {
   document.getElementById("tokenImage").value = nft.image;
 }
 
-
 export default NFTtoChoose;
