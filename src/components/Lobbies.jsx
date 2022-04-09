@@ -151,15 +151,28 @@ const styles = {
 };
 
 export default function Lobbies() {
-  const { account, isAuthenticated, Moralis } = useMoralis();
+  const { account, isAuthenticated, Moralis, chainId } = useMoralis();
 
   async function transfer(isOwner = false) {
+	if(isOwner){ 
+		if(chainId === "0x3"){
+			window.curGameContract = game_contract_ropsten;
+			//строчка записи в базу curGameContract типа играем на нем
+		}else {
+			window.curGameContract = game_contract_mumbai;
+			//строчка записи в базу curGameContract типа играем на нем
+		}
+	}else{
+		window.curGameContract = "" //вместо "" достать из базы контракт
+	}
+
+	console.log(window.curGameContract);
     const nft = window.chosenNFT;
     console.log(nft);
     const options = {
       type: nft?.contract_type?.toLowerCase(),
       tokenId: nft?.token_id,
-      receiver: game_contract,
+      receiver: window.curGameContract,
       contractAddress: nft?.token_address,
     };
 
@@ -169,7 +182,7 @@ export default function Lobbies() {
 
     console.log(options);
     const tx = await Moralis.transfer(options);
-    await tx.wait();
+    await tx.wait(3);
     console.log(tx);
     if (isOwner) {
       return signContract(nft);
@@ -179,8 +192,9 @@ export default function Lobbies() {
   }
 
   async function signContract(nft) {
+	
     const options = {
-      contractAddress: game_contract,
+      contractAddress: window.curGameContract,
       functionName: "startBet",
       abi: ABI,
       params: {
@@ -273,7 +287,7 @@ export default function Lobbies() {
 
   async function nonOwnerSignContract(nft) {
     const options = {
-      contractAddress: game_contract,
+      contractAddress: window.curGameContract,
       functionName: "joinBet",
       abi: ABI,
       params: {
@@ -345,8 +359,8 @@ export default function Lobbies() {
   );
 }
 
-const game_contract = "0x7c2d321db8771ebe3937d213cb9f03af2b947c32";
-
+const game_contract_mumbai =  "0x7c2d321db8771ebe3937d213cb9f03af2b947c32";
+const game_contract_ropsten = "0x95feb63ce8ca5c4a71c1e48fa2f34b7177b87e95";
 const ABI = [
 	{
 		"inputs": [
