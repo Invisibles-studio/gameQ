@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/gameQ/static/css/main.5ea5824c.css",
-    "main.js": "/gameQ/static/js/main.838c8cbf.js",
+    "main.js": "/gameQ/static/js/main.33aac659.js",
     "static/media/coin.png": "/gameQ/static/media/coin.17cf175d364ec6797860.png",
     "static/media/coin2.png": "/gameQ/static/media/coin2.9e4f4229030cbaa1d49f.png",
     "service-worker.js": "/gameQ/service-worker.js",
@@ -12,10 +12,10 @@
     "SafePal.svg": "/gameQ/e7068bbce0757878c2ef3e30191ce580.svg",
     "index.html": "/gameQ/index.html",
     "main.5ea5824c.css.map": "/gameQ/static/css/main.5ea5824c.css.map",
-    "main.838c8cbf.js.map": "/gameQ/static/js/main.838c8cbf.js.map"
+    "main.33aac659.js.map": "/gameQ/static/js/main.33aac659.js.map"
   },
   "entrypoints": [
     "static/css/main.5ea5824c.css",
-    "static/js/main.838c8cbf.js"
+    "static/js/main.33aac659.js"
   ]
 }
