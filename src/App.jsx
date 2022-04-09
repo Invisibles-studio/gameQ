@@ -82,25 +82,25 @@ const App = ({ isServerInfo }) => {
         </Header>
         <div style={styles.content}>
           <Switch>
-            <Route exact path="/main">
+            <Route exact path="/gameQ/main">
               <QuickStart isServerInfo={isServerInfo} />
             </Route>
-            <Route path="/nftBalance">
+            <Route path="/gameQ/nftBalance">
               <NFTBalance />
             </Route>
-            <Route path="/contract">
+            <Route path="/gameQ/contract">
               <Contract />
             </Route>
-            <Route path="/lobbies">
+            <Route path="/gameQ/lobbies">
               <Lobbies />
             </Route>
-            <Route path="/">
-              <Redirect to="/quickstart" />
+            <Route path="/gameQ/">
+              <Redirect to="gameQ/quickstart" />
             </Route>
-            <Route path="/ethereum-boilerplate">
-              <Redirect to="/quickstart" />
+            <Route path="/gameQ/ethereum-boilerplate">
+              <Redirect to="/gameQ/quickstart" />
             </Route>
-            <Route path="/nonauthenticated">
+            <Route path="/gameQ/nonauthenticated">
               <>Please login using the "Authenticate" button</>
             </Route>
           </Switch>

@@ -1,6 +1,7 @@
 {
   "name": "game-heads-and-tails",
   "version": "0.1.0",
+  "homepage": "https://invisibles-studio.github.io/gameQ",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@testing-library/jest-dom": "^5.11.4",
@@ -39,7 +40,6 @@
     "devchain": "node Truffle/scripts/devChain.js",
     "connect": "moralis-admin-cli connect-local-devchain",
     "watch:events": "moralis-admin-cli add-contract",
-    "deploy": "node Truffle/scripts/deployContract.js",
     "deploypage": "gh-pages -d build",
     "clean": "npx gh-pages-clean",
     "lint:check": "eslint .",
@@ -47,7 +47,9 @@
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,json,html}\" .prettierrc --config ./.prettierrc",
     "format": "npm run lint:fix && npm run prettier:fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

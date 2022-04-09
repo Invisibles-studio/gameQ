@@ -18,17 +18,17 @@ function MenuItems() {
       }}
       defaultSelectedKeys={[pathname]}
     >
-      <Menu.Item key="/main">
-        <NavLink to="/main">Main page</NavLink>
+      <Menu.Item key="/gameQ/main">
+        <NavLink to="/gameQ/main">Main page</NavLink>
       </Menu.Item>
-      <Menu.Item key="/nftBalance">
-        <NavLink to="/nftBalance">🖼 NFTs</NavLink>
+      <Menu.Item key="/gameQ/nftBalance">
+        <NavLink to="/gameQ/nftBalance">🖼 NFTs</NavLink>
       </Menu.Item>
-      <Menu.Item key="/contract">
-        <NavLink to="/contract">📄 Contract</NavLink>
+      <Menu.Item key="/gameQ/contract">
+        <NavLink to="/gameQ/contract">📄 Contract</NavLink>
       </Menu.Item>
-      <Menu.Item key="/lobbies">
-        <NavLink to="/lobbies"> Lobbies</NavLink>
+      <Menu.Item key="/gameQ/lobbies">
+        <NavLink to="/gameQ/lobbies"> Lobbies</NavLink>
       </Menu.Item>
     </Menu>
   );
