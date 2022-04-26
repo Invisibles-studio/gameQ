@@ -85,3 +85,33 @@ export function setGameWinner(id, address){
 export function removeLobbie(id){
     remove(ref(database, "Lobbies/" + id))
 }
+
+export function addNftToSearch(address, nftID, nftAddress, nftImage, nftName){
+  const id = "id" + Math.random().toString(16).slice(2);
+  set(ref(database, "Offers/" + id), {
+    nftTransfer: {
+      tokenID: nftID,
+      tokenAddress: nftAddress,
+      tokenImage: nftImage,
+      tokenName: nftName,
+    },
+    UserID: address,
+  });
+}
+
+export function getAllOffersWithoutMy(address, callback){
+  get(child(ref(database), "Offers/")).then((snapshot) => {
+      if (snapshot.exists()){
+        let offers = []
+        let json = snapshot.val()
+        for (let offer in json){
+          if (json[offer]["UserID"].toString() === address.toString()) continue
+          else{
+            offers.push(json[offer])
+          }
+        }
+        callback(offers)
+        console.log(offers)
+      }
+  })
+}

@@ -25,6 +25,7 @@ import Contract from "components/Contract/Contract";
 //import Text from "antd/lib/typography/Text";
 //import Ramper from "components/Ramper";
 import MenuItems from "./components/MenuItems";
+import Game from "./components/Game";
 //import NFTtoChoose from "components/LobbyObjects/NFTtoChoose";
 const { Header } = Layout;
 
@@ -92,7 +93,7 @@ const App = ({ isServerInfo }) => {
               <Contract />
             </Route>
             <Route path="/gameQ/lobbies">
-              <Lobbies />
+              <Game />
             </Route>
             <Route path="/gameQ/">
               <Redirect to="gameQ/quickstart" />

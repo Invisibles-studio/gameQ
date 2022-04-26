@@ -15,20 +15,12 @@ function MenuItems() {
         fontWeight: "500",
         width: "100%",
         justifyContent: "center",
+        marginLeft: "400px",
       }}
       defaultSelectedKeys={[pathname]}
     >
-      <Menu.Item key="/gameQ/main">
-        <NavLink to="/gameQ/main">Main page</NavLink>
-      </Menu.Item>
-      <Menu.Item key="/gameQ/nftBalance">
-        <NavLink to="/gameQ/nftBalance">🖼 NFTs</NavLink>
-      </Menu.Item>
-      <Menu.Item key="/gameQ/contract">
-        <NavLink to="/gameQ/contract">📄 Contract</NavLink>
-      </Menu.Item>
       <Menu.Item key="/gameQ/lobbies">
-        <NavLink to="/gameQ/lobbies"> Lobbies</NavLink>
+        <NavLink to="/gameQ/lobbies">Game</NavLink>
       </Menu.Item>
     </Menu>
   );
