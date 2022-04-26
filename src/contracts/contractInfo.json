@@ -3,123 +3,123 @@ import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
 contract BetBook{
 
-address payable owner;
+  address payable owner;
 
-constructor() public {
-owner = payable(msg.sender);
-}
+  constructor() public {
+    owner = payable(msg.sender);
+  }
 
-enum Result{
-NONE, FIRST_PLAYER, SECOND_PLAYER
-}
+  enum Result{
+    NONE, FIRST_PLAYER, SECOND_PLAYER
+  }
 
-struct Bet{
-uint id;
-address first_player;
-address first_contract;
-uint first_nft_id;
-address second_player;
-address second_contract;
-uint second_nft_id;
-bytes32 first_hash;
-bytes32 second_hash;
+  struct Bet{
+    uint id;
+    address first_player;
+    address first_contract;
+    uint first_nft_id;
+    address second_player;
+    address second_contract;
+    uint second_nft_id;
+    bytes32 first_hash;
+    bytes32 second_hash;
 
-Result result;
-}
+    Result result;
+  }  
 
-mapping(uint => Bet) public bets;
-mapping (address => uint) myGame;
+  mapping(uint => Bet) public bets;
+  mapping (address => uint) myGame;
 
-uint betCounter;
-event startBetEvent (
-uint indexed _id
-);
+  uint betCounter;
+  event startBetEvent (
+    uint indexed _id
+  );
 
-event joinBetEvent (
-uint indexed _id,
-address _winner
-);
+  event joinBetEvent (
+    uint indexed _id,
+    address _winner
+  );
 
-modifier onlyOwner {
-require(msg.sender == owner, "This function can only be launched by the owner");
-_;
-}
+   modifier onlyOwner {
+    require(msg.sender == owner, "This function can only be launched by the owner");
+    _;
+  }
 
-function withdraw(uint amount) external onlyOwner {
-require(amount < address(this).balance, "You cannot withdraw more than what is available in the contract");
-owner.transfer(amount);
-}
-
-
-receive() external payable { }
+  function withdraw(uint amount) external onlyOwner {
+    require(amount < address(this).balance, "You cannot withdraw more than what is available in the contract");
+    owner.transfer(amount);
+  }
 
 
-function startBet(address _firstContract, uint256 _firstNftId, bytes32 _hash) external {
-// for new bet
-require(_hash.length <= 30, "Hash lenght should be equal or less than 30");
-ERC1155 firstContract = ERC1155(_firstContract);
-require(firstContract.balanceOf(address(this), _firstNftId) > 0, "You haven`t trasferred NFT");
-betCounter++;
-bets[betCounter] = Bet(
-betCounter,
-msg.sender,
-_firstContract,
-_firstNftId,
-address(0x0),
-address(0x0),
-0,
-"",
-"",
-Result.NONE
-);
-emit startBetEvent(betCounter);
-}
-
-function joinBet(uint _id, address _secondContract, uint256 _secondNftId, bytes32 _second_hash) external {
-require(_id > 0 && _id <= betCounter);
-ERC1155 secondContract = ERC1155(_secondContract);
-require(secondContract.balanceOf(address(this), _secondNftId) > 0, "You haven`t trasferred NFT");
-Bet storage bet = bets[_id];
-require(bet.result == Result.NONE, "Game already finished");
-require(bet.second_player == address(0x0), "Game already started");
-require(bet.first_player != msg.sender, "You can`t play with yourself");
-bet.second_player = msg.sender;
-bet.second_contract = _secondContract;
-bet.second_nft_id = _secondNftId;
-bet.second_hash = _second_hash;
-
-bytes32 winner = bet.first_hash^bet.second_hash;
-uint decimal = uint(winner^bytes32(block.timestamp)) % 2;
-if (decimal == 0){
-bet.result = Result.FIRST_PLAYER;
-}else{
-bet.result = Result.SECOND_PLAYER;
-}
+  receive() external payable { }
 
 
-uint[] memory a = new uint[](1);
-a[0] = 1;
-uint[] memory b = new uint[](1);
-b[0] = bet.first_nft_id;
-ERC1155 firstContract = ERC1155(bet.first_contract);
-address _winner = address(0x0);
-if (bet.result == Result.FIRST_PLAYER) {
-_winner = bet.first_player;
-firstContract.safeBatchTransferFrom(address(this), address(bet.first_player),b, a, "0x0");
-b[0] = bet.second_nft_id;
-a[0] = 1;
-secondContract.safeBatchTransferFrom(address(this), address(bet.first_player), b, a, "0x0");
-}else{
-_winner = bet.second_player;
-firstContract.safeBatchTransferFrom(address(this), address(bet.second_player), b, a, "0x0");
-b[0] = bet.second_nft_id;
-a[0] = 1;
-secondContract.safeBatchTransferFrom(address(this), address(bet.second_player), b, a, "0x0");
+  function startBet(address _firstContract, uint256 _firstNftId, bytes32 _hash) external {
+    // for new bet
+    require(_hash.length <= 30, "Hash lenght should be equal or less than 30");
+    ERC1155 firstContract = ERC1155(_firstContract);
+    require(firstContract.balanceOf(address(this), _firstNftId) > 0, "You haven`t trasferred NFT");
+    betCounter++;
+    bets[betCounter] = Bet(
+         betCounter,
+         msg.sender,
+         _firstContract,
+         _firstNftId,
+         address(0x0),
+         address(0x0),
+         0,
+         "",
+         "",
+         Result.NONE
+    );
+    emit startBetEvent(betCounter);
+  }
 
-}
+  function joinBet(uint _id, address _secondContract, uint256 _secondNftId, bytes32 _second_hash) external {
+    require(_id > 0 && _id <= betCounter);
+    ERC1155 secondContract = ERC1155(_secondContract);  
+    require(secondContract.balanceOf(address(this), _secondNftId) > 0, "You haven`t trasferred NFT");
+    Bet storage bet = bets[_id];
+    require(bet.result == Result.NONE, "Game already finished");
+    require(bet.second_player == address(0x0), "Game already started");
+    require(bet.first_player != msg.sender, "You can`t play with yourself");
+    bet.second_player = msg.sender;
+    bet.second_contract = _secondContract;
+    bet.second_nft_id = _secondNftId;
+    bet.second_hash = _second_hash;
 
-emit joinBetEvent(_id, _winner);
+    bytes32 winner = bet.first_hash^bet.second_hash;
+    uint decimal = uint(winner^bytes32(block.timestamp)) % 2;
+    if (decimal == 0){
+      bet.result = Result.FIRST_PLAYER;
+    }else{
+      bet.result = Result.SECOND_PLAYER;
+    }
 
-}
 
+    uint[] memory a = new uint[](1);
+    a[0] = 1;
+    uint[] memory b = new uint[](1);
+    b[0] = bet.first_nft_id;
+    ERC1155 firstContract = ERC1155(bet.first_contract);
+    address _winner = address(0x0);
+    if (bet.result == Result.FIRST_PLAYER) {
+      _winner = bet.first_player;
+      firstContract.safeBatchTransferFrom(address(this), address(bet.first_player),b, a, "0x0");
+      b[0] = bet.second_nft_id;
+      a[0] = 1;
+      secondContract.safeBatchTransferFrom(address(this), address(bet.first_player), b, a, "0x0");
+    }else{
+      _winner = bet.second_player;  
+      firstContract.safeBatchTransferFrom(address(this), address(bet.second_player), b, a, "0x0");
+      b[0] = bet.second_nft_id;
+      a[0] = 1;
+      secondContract.safeBatchTransferFrom(address(this), address(bet.second_player), b, a, "0x0");
+      
+    }
+    
+    emit joinBetEvent(_id, _winner);
+
+  }
+  
 }
