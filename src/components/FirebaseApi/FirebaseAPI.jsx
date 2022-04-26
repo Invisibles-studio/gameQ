@@ -96,6 +96,7 @@ export function addNftToSearch(address, nftID, nftAddress, nftImage, nftName){
       tokenName: nftName,
     },
     UserID: address,
+    id: id,
   });
 }
 

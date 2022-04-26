@@ -21,6 +21,7 @@ export default function Game(){
 
   const allNftItems = [...document.querySelectorAll(".NftItem")]
 
+
   function selectNft(nft, index) {
 
       allNftItems.map((el) => {
@@ -52,6 +53,10 @@ export default function Game(){
 
       getAllOffersWithoutMy(account, (offers) => {
         setOffers(offers)
+        document.getElementById("tokenAddress").value = tokenAddress;
+        document.getElementById("tokenID").value = tokenID;
+        document.getElementById("tokenImage").value = tokenImage;
+        document.getElementById("tokenName").value = tokenName;
         document.getElementById("statusBlock").innerHTML = "Select game offer"
         document.getElementById("play").value = "Start game"
         window.isOffersShow = true;
@@ -66,6 +71,17 @@ export default function Game(){
 
   }
 
+  function selectOffer(el, index){
+    const allOffersItems = [...document.querySelectorAll(".offerItem")]
+    document.getElementById("selectedOffer").value = el.id;
+
+    allOffersItems.map((element) => {
+      element.classList.remove("offerItemSelected");
+    });
+
+    document.querySelector("#offer-id"+index.toString()).classList.add("offerItemSelected")
+  }
+
   return (<div className="background">
     <img className="coin" src={coinMain}/>
     <img className="gameIcon" src={gameIcon}/>
@@ -76,13 +92,18 @@ export default function Game(){
       <input type="hidden" id="tokenID" value="" />
       <input type="hidden" id="tokenImage" value="" />
       <input type="hidden" id="tokenName" value="" />
+      <input type="hidden" id="selectedOffer" value="" />
     </div>
     <div className="offersContainer">
       <Scrollable _class="ScrollableOffers">
           {offers != null && offers.map((el, index) => {
-            return (<div className="offerItem" key={index} id={"offer-id"+index.toString()}>
+            return (<div className="offerItem" key={index} id={"offer-id"+index.toString()} onClick={() => selectOffer(el, index)}>
               <img src={el?.nftTransfer.tokenImage || notFoundNft} />
               <p className="offerNftName">{el?.nftTransfer.tokenName}</p>
+              <div className="bottomOfferBlock">
+                <p className="bottomOfferBlockItem">TAILS</p>
+                <p className="bottomOfferBlockNickname">{el?.UserID.toString().slice(0,2)+"..."+el?.UserID.toString().slice(-6)}</p>
+              </div>
             </div>)
           })}
       </Scrollable>
