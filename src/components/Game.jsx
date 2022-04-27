@@ -66,7 +66,13 @@ export default function Game(){
 
     }
     else {
-      console.log("TRUE")
+      const offerID = document.getElementById("selectedOffer").value
+      if (offerID != ""){
+        console.log("TRUE : "+offerID)
+
+
+      }
+
     }
 
   }
@@ -83,19 +89,20 @@ export default function Game(){
   }
 
   return (<div className="background">
-    <img className="coin" src={coinMain}/>
     <img className="gameIcon" src={gameIcon}/>
-    <p id="statusBlock">Select NFT you want to play for</p>
-    <div className="line1"/>
-    <div className="selectedNft">
-      <input type="hidden" id="tokenAddress" value="" />
-      <input type="hidden" id="tokenID" value="" />
-      <input type="hidden" id="tokenImage" value="" />
-      <input type="hidden" id="tokenName" value="" />
-      <input type="hidden" id="selectedOffer" value="" />
-    </div>
-    <div className="offersContainer">
-      <Scrollable _class="ScrollableOffers">
+    <div className="GameWindow1">
+      <img className="coin" src={coinMain}/>
+      <p id="statusBlock">Select NFT you want to play for</p>
+      <div className="line1"/>
+      <div className="selectedNft">
+        <input type="hidden" id="tokenAddress" value="" />
+        <input type="hidden" id="tokenID" value="" />
+        <input type="hidden" id="tokenImage" value="" />
+        <input type="hidden" id="tokenName" value="" />
+        <input type="hidden" id="selectedOffer" value="" />
+      </div>
+      <div className="offersContainer">
+        <Scrollable _class="ScrollableOffers">
           {offers != null && offers.map((el, index) => {
             return (<div className="offerItem" key={index} id={"offer-id"+index.toString()} onClick={() => selectOffer(el, index)}>
               <img src={el?.nftTransfer.tokenImage || notFoundNft} />
@@ -106,29 +113,30 @@ export default function Game(){
               </div>
             </div>)
           })}
-      </Scrollable>
-    </div>
-    <div className="nftsContainer">
-      <Scrollable _class="ScrollableNft">
-        <Skeleton loading={!NFTBalances?.result}>
-        {NFTBalances?.result &&
-          NFTBalances.result.map((nft, index) => {
-            nft = verifyMetadata(nft);
-            return (<div className="NftItem" id={"nft-id"+index.toString()} onClick={() => selectNft(nft, index)} key={index}>
-              <img src={nft?.image || notFoundNft} />
-            </div>)
+        </Scrollable>
+      </div>
+      <div className="nftsContainer">
+        <Scrollable _class="ScrollableNft">
+          <Skeleton loading={!NFTBalances?.result}>
+            {NFTBalances?.result &&
+              NFTBalances.result.map((nft, index) => {
+                nft = verifyMetadata(nft);
+                return (<div className="NftItem" id={"nft-id"+index.toString()} onClick={() => selectNft(nft, index)} key={index}>
+                  <img src={nft?.image || notFoundNft} />
+                </div>)
 
-          })}
-        </Skeleton>
-      </Scrollable>
+              })}
+          </Skeleton>
+        </Scrollable>
+      </div>
+      <div className="line2"/>
+      <input
+        type="button"
+        id="play"
+        value="Play"
+        onClick={addOffer}
+      />
     </div>
-    <div className="line2"/>
-    <input
-      type="button"
-      id="play"
-      value="Play"
-      onClick={addOffer}
-    />
   </div>);
 
 }
