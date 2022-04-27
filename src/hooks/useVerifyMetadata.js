@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState } from "react";
 import { useIPFS } from "./useIPFS";
 
@@ -32,7 +33,7 @@ export const useVerifyMetadata = () => {
    */
   async function getMetadata(NFT) {
     //Validate URI
-    if (!NFT.token_uri || !NFT.token_uri.includes("://")) {
+    if (!NFT.token_uri || !NFT.token_uri.includes("://") || NFT.token_uri == null) {
       console.log("getMetadata() Invalid URI", { URI: NFT.token_uri, NFT });
       return;
     }
@@ -76,11 +77,12 @@ export const useVerifyMetadata = () => {
         } //Valid Result
       })
       .catch((err) => {
-        console.error("useVerifyMetadata.getMetadata() Error Caught:", {
-          err,
-          NFT,
-          URI: NFT.token_uri,
-        });
+        console.log("err but похуй");
+        //console.error("useVerifyMetadata.getMetadata() Error Caught:", {
+          //err,
+          //NFT,
+          //URI: NFT.token_uri,
+        //});
       });
   } //getMetadata()
 
