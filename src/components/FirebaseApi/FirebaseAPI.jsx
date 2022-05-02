@@ -1,6 +1,14 @@
 /* eslint-disable */
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, get, child, onValue, remove } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  set,
+  get,
+  child,
+  onValue,
+  remove,
+} from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD-QqxBGWTquYLsdJb37S5MuYJiuaV3c58",
@@ -47,10 +55,17 @@ export function setValue(
   }
 }
 
-export function connectToLobby(id, userID, nft_address, nft_id, nft_image, callback = null) {
+export function connectToLobby(
+  id,
+  userID,
+  nft_address,
+  nft_id,
+  nft_image,
+  callback = null,
+) {
   setValue("2", userID, nft_address, nft_id, id, nft_image);
   if (callback != null) {
-      setOnValueChanged(id, callback)
+    setOnValueChanged(id, callback);
   }
   return true;
 }
@@ -76,17 +91,17 @@ export function getValue(callback) {
   });
 }
 
-export function setGameWinner(id, address){
-    set(ref(database, "Lobbies/" + id), {
-        winner: address
-    })
+export function setGameWinner(id, address) {
+  set(ref(database, "Lobbies/" + id), {
+    winner: address,
+  });
 }
 
-export function removeLobbie(id){
-    remove(ref(database, "Lobbies/" + id))
+export function removeLobbie(id) {
+  remove(ref(database, "Lobbies/" + id));
 }
 
-export function addNftToSearch(address, nftID, nftAddress, nftImage, nftName){
+export function addNftToSearch(address, nftID, nftAddress, nftImage, nftName) {
   const id = "id" + Math.random().toString(16).slice(2);
   set(ref(database, "Offers/" + id), {
     nftTransfer: {
@@ -100,19 +115,19 @@ export function addNftToSearch(address, nftID, nftAddress, nftImage, nftName){
   });
 }
 
-export function getAllOffersWithoutMy(address, callback){
+export function getAllOffersWithoutMy(address, callback) {
   get(child(ref(database), "Offers/")).then((snapshot) => {
-      if (snapshot.exists()){
-        let offers = []
-        let json = snapshot.val()
-        for (let offer in json){
-          if (json[offer]["UserID"].toString() === address.toString()) continue
-          else{
-            offers.push(json[offer])
-          }
+    if (snapshot.exists()) {
+      let offers = [];
+      let json = snapshot.val();
+      for (let offer in json) {
+        if (json[offer]["UserID"].toString() === address.toString()) continue;
+        else {
+          offers.push(json[offer]);
         }
-        callback(offers)
-        console.log(offers)
       }
-  })
+      callback(offers);
+      console.log(offers);
+    }
+  });
 }
