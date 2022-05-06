@@ -1,13 +1,12 @@
 /* eslint-disable */
 import { useMoralis } from "react-moralis";
 
-const { Moralis } = useMoralis();
+
 
 const contract = "0x5cB4F850f90339151a2AbFC23Ba4B0E902261974";
 
 // получить разрешение на контракт
-export function getApproval() {
-  const nft = window.chosenNFT;
+export function GetApproval(nft, Moralis, callback) {
   console.log(nft);
 
   const options = {
@@ -19,11 +18,46 @@ export function getApproval() {
       _approved: true,
     },
   };
-  return execFunc(options);
+  ExecFunc(options, Moralis).then(({isSigned, value})=>{
+    isS = isSigned;
+    if (isS===false) {
+      callback(false, null);
+      return;
+    }
+    val = {
+            owner: value["events"][3]["args"]["owner"] ,
+            operator : value["events"][3]["args"]["operator"],
+            bApproved: value["events"][3]["args"]["approved"]
+   };
+   console.log(val);
+   callback(isS, val);
+  });
+}
+
+export function CheckApproval(nft, _owner, Moralis, callback){
+  console.log(nft);
+
+  const options = {
+    contractAddress: nft?.token_address,
+    functionName: "setApprovalForAll",
+    abi: ABI_ERC721,
+    params: {
+      owner: _owner,
+      operator: contract.toLowerCase(),
+    },
+  };
+  ExecReadFunc(options, Moralis).then((val)=>{
+    if (val==="error") {
+      callback(null);
+      return;
+    }
+    console.log(val);
+    callback(val);
+   });
 }
 
 //создать игровое лобби
-export function CreateLobby(nft = window.chosenNFT, etherValue = 0) {
+export function CreateLobby(nft, etherValue = 0, Moralis, callback) {
   console.log(nft);
 
   const options = {
@@ -35,12 +69,38 @@ export function CreateLobby(nft = window.chosenNFT, etherValue = 0) {
       _creatorNFTId: nft?.token_id,
       _creatorEtherValue: etherValue,
     },
+    msgValue: etherValue.toString()
   };
-  return execFunc(options);
+  let isS = null;
+  let val = null;
+  ExecFunc(options, Moralis).then(({isSigned, value})=>{
+    isS = isSigned;
+    if (isS===false) {
+      callback(false, null);
+      return;
+    }
+    val = {lobby:{
+            lobbyId : parseInt(value["events"][2]["args"]["lobbyId"]._hex, 16),
+            creator : value["events"][2]["args"]["creator"],
+            creatorBet : parseInt(value["events"][2]["args"]["creatorBet"]._hex, 16)
+          },
+          bet: {
+            NFTAddress: value["events"][3]["args"]["NFTAddress"], 
+            NFTId: parseInt(value["events"][3]["args"]["NFTId"]._hex, 16) , 
+            betId: parseInt(value["events"][3]["args"]["betId"]._hex, 16) ,
+            etherValue : parseInt(value["events"][3]["args"]["etherValue"]._hex, 16) ,
+            lobbyId : parseInt(value["events"][3]["args"]["lobbyId"]._hex, 16) ,
+            user: value["events"][3]["args"]["user"]
+          }
+   };
+   console.log(val);
+   callback(isS, val);
+  });
+  return 1;
 }
 
 //предложить играть в контректном лобби
-export function CreateOffer(lobbyID, nft = window.chosenNFT, etherValue = 0) {
+export function CreateOffer(lobbyID, nft, etherValue = 0, Moralis, callback) {
   console.log(nft);
   const options = {
     contractAddress: contract.toLowerCase(),
@@ -52,12 +112,33 @@ export function CreateOffer(lobbyID, nft = window.chosenNFT, etherValue = 0) {
       _userNFTId: nft?.token_id,
       _userEtherValue: etherValue,
     },
+    
   };
-  return execFunc(options);
+  let isS = null;
+  let val = null;
+  ExecFunc(options, Moralis).then(({isSigned, value})=>{
+    isS = isSigned;
+    if (isS===false) {
+      callback(false, null);
+      return;
+    }
+    val = {
+          bet: {
+            NFTAddress: value["events"][3]["args"]["NFTAddress"], 
+            NFTId: parseInt(value["events"][3]["args"]["NFTId"]._hex, 16) , 
+            betId: parseInt(value["events"][3]["args"]["betId"]._hex, 16) ,
+            etherValue : parseInt(value["events"][3]["args"]["etherValue"]._hex, 16) ,
+            lobbyId : parseInt(value["events"][3]["args"]["lobbyId"]._hex, 16) ,
+            user: value["events"][3]["args"]["user"]
+          }
+   };
+   console.log(val);
+   callback(isS, val);
+  });
 }
 
 //отменить предложение игры
-export function WithdrawOffer(betID) {
+export function WithdrawOffer(betID, Moralis, callback) {
   console.log(nft);
 
   const options = {
@@ -68,12 +149,27 @@ export function WithdrawOffer(betID) {
       betId: betID,
     },
   };
-  return execFunc(options);
+
+  ExecFunc(options, Moralis).then(({isSigned, value})=>{
+    isS = isSigned;
+    if (isS===false) {
+      callback(false, null);
+      return;
+    }
+    val = {
+          bet: { 
+            betId: parseInt(value["events"][3]["args"]["betId"]._hex, 16) ,
+            lobbyId : parseInt(value["events"][3]["args"]["lobbyId"]._hex, 16) ,
+            user: value["events"][3]["args"]["user"]
+          }
+   };
+   console.log(val);
+   callback(isS, val);
+  });
 }
 
 //Принять предложение игры
-export function AcceptOffer(lobbyID, betID) {
-  console.log(nft);
+export function AcceptOffer(lobbyID, betID, Moralis, callback) {
 
   const options = {
     contractAddress: contract.toLowerCase(),
@@ -84,13 +180,29 @@ export function AcceptOffer(lobbyID, betID) {
       betId: betID,
     },
   };
-  return execFunc(options);
+  ExecFunc(options, Moralis).then(({isSigned, value})=>{
+    isS = isSigned;
+    if (isS===false) {
+      callback(false, null);
+      return;
+    }
+    val = {
+          bet: {
+            NFTAddress: value["events"][3]["args"]["NFTAddress"], 
+            NFTId: parseInt(value["events"][3]["args"]["NFTId"]._hex, 16) , 
+            betId: parseInt(value["events"][3]["args"]["betId"]._hex, 16) ,
+            etherValue : parseInt(value["events"][3]["args"]["etherValue"]._hex, 16) ,
+            lobbyId : parseInt(value["events"][3]["args"]["lobbyId"]._hex, 16) ,
+            user: value["events"][3]["args"]["user"]
+          }
+   };
+   console.log(val);
+   callback(isS, val);
+  });
 }
 
-// view функция. Не нужно подтверждение на метамаске
-export function getWinner(lobbyID) {
-  console.log(nft);
-
+// view функция. Не нужно подтверждение на метамаске // todo
+export function GetWinner(lobbyID, Moralis, callback) {
   const options = {
     contractAddress: contract.toLowerCase(),
     functionName: "getWinner",
@@ -99,11 +211,18 @@ export function getWinner(lobbyID) {
       lobbyId: lobbyID,
     },
   };
-  return execFunc(options);
+  ExecReadFunc(options, Moralis).then((val)=>{
+    if (val==="error") {
+      callback(null);
+      return;
+    }
+    console.log(val);
+    callback(val);
+   });
 }
 
 // забрать выигрыш.
-export function ClaimReward(lobbyID) {
+export function ClaimReward(lobbyID, Moralis, callback) {
   console.log(nft);
 
   const options = {
@@ -114,24 +233,64 @@ export function ClaimReward(lobbyID) {
       lobbyId: lobbyID,
     },
   };
-  return execFunc(options);
+  ExecFunc(options, Moralis).then(({isSigned, value})=>{
+    isS = isSigned;
+    if (isS===false) {
+      callback(false, null);
+      return;
+    }
+    val = {
+          bet: {
+            winner: value["events"][3]["args"]["winner"], 
+            winnerAddress: value["events"][3]["args"]["winnerAddress"] , 
+            etherValue : parseInt(value["events"][3]["args"]["etherValue"]._hex, 16) ,
+            lobbyId : parseInt(value["events"][3]["args"]["lobbyId"]._hex, 16) ,
+          }
+   };
+   console.log(val);
+   callback(isS, val);
+  });
 }
 
-export function getActiveLobbies() {
-  console.log(nft);
-
+export function GetActiveLobbies(Moralis, callback) {
   const options = {
     contractAddress: contract.toLowerCase(),
     functionName: "getActiveLobbies",
     abi: ABI_GAME,
   };
-  return execFunc(options);
+  ExecReadFunc(options, Moralis).then((value)=>{
+    if (value==="error") {
+      callback(null);
+      return;
+    }
+
+    var val = [];
+    value = value[1];
+    value.forEach(function(res){
+        val.push(
+           {
+            betCount: parseInt(res["betCount"]._hex, 16), 
+            blockNumber: parseInt(res["blockNumber"]._hex, 16),  
+            creator : res["creator"],
+            creatorBet : parseInt(res["creatorBet"]._hex, 16) ,
+            creatorHash : res["creatorHash"],
+            gameNumber : parseInt(res["gameNumber"]._hex, 16) ,
+            lobbyId : parseInt(res["lobbyId"]._hex, 16) ,
+            lobbyStatus: res["lobbyStatus"],
+            opponentBet : parseInt(res["opponentBet"]._hex, 16) ,
+            opponentHash : res["opponentHash"],
+            winner: res["winner"]
+          }
+        )
+    });
+    
+    console.log(val);
+    callback(val);
+   });
 }
 
 //получает все ставки в конкретном лобби (возвращает )
-export function getBetsInLobby(lobbyID) {
-  console.log(nft);
-
+export function GetBetsInLobby(lobbyID, Moralis, callback) {
   const options = {
     contractAddress: contract.toLowerCase(),
     functionName: "getBetsOfLobby",
@@ -140,19 +299,52 @@ export function getBetsInLobby(lobbyID) {
       LobbyId: lobbyID,
     },
   };
-  return execFunc(options);
+  ExecReadFunc(options, Moralis).then((value)=>{
+    if (val==="error") {
+      callback(null);
+      return;
+    }
+    var val = [];
+    value = value[1];
+    value.forEach(function(res){
+        val.push(
+           {
+            NFT: res["NFT"], 
+            NFTId: parseInt(res["NFTId"]._hex, 16),  
+            etherValue : parseInt(res["etherValue"]._hex, 16),
+            isCancelled : res["isCancelled"],
+            lobbyId : parseInt(res["lobbyId"]._hex, 16) ,
+            user: res["user"]
+          }
+        )
+    });
+    console.log(val);
+    callback(val);
+   });
 }
 
 //------------------------------------------------------
-export async function execFunc(options) {
+export async function ExecFunc(options, Moralis) {
   try {
+    
     const trn = await Moralis.executeFunction(options);
-    const reciept = await trn.wait(3);
+    console.log(trn);
+    const reciept = await trn.wait(1);
     console.log(reciept);
     return { isSigned: true, value: reciept };
   } catch (e) {
     console.log(e);
-    return false;
+    return {isSigned: false, value: null};
+  }
+}
+
+async function ExecReadFunc(options, Moralis){
+  try {
+    const trn = await Moralis.executeFunction(options);
+    return trn;
+  } catch(e){
+    console.log(e);
+    return "error";
   }
 }
 //----------------------------------------------------------------------
