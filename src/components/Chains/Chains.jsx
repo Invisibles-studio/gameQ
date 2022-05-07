@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useEffect, useState } from "react";
 import { Menu, Dropdown, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
@@ -84,17 +85,17 @@ const menuItems = [
 ];
 
 function Chains() {
-  const { switchNetwork, chainId, chain } = useChain();
+  const { switchNetwork, chainId} = useChain();
   const { isAuthenticated } = useMoralis();
   const [selected, setSelected] = useState({});
 
-  console.log("chain", chain);
+  //console.log("chain", chain);
 
   useEffect(() => {
     if (!chainId) return null;
     const newSelected = menuItems.find((item) => item.key === chainId);
     setSelected(newSelected);
-    console.log("current chainId: ", chainId);
+    //console.log("current chainId: ", chainId);
   }, [chainId]);
 
   const handleMenuClick = (e) => {
