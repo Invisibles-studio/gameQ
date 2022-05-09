@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useEffect, useState } from "react";
 import { Menu, Dropdown, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
@@ -120,10 +121,9 @@ function Chains() {
         <Button
           key={selected?.key}
           icon={selected?.icon}
-          style={{ ...styles.button, ...styles.item }}
+          className="DropDownChains"
         >
-          <span style={{ marginLeft: "5px" }}>{selected?.value}</span>
-          <DownOutlined />
+          <p className="ChainName">{selected?.value}</p>
         </Button>
       </Dropdown>
     </div>

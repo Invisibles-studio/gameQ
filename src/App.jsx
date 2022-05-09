@@ -71,43 +71,7 @@ const App = ({ isServerInfo }) => {
   }, [isAuthenticated, isWeb3Enabled]);
 
   return (
-    <Layout style={{ height: "100vh", overflow: "auto" }}>
-      <Router>
-        <Header style={styles.header}>
-          <MenuItems />
-          <div style={styles.headerRight}>
-            <Chains />
-            <NativeBalance />
-            <Account />
-          </div>
-        </Header>
-        <div style={styles.content}>
-          <Switch>
-            <Route exact path="/gameQ/main">
-              <QuickStart isServerInfo={isServerInfo} />
-            </Route>
-            <Route path="/gameQ/nftBalance">
-              <NFTBalance />
-            </Route>
-            <Route path="/gameQ/contract">
-              <Contract />
-            </Route>
-            <Route path="/gameQ/lobbies">
-              <Game />
-            </Route>
-            <Route path="/gameQ/">
-              <Redirect to="gameQ/quickstart" />
-            </Route>
-            <Route path="/gameQ/ethereum-boilerplate">
-              <Redirect to="/gameQ/quickstart" />
-            </Route>
-            <Route path="/gameQ/nonauthenticated">
-              <>Please login using the "Authenticate" button</>
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    </Layout>
+    <Game/>
   );
 };
 export default App;
