@@ -4,9 +4,12 @@ import { useMoralis } from "react-moralis";
 import { useState } from "react";
 import Chains from "./Chains";
 import NativeBalance from "./NativeBalance";
-import { Modal } from "antd";
+import { Button, Card, Modal } from "antd";
 import { connectors } from "./Account/config";
 import Text from "antd/lib/typography/Text";
+import Address from "./Address/Address";
+import { getExplorer } from "../helpers/networks";
+import { SelectOutlined } from "@ant-design/icons";
 
 const styles = {
   account: {
@@ -44,8 +47,9 @@ const styles = {
 };
 
 export default function CustomAuth() {
-  const { isAuthenticated, authenticate, account } = useMoralis();
+  const { isAuthenticated, authenticate, account, chainId, logout } = useMoralis();
   const [isAuthModalVisible, setIsAuthModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
     if (!isAuthenticated || account == null){
       return (
@@ -107,8 +111,66 @@ export default function CustomAuth() {
           <div className="NativeBalance" >
             <NativeBalance />
           </div>
-          <div className="accountAddress">
+          <div className="accountAddress" onClick={() => setIsModalVisible(true)} >
             <p>{account.slice(0, 2) + "..." + account.slice(-6)}</p>
+          </div>
+          <div>
+            <Modal
+              visible={isModalVisible}
+              footer={null}
+              onCancel={() => setIsModalVisible(false)}
+              bodyStyle={{
+                padding: "15px",
+                fontSize: "17px",
+                fontWeight: "500",
+              }}
+              style={{ fontSize: "16px", fontWeight: "500" }}
+              width="400px"
+            >
+              Account
+              <Card
+                style={{
+                  marginTop: "10px",
+                  borderRadius: "1rem",
+                }}
+                bodyStyle={{ padding: "15px" }}
+              >
+                <Address
+                  avatar="left"
+                  size={6}
+                  copyable
+                  style={{ fontSize: "20px" }}
+                />
+                <div style={{ marginTop: "10px", padding: "0 10px" }}>
+                  <a
+                    href={`${getExplorer(chainId)}/address/${account}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <SelectOutlined style={{ marginRight: "5px" }} />
+                    View on Explorer
+                  </a>
+                </div>
+              </Card>
+              <Button
+                size="large"
+                type="primary"
+                style={{
+                  width: "100%",
+                  marginTop: "10px",
+                  borderRadius: "0.5rem",
+                  fontSize: "16px",
+                  fontWeight: "500",
+                }}
+                onClick={async () => {
+                  await logout();
+                  window.localStorage.removeItem("connectorId");
+                  setIsModalVisible(false);
+                }}
+              >
+                Disconnect Wallet
+              </Button>
+            </Modal>
           </div>
         </div>
       )

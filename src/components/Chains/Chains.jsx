@@ -28,15 +28,24 @@ const menuItems = [
     icon: <ETHLogo />,
   },
   {
-    key: "0x539",
-    value: "Local Chain",
-    icon: <ETHLogo />,
-  },
-  {
     key: "0x3",
     value: "Ropsten Testnet",
     icon: <ETHLogo />,
   },
+];
+
+const menuItemsTest = [
+
+  //ethereum
+
+  {
+    key: "0x539",
+    value: "Local Chain",
+    icon: <ETHLogo />,
+  },
+
+  //ropsten
+
   {
     key: "0x4",
     value: "Rinkeby Testnet",
@@ -82,7 +91,7 @@ const menuItems = [
     value: "Avalanche Testnet",
     icon: <AvaxLogo />,
   },
-];
+]
 
 function Chains() {
   const { switchNetwork, chainId} = useChain();

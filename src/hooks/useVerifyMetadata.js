@@ -38,7 +38,7 @@ export const useVerifyMetadata = () => {
       !NFT.token_uri.includes("://") ||
       NFT.token_uri == null
     ) {
-      console.log("getMetadata() Invalid URI", { URI: NFT.token_uri, NFT });
+      //console.log("getMetadata() Invalid URI", { URI: NFT.token_uri, NFT });
       return;
     }
     //Get Metadata

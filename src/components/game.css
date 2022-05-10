@@ -361,6 +361,233 @@
   display: none;
 }
 
+.Player1BlockWait, .Player2BlockWait {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 355px;
+  height: 405px;
+  left: 212px;
+  top: 410px;
+
+  border: 1px solid #F7931E;
+  border-radius: 20px;
+}
+
+.PlayerBlockWaitText{
+  position: absolute;
+  width: 130px;
+  height: 34px;
+  left: 128px;
+  top: 23px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 36px;
+
+  color: #D0D0CF;
+}
+
+.PlayerBlockWaitImage {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 299px;
+  height: 296px;
+  left: 28px;
+  top: 81px;
+
+  border: 1px solid #6C6661;
+  border-radius: 20px;
+}
+
+.Player2BlockWait {
+  left: 1353px;
+  top: 410px;
+}
+
+.CancelOfferBlockWait {
+  position: absolute;
+  width: 500px;
+  height: 120px;
+  left: 710px;
+  top: 800px;
+
+  background: #F7931E;
+  box-shadow: 4px 4px 10px rgba(255, 201, 64, 0.25), inset 10px 10px 20px #FFC940;
+  border-radius: 15px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 44px;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #FFFFFF;
+}
+
+.TopBlockGR {
+  position: absolute;
+  width: 976px;
+  height: 81px;
+  left: 472px;
+  top: -20px;
+}
+
+.CoinBackgroundGR {
+  position: absolute;
+  width: 568px;
+  height: 583px;
+  left: 688px;
+  top: 177px;
+}
+
+.Player1CardGR, .Player2CardGR {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 355px;
+  height: 405px;
+  left: 167px;
+  top: 268px;
+
+  border: 1px solid #F7931E;
+  border-radius: 20px;
+}
+
+.Player2CardGR {
+  left: 1446px;
+  top: 269px;
+}
+
+.PlayerTextGR{
+  position: absolute;
+  width: 130px;
+  height: 34px;
+  left: 120px;
+  top: 23px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 36px;
+
+  color: #D0D0CF;
+}
+
+.BottomBlockGR {
+  position: absolute;
+  width: 829px;
+  height: 50px;
+  left: 545px;
+  top: 895px;
+}
+
+.BottomBlockGR img {
+  transform: scale(1, -1);
+}
+
+.PlayerImageGR{
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 299px;
+  height: 296px;
+  left: 28px;
+  top: 81px;
+
+  border: 1px solid #6C6661;
+  border-radius: 20px;
+}
+
+.ClaimWinningsGR{
+  position: absolute;
+  width: 355px;
+  height: 69px;
+  left: 167px;
+  top: 811px;
+
+  background: #F7931E;
+  box-shadow: 4px 4px 10px rgba(255, 201, 64, 0.25), inset 10px 10px 20px #FFC940;
+  border-radius: 15px;
+}
+
+.NftNotSelected {
+  position: absolute;
+  width: 400px;
+  height: 150px;
+  left: 1308px;
+  top: 95px;
+
+  background: #F71E1E;
+  border-radius: 10px;
+}
+
+.NftNotSelected p {
+  position: absolute;
+  width: 307px;
+  height: 78px;
+  left: 47px;
+  top: 36px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 39px;
+  text-align: center;
+
+  color: #FFFFFF;
+}
+
+.Winner1TextGR, .Winner2TextGR{
+  position: absolute;
+  width: 98px;
+  height: 29px;
+  left: 301px;
+  top: 218px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  /* identical to box height */
+
+  text-transform: uppercase;
+
+  /* button */
+
+  color: #F7931E;
+}
+
+.Winner2TextGR{
+  left: 1570px;
+  right: 0px;
+}
+
+.VsTextOnBlockWait {
+  position: absolute;
+  width: 135px;
+  height: 116px;
+  left: 893px;
+  top: 566px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 96px;
+  line-height: 116px;
+
+  color: #FFFFFF;
+}
+
 .offersContainer {
   display: flex;
   flex-direction: row;
