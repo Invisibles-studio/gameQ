@@ -14,12 +14,16 @@ import { useState } from "react";
 import CustomAuth from "components/CustomAuth";
 import topBlockGR from "TopBlockGR.png"
 import coinBackgroundGR from "coinBackgroundGR.png"
+import FontCoin from "images/font.png"
+import BackCoin from "images/back.png"
+import { useMoralisWeb3Api } from "react-moralis";
+import "./coinFlip.css";
 import {
   AcceptOffer,
-  CheckApproval,
+  CheckApproval, ClaimReward,
   CreateLobby, CreateOffer, GetActiveLobbies,
   GetApproval, GetBetById,
-  GetBetsInLobby,
+  GetBetsInLobby, GetBlock,
   GetLobbyById,
   getNftMetadata, GetWinner, WithdrawOffer,
 } from "components/ContractApi";
@@ -31,8 +35,13 @@ export default function Game() {
   const [selectedOfferNft, setSelectedOfferNft] = useState(null);
   const [selectedLobby, setSelectedLobby] = useState(null);
   const [createdOffer, setCreatedOffer] = useState(null);
+
   const { data: NFTBalances } = useNFTBalances();
   const { verifyMetadata } = useVerifyMetadata();
+
+  const gameInterval = 5000
+
+  const Web3Api = useMoralisWeb3Api();
 
   const allNftItems = [...document.querySelectorAll(".NftItem")];
 
@@ -120,6 +129,8 @@ export default function Game() {
 
     let interval = setInterval(() => {
       GetLobbyById(selectedLobby.id, Moralis, (json) => {
+        console.log(json)
+
         if (json.opponent.toString().toLowerCase() === "0x0000000000000000000000000000000000000000") return
 
         if (json.opponent.toString().toLowerCase() === account.toString().toLowerCase()){
@@ -348,25 +359,90 @@ export default function Game() {
   function showGameResultsCreator(){
     window.isLobbyOpen = false
 
-    document.querySelector(".GameWindowStart").classList.add("hidden")
+    document.querySelector(".GameWindow1").classList.add("hidden")
     document.querySelector(".GameResults").classList.remove("hidden")
 
     setImageInGameResults(1, selectedNft.image)
     setImageInGameResults(2, selectedOfferNft.nftTransfer.tokenImage)
 
+    GetLobbyById(selectedLobby.lobby.lobbyId, Moralis, (json) => {
+      let blockNumber = json.blockNumber
+      let position = json.gameNumber
+
+      let creatorHash = json.creatorHash
+      let opponentHash = json.opponentHash
+
+      window.CreatorHash = creatorHash
+      window.OpponentHash = opponentHash
+
+      setPlayerHashGameResult(1, creatorHash)
+      setPlayerHashGameResult(2, opponentHash)
+
+      setDataInTopBlock(position, blockNumber)
+    })
+
+    let interval2 = setInterval(() => {
+      GetBlock(Web3Api, chainId.toString()).then((json) => {
+        document.querySelector("#currentBlockTBGR").innerHTML = json
+      })
+    }, gameInterval)
+
     let interval = setInterval(() => {
       GetWinner(selectedLobby.lobby.lobbyId, Moralis, (json) => {
         console.log(json)
 
-        let winnerAccount = json[1].toString().toLowerCase()
+        let winnerAccount = json.address.toLowerCase()
 
         if (winnerAccount === "0x0000000000000000000000000000000000000000") return
 
-        if (winnerAccount === account.toString().toLowerCase()) setWinnerTextGameResult(1)
-        else setWinnerTextGameResult(2)
+        let blockHash = json.blockHash //'Hash: 0x267a78849675F05B86fb0766d6aB6aA466910A6'
+        let position = json.index
 
+
+        if (winnerAccount === account.toString().toLowerCase()) {
+          setWinnerTextGameResult(1)
+
+          let oHash = ""
+
+          for (let i in CreatorHash){
+            if (CreatorHash[i] === blockHash[position]) oHash += '<span class="yellowForHash">'+CreatorHash[i]+'</span>'
+            else oHash += CreatorHash[i]
+          }
+
+
+          setPlayerHashGameResult(1, oHash)
+
+        }
+        else {
+          setWinnerTextGameResult(2)
+
+          let oHash = ""
+
+          for (let i in OpponentHash){
+            if (OpponentHash[i] === blockHash[position]) oHash += '<span class="yellowForHash">'+OpponentHash[i]+'</span>'
+            else oHash += OpponentHash[i]
+          }
+
+          setPlayerHashGameResult(2, oHash)
+        }
+
+        let bHash = "Hash: "
+
+        for (let i in blockHash){
+          if (i == position){
+            bHash += '<span class="yellowForHash">'+blockHash[i]+'</span>'
+          }
+          else bHash += blockHash[i]
+        }
+
+        setDataInBottomBlock(bHash)
+
+        rotate()
+
+        clearInterval(interval)
+        clearInterval(interval2)
       })
-    }, 1000)
+    }, gameInterval)
   }
 
   function showGameResults(){
@@ -378,21 +454,87 @@ export default function Game() {
     setImageInGameResults(1, selectedNft.image)
     setImageInGameResults(2, selectedLobby.nftTransfer.tokenImage)
 
+
+    GetLobbyById(selectedLobby.id, Moralis, (json) => {
+      let blockNumber = json.blockNumber
+      let position = json.gameNumber
+
+      let creatorHash = json.creatorHash
+      let opponentHash = json.opponentHash
+      window.CreatorHash = creatorHash
+      window.OpponentHash = opponentHash
+
+
+      setPlayerHashGameResult(2, creatorHash)
+      setPlayerHashGameResult(1, opponentHash)
+
+      setDataInTopBlock(position, blockNumber)
+    })
+
+    let interval2 = setInterval(() => {
+      GetBlock(Web3Api, chainId.toString()).then((json) => {
+        document.querySelector("#currentBlockTBGR").innerHTML = json
+      })
+    }, gameInterval)
+
     let interval = setInterval(() => {
       GetWinner(selectedLobby.id, Moralis, (json) => {
         console.log(json)
 
-        let winnerAccount = json[1].toString().toLowerCase()
+        let winnerAccount = json.address.toLowerCase()
 
         if (winnerAccount === "0x0000000000000000000000000000000000000000") return
 
-        if (winnerAccount === account.toString().toLowerCase()) setWinnerTextGameResult(1)
-        else setWinnerTextGameResult(2)
+        let blockHash = json.blockHash //'Hash: 0x267a78849675F05B86fb0766d6aB6aA466910A6'
+        let position = json.index
+
+        if (winnerAccount === account.toString().toLowerCase()) {
+          setWinnerTextGameResult(1)
+
+          let oHash = ""
+
+          for (let i in window.OpponentHash){
+            if (window.OpponentHash[i] === blockHash[position]) oHash += '<span class="yellowForHash">'+window.OpponentHash[i]+'</span>'
+            else oHash += window.OpponentHash[i]
+          }
+
+
+          setPlayerHashGameResult(1, oHash)
+
+        }
+        else {
+          setWinnerTextGameResult(2)
+
+          let oHash = ""
+
+          for (let i in window.CreatorHash){
+            if (window.CreatorHash[i] === blockHash[position]) oHash += '<span class="yellowForHash">'+window.CreatorHash[i]+'</span>'
+            else oHash += window.CreatorHash[i]
+          }
+
+
+          setPlayerHashGameResult(2, oHash)
+
+        }
+
+        let bHash = "Hash: "
+
+        for (let i in blockHash){
+          if (i == position){
+            bHash += '<span class="yellowForHash">'+blockHash[i]+'</span>'
+          }
+          else bHash += blockHash[i]
+        }
+
+        rotate()
+
+        setDataInBottomBlock(bHash)
 
         clearInterval(interval)
+        clearInterval(interval2)
 
       })
-    }, 1000)
+    }, gameInterval)
   }
 
   function setWinnerTextGameResult(player = 1){
@@ -404,6 +546,17 @@ export default function Game() {
         break
       case 2:
         document.querySelector("#WinnerBlockGR").classList.add("Winner2TextGR")
+        break
+    }
+  }
+
+  function setPlayerHashGameResult(player = 1, hash){
+    switch (player) {
+      case 1:
+        document.querySelector(".Player1HashGR p").innerHTML = hash
+        break
+      case 2:
+        document.querySelector(".Player2HashGR p").innerHTML = hash
         break
     }
   }
@@ -420,9 +573,46 @@ export default function Game() {
     })
   }
 
+  function claimWinning(){
+    let lobbyId;
+    if (window.isCreate){
+      lobbyId = selectedLobby.lobby.lobbyId
+    }
+    else{
+      lobbyId = selectedLobby.id
+    }
+    console.log(selectedLobby)
+    ClaimReward(lobbyId, Moralis, (isSign, json) => {
+      if (isSign){
+        window.location.reload();
+      }
+    })
+  }
+
+  function rotate() {
+    var red = document
+      .querySelector("#CoinFlip")
+      .style.setProperty(
+        "--animation-time",
+        (Math.floor(Math.random() * 10) * 180 + 180).toString() + "deg",
+      );
+    document.querySelector("#CoinFlip").classList.toggle("flip-container-hover");
+  }
+
+  function setDataInTopBlock(position, gameblock){
+
+    document.querySelector("#positionTBGR").innerHTML = position
+    document.querySelector("#gameBlockTBGR").innerHTML = gameblock
+
+  }
+
+  function setDataInBottomBlock(hash){
+    document.querySelector(".GameHashBBGR").innerHTML = hash
+  }
+
   return (
     <div className="background">
-      <img className="gameIcon" src={gameIcon} />
+      <img className="gameIcon" src={gameIcon}  onClick={() => rotate()}/>
       <div className="GameWindow1 hidden">
         <img className="coin" src={coinMain} />
         <p id="statusBlock">Select NFT you want to play for</p>
@@ -511,8 +701,21 @@ export default function Game() {
       <div className="GameResults hidden">
         <div className="TopBlockGR">
           <img src={topBlockGR}/>
+          <div className="CurrentBlockTBGR"><span>Current block: </span> <span id="currentBlockTBGR" style={{ color:"#F7931E" }} ></span></div>
+          <div className="PositionTBGR"><span>Position: </span> <span id="positionTBGR" style={{ color:"#F7931E" }} ></span></div>
+          <div className="GameBlockTBGR"><span>Game block: </span> <span id="gameBlockTBGR" style={{ color:"#F7931E" }} ></span></div>
         </div>
         <img src={coinBackgroundGR} className="CoinBackgroundGR"/>
+        <div className="flip-container vertical" id="CoinFlip">
+          <div className="flipper">
+            <div className="front">
+              <img src={FontCoin} />
+            </div>
+            <div className="back">
+              <img src={BackCoin} />
+            </div>
+          </div>
+        </div>
         <div className="Player1CardGR">
           <p className="PlayerTextGR">Player 1</p>
           <img className="PlayerImageGR" id="Player1ImgGR"/>
@@ -523,9 +726,17 @@ export default function Game() {
         </div>
         <div className="BottomBlockGR">
           <img src={topBlockGR}/>
+          <div className="GameHashBBGR"></div>
+
+        </div>
+        <div className="Player1HashGR">
+          <p></p>
+        </div>
+        <div className="Player2HashGR">
+          <p></p>
         </div>
         <p className="hidden" id="WinnerBlockGR">WINNER</p>
-        <input type="button" className="ClaimWinningsGR hidden" value="claim winnings"/>
+        <input type="button" className="ClaimWinningsGR hidden" value="claim winnings" onClick={() => claimWinning()}/>
       </div>
     </div>
   );

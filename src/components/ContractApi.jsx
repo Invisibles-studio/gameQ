@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { useMoralis } from "react-moralis";
 
-const contract = "0x86b65B01E8CaA91923385ab52917a0093dc20C55";
+const contract = "0x9f5C103D0641f536272917a16172FaC7211d791f";
 
 // получить разрешение на контракт
 export function GetApproval(nft, Moralis, callback) {
@@ -52,6 +52,13 @@ export function CheckApproval(nft, _owner, Moralis, callback) {
     console.log(val);
     callback(val);
   });
+}
+
+export async function GetBlock(Web3Api, _chain) {
+
+  const options = { chain: _chain , date: Date.now() };
+  const date = await Web3Api.native.getDateToBlock(options);
+  return date.block
 }
 
 //создать игровое лобби
@@ -197,7 +204,7 @@ export function AcceptOffer(lobbyID, betID, Moralis, callback) {
   });
 }
 
-// view функция. Не нужно подтверждение на метамаске // todo
+// view функция. Не нужно подтверждение на метамаске
 export function GetWinner(lobbyID, Moralis, callback) {
   const options = {
     contractAddress: contract.toLowerCase(),
@@ -212,14 +219,21 @@ export function GetWinner(lobbyID, Moralis, callback) {
       callback(null);
       return;
     }
+
+
     console.log(val);
-    callback(val);
+    let json = {
+      winner: val[0],
+      address: val[1].toString(),
+      blockHash: val[2].toString(),
+      index: parseInt(val[3]._hex, 16)+2,
+    };
+    callback(json);
   });
 }
 
 // забрать выигрыш.
 export function ClaimReward(lobbyID, Moralis, callback) {
-  console.log(nft);
 
   const options = {
     contractAddress: contract.toLowerCase(),
@@ -237,10 +251,10 @@ export function ClaimReward(lobbyID, Moralis, callback) {
     }
     let val = {
       bet: {
-        winner: value["events"][3]["args"]["winner"],
-        winnerAddress: value["events"][3]["args"]["winnerAddress"],
-        etherValue: parseInt(value["events"][3]["args"]["etherValue"]._hex, 16),
-        lobbyId: parseInt(value["events"][3]["args"]["lobbyId"]._hex, 16),
+        winner: value["events"][4]["args"]["winner"],
+        winnerAddress: value["events"][4]["args"]["winnerAddress"],
+        etherValue: parseInt(value["events"][4]["args"]["etherValue"]._hex, 16),
+        lobbyId: parseInt(value["events"][4]["args"]["lobbyId"]._hex, 16),
       },
     };
     console.log(val);
@@ -530,6 +544,70 @@ const ABI_GAME = [
     "type": "event"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "lobbyId",
+        "type": "uint256"
+      }
+    ],
+    "name": "claimReward",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_creatorNFT",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_creatorNFTId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_creatorEtherValue",
+        "type": "uint256"
+      }
+    ],
+    "name": "CreateLobby",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "lobbyId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_userNFT",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_userNFTId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_userEtherValue",
+        "type": "uint256"
+      }
+    ],
+    "name": "CreateOffer",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
     "anonymous": false,
     "inputs": [
       {
@@ -584,57 +662,6 @@ const ABI_GAME = [
     ],
     "name": "RewardClaimed",
     "type": "event"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_creatorNFT",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_creatorNFTId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_creatorEtherValue",
-        "type": "uint256"
-      }
-    ],
-    "name": "CreateLobby",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "lobbyId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "_userNFT",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_userNFTId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_userEtherValue",
-        "type": "uint256"
-      }
-    ],
-    "name": "CreateOffer",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
   },
   {
     "inputs": [
@@ -714,19 +741,6 @@ const ABI_GAME = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "lobbyId",
-        "type": "uint256"
-      }
-    ],
-    "name": "claimReward",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -907,6 +921,16 @@ const ABI_GAME = [
         "internalType": "address",
         "name": "",
         "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "blockHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "gameNumber",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
