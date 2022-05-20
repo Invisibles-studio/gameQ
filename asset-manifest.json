@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/gameQ/static/css/main.a2a3f2eb.css",
-    "main.js": "/gameQ/static/js/main.7fa84d37.js",
+    "main.css": "/gameQ/static/css/main.07095762.css",
+    "main.js": "/gameQ/static/js/main.a62fad4b.js",
     "static/media/gameIcon.png": "/gameQ/static/media/gameIcon.0f103bc7890fec07734d.png",
     "static/media/back.png": "/gameQ/static/media/back.7b047f20693dbc2c63be.png",
     "static/media/font.png": "/gameQ/static/media/font.33aab387727ca1fd839a.png",
@@ -16,11 +16,11 @@
     "static/media/MathWallet.svg": "/gameQ/static/media/MathWallet.19212234cfaec388ea6f339d0cea9df9.svg",
     "SafePal.svg": "/gameQ/e7068bbce0757878c2ef3e30191ce580.svg",
     "index.html": "/gameQ/index.html",
-    "main.a2a3f2eb.css.map": "/gameQ/static/css/main.a2a3f2eb.css.map",
-    "main.7fa84d37.js.map": "/gameQ/static/js/main.7fa84d37.js.map"
+    "main.07095762.css.map": "/gameQ/static/css/main.07095762.css.map",
+    "main.a62fad4b.js.map": "/gameQ/static/js/main.a62fad4b.js.map"
   },
   "entrypoints": [
-    "static/css/main.a2a3f2eb.css",
-    "static/js/main.7fa84d37.js"
+    "static/css/main.07095762.css",
+    "static/js/main.a62fad4b.js"
   ]
 }
