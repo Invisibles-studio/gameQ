@@ -32,6 +32,21 @@ const menuItems = [
     value: "Ropsten Testnet",
     icon: <ETHLogo />,
   },
+  {
+    key: "0x38",
+    value: "Binance",
+    icon: <BSCLogo />,
+  },
+  {
+    key: "0x89",
+    value: "Polygon",
+    icon: <PolygonLogo />,
+  },
+  {
+    key: "0xa86a",
+    value: "Avalanche",
+    icon: <AvaxLogo />,
+  },
 ];
 
 const menuItemsTest = [

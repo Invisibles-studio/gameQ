@@ -1,48 +1,45 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 
-#root {
-  min-height: 947px;
-  height: 1px;
-}
-
 .background {
+  position: absolute;
   height: 100%;
-  max-width: 1920px;
+  width: 100%;
   background-color: black;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .AuthButton {
   box-sizing: border-box;
 
   position: absolute;
-  left: 71.35%;
-  right: 13.02%;
-  top: 10.93%;
-  bottom: 83.06%;
+  left: 71.354vw;
+  top: 6.146vw;
 
-  border: 1px solid #F7931E;
-  border-radius: 10px;
-  filter: drop-shadow(4px 4px 10px rgba(255, 201, 64, 0.5));
+  border: 0.052vw solid #F7931E;
+  border-radius: 0.521vw;
+  filter: drop-shadow(0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.5));
 
-  width: 300px;
-  height: 65px;
+  width: 15.625vw;
+  height: 3.385vw;
   background: black;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 1.250vw;
+  line-height: 1.510vw;
 
   color: #FFFFFF;
 }
 
 .UserBlock {
   position: absolute;
-  width: 720px;
-  height: 65px;
-  left: 59.3%;
-  top: 118px;
+  width: 37.500vw;
+  height: 3.385vw;
+  left: 59.375vw;
+  top: 6.146vw;
 
 }
 
@@ -50,24 +47,22 @@
   box-sizing: border-box;
 
   position: absolute;
-  left: 0%;
-  right: 58.33%;
-  top: 0%;
-  bottom: 0%;
+  width: 15.625vw;
+  height: 3.385vw;
 
   background: black;
 
-  border: 1px solid #F7931E;
-  filter: drop-shadow(4px 4px 10px rgba(255, 201, 64, 0.5));
-  border-radius: 10px;
+  border: 0.052vw solid #F7931E;
+  filter: drop-shadow(0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.5));
+  border-radius: 0.521vw;
 }
 
 .DropDownChains {
-  width: 100%;
-  height: 65px;
+  width: 15.625vw;
+  height: 3.385vw;
   background: black;
-  border: 1px solid #F7931E;
-  border-radius: 10px;
+  border: 0.052vw solid #F7931E;
+  border-radius: 0.521vw;
 }
 
 .anticon-down {
@@ -78,77 +73,73 @@
 
 .NativeBalance {
   position: absolute;
-  width: 70px;
-  height: 29px;
-  left: 325px;
-  top: 18px;
+  width: 3.646vw;
+  height: 1.510vw;
+  left: 16.927vw;
+  top: 0.938vw;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 1.250vw;
+  line-height: 1.510vw;
 
   color: #FFFFFF;
 }
 
 .accountAddress {
   position: absolute;
-  width: 200px;
-  height: 65px;
-  left: 520px;
-  top: 0px;
+  width: 10.417vw;
+  height: 3.385vw;
+  left: 27.083vw;
 
   background: #0A0A0A;
-  border-radius: 10px;
+  border-radius: 0.521vw;
 }
 
 .accountAddress p {
   position: absolute;
-  width: 164px;
-  height: 29px;
-  left: 20px;
-  top: 18px;
+  width: 8.542vw;
+  height: 1.510vw;
+  left: 1.042vw;
+  top: 0.938vw;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 1.250vw;
+  line-height: 1.510vw;
 
   color: #F7931E;
 }
 
 .ChainName {
   position: absolute;
-  width: 96px;
-  height: 29px;
-  left: 82px;
-  top: 18px;
+  width: 5vw;
+  height: 1.510vw;
+  left: 4.271vw;
+  top: 0.938vw;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 1.250vw;
+  line-height: 1.510vw;
 
   color: #FFFFFF;
 }
 
 .ChainName:focus {
   position: absolute;
-  width: 96px;
-  height: 29px;
-  left: 82px;
-  top: 18px;
+  width: 5vw;
+  height: 1.510vw;
+  left: 4.271vw;
+  top: 0.938vw;
 }
 
 .DropDownChains svg {
   position: absolute;
-  width: 47px;
-  height: 47px;
-  left: 20px;
-  top: 9px;
+  width: 2.448vw;
+  height: 2.448vw;
+  left: 1.042vw;
+  top: 0.469vw;
 }
 
 .DropDownChains:hover {
@@ -163,54 +154,54 @@
 
 .coin {
   position: absolute;
-  width: 264px;
-  height: 264px;
+  width: 13.750vw;
+  height: 13.750vw;
 
-  left: 43.12%;
-  right: 43.12%;
-  top: 3.7%;
-  bottom: 71.85%;
+  left: 43.125vw;
+  top: 5.625vw;
+  transition: transform 1000ms ease;
+}
+
+.coinWork {
+  transform: translateY(-3.229vw);
 }
 
 .CreateGameButton, .FindGameButton {
   position: absolute;
-  width: 460px;
-  height: 100px;
+  width: 23.958vw;
+  height: 5.208vw;
   background: #F7931E;
-  box-shadow: 4px 4px 10px rgba(255, 201, 64, 0.25), inset 10px 10px 20px #FFC940;
-  border-radius: 15px;
+  box-shadow: 0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.25), inset 0.521vw 0.521vw 1.042vw #FFC940;
+  border-radius: 0.781vw;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 36px;
-  line-height: 44px;
+  font-size: 1.875vw;
+  line-height: 2.292vw;
 
   text-transform: uppercase;
 
   color: #FFFFFF;
 
-  bottom: 54.95%;
-  left: 38%;
+  left: 38.021vw;
+  top: 25.573vw;
 }
 
 .FindGameButton {
-  bottom: 43%;
-  left: 38%;
+  top: 31.927vw;
 }
 
 #statusBlock {
   position: absolute;
-  width: 372px;
-  height: 30px;
-  left: 780px;
-  top: 311px;
+  width: 19.375vw;
 
-  font-family: "Inter";
+  left: 40.625vw;
+  top: 16.198vw;
+
   font-style: normal;
   font-weight: 400;
-  font-size: 25px;
-  line-height: 30px;
+  font-size: 1.302vw;
+  line-height: 1.563vw;
 
   color: #d0d0cf;
   text-align: center;
@@ -218,54 +209,52 @@
 
 .line1 {
   position: absolute;
-  width: 981px;
+  width: 51.094vw;
   height: 0px;
-  left: 470px;
-  top: 415px;
+  left: 24.479vw;
+  top: 21.615vw;
 
-  border: 1px solid #6c6661;
+  border: 0.052vw solid #6c6661;
   transform: rotate(-0.12deg);
   transition: transform 500ms ease;
 }
 
 .line2 {
   position: absolute;
-  width: 981px;
+  width: 51.094vw;
   height: 0px;
-  left: 470px;
-  top: 630px;
+  left: 24.479vw;
+  top: 32.813vw;
 
-  border: 1px solid #6c6661;
+  border: 0.052vw solid #6c6661;
   transform: rotate(-0.12deg);
   transition: transform 500ms ease;
 }
 
 .gameIcon {
   position: absolute;
-  width: 80px;
-  height: 96px;
-  left: 3.12%;
-  right: 92.71%;
-  top: 8.33%;
+  width: 4.167vw;
+  height: 5vw;
+  left: 3.125vw;
+  top: 4.688vw;
 }
 
 #play {
   position: absolute;
-  width: 460px;
-  height: 100px;
-  left: 730px;
-  top: 800px;
+  width: 23.958vw;
+  height: 5.208vw;
+  left: 38.021vw;
+  top: 41.667vw;
 
   background: #f7931e;
-  box-shadow: 4px 4px 10px rgba(255, 201, 64, 0.25),
-    inset 10px 10px 20px #ffc940;
-  border-radius: 15px;
+  box-shadow: 0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.25),
+    inset 0.521vw 0.521vw 1.042vw #ffc940;
+  border-radius: 0.781vw;
 
-  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  font-size: 36px;
-  line-height: 17px;
+  font-size: 1.875vw;
+  line-height: 0.885vw;
   text-transform: uppercase;
   color: #ffffff;
 }
@@ -287,9 +276,9 @@
   flex-direction: row;
   align-items: flex-start;
   position: absolute;
-  width: 1920px;
-  height: 200px;
-  top: 415px;
+  width: 100vw;
+  height: 10.417vw;
+  top: 21.615vw;
   margin: auto;
 
   vertical-align: middle;
@@ -297,28 +286,29 @@
 }
 
 .NftItem {
-  width: 150px;
-  height: 150px;
+  width: 7.813vw;
+  height: 7.813vw;
 
-  min-width: 125px;
-  min-height: 125px;
+  min-width: 6.510vw;
+  min-height: 6.510vw;
 
-  max-height: 150px;
-  max-width: 150px;
+  max-height: 7.813vw;
+  max-width: 7.813vw;
 
-  margin-left: 10px;
+  margin-left: 0.521vw;
   transition: transform 500ms ease;
-  margin-top: 40px;
+  margin-top: 2.083vw;
 }
 
 .NftItem img {
-  width: 125px;
-  height: 125px;
+  width: 6.510vw;
+  height: 6.510vw;
 
-  border: 1px solid #6c6661;
+  border: 0.104vw solid #6c6661;
   box-sizing: border-box;
-  box-shadow: -10px 4px 25px rgba(31, 31, 31, 0.6);
-  border-radius: 20px;
+  box-shadow: -0.521vw 0.208vw 1.302vw rgba(31, 31, 31, 0.6);
+  border-radius: 1.042vw;
+  background-size: contain;
 }
 
 .NftItem:last-child {
@@ -326,7 +316,7 @@
 }
 
 .ScrollableNft {
-  height: 215px;
+  height: 12.1vw;
 
   display: flex;
   flex-direction: row;
@@ -336,25 +326,25 @@
 }
 
 .NftItemSelected {
-  transform: scale(1.5) translateY(3px);
-  margin-right: 30px;
-  margin-left: 42px;
+  transform: scale(1.5) translateY(0.156vw);
+  margin-right: 1.563vw;
+  margin-left: 2.188vw;
 }
 
 .line1SelectedNft {
-  transform: translateY(-20px);
+  transform: translateY(-1.042vw);
 }
 
 .line2SelectedNft {
-  transform: translateY(20px);
+  transform: translateY(1.042vw);
 }
 
 .line1SelectedNft2 {
-  transform: translateY(-63px);
+  transform: translateY(-3.281vw);
 }
 
 .line2SelectedNft2 {
-  transform: translateY(63px);
+  transform: translateY(3.281vw);
 }
 
 .hidden {
@@ -727,57 +717,57 @@
   flex-direction: row;
   align-items: flex-start;
   position: absolute;
-  width: 980px;
-  height: 320px;
-  top: 380px;
+  width: 51.042vw;
+  height: 16.667vw;
+  top: 19.792vw;
   vertical-align: middle;
-  margin: 0px 125px 0 470px;
+  margin: 0 6.510vw 0 24.479vw;
   justify-content: center;
 }
 
 .offerItem {
-  width: 213px;
-  height: 292px;
+  width: 11.094vw;
+  height: 15.208vw;
 
-  min-width: 213px;
-  min-height: 292px;
+  min-width: 11.094vw;
+  min-height: 15.208vw;
 
   background: rgba(108, 102, 97, 0.1);
 
-  border: 1px solid #f7931e;
+  border: 0.052vw solid #f7931e;
   box-sizing: border-box;
-  border-radius: 20px;
-  margin-right: 30px;
+  border-radius: 1.042vw;
+  margin-right: 1.563vw;
 }
 
 .offerItemSelected {
-  width: 213px;
-  height: 292px;
+  width: 11.094vw;
+  height: 15.208vw;
 
-  min-width: 213px;
-  min-height: 292px;
+  min-width: 11.094vw;
+  min-height: 15.208vw;
 
   background: rgba(108, 102, 97, 0.1);
 
-  border: 1px solid green;
+  border: 0.052vw solid green;
   box-sizing: border-box;
-  border-radius: 20px;
-  margin-right: 30px;
+  border-radius: 1.042vw;
+  margin-right: 1.563vw;
 }
 
 .offerItemSelected img {
-  width: 191px;
-  height: 171px;
-  margin-left: 10px;
-  margin-top: 33px;
+  width: 9.948vw;
+  height: 8.906vw;
+  margin-left: 0.521vw;
+  margin-top: 1.719vw;
 
-  border: 1px solid #6c6661;
+  border: 0.052vw solid #6c6661;
   box-sizing: border-box;
-  border-radius: 20px;
+  border-radius: 1.042vw;
 }
 
 .ScrollableOffers {
-  height: 320px;
+  height: 16.667vw;
 
   display: flex;
   flex-direction: row;
@@ -787,27 +777,26 @@
 }
 
 .offerItem img {
-  width: 191px;
-  height: 171px;
-  margin-left: 10px;
-  margin-top: 33px;
+  width: 9.948vw;
+  height: 8.906vw;
+  margin-left: 0.521vw;
+  margin-top: 1.719vw;
 
-  border: 1px solid #6c6661;
+  border: 0.052vw solid #6c6661;
   box-sizing: border-box;
-  border-radius: 20px;
+  border-radius: 1.042vw;
 }
 
 .offerNftName {
-  width: 61px;
-  height: 12px;
-  margin-left: 15px;
-  margin-top: 10px;
+  width: 3.177vw;
+  height: 0.625vw;
+  margin-left: 0.781vw;
+  margin-top: 0.521vw;
 
-  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  font-size: 10px;
-  line-height: 12px;
+  font-size: 0.521vw;
+  line-height: 0.625vw;
 
   /* text in a player card */
 
@@ -816,26 +805,25 @@
 
 .bottomOfferBlock {
   display: flex;
-  width: 211px;
-  height: 35px;
-  margin-top: 29px;
+  width: 10.990vw;
+  height: 1.823vw;
+  margin-top: 1.510vw;
 
   background: #000000;
-  border-radius: 0px 0px 20px 20px;
+  border-radius: 0 0 1.042vw 1.042vw;
 }
 
 .bottomOfferBlockItem {
-  width: 29px;
-  height: 12px;
+  width: 1.510vw;
+  height: 0.625vw;
 
-  margin-left: 15px;
-  margin-top: 12px;
+  margin-left: 0.781vw;
+  margin-top: 0.625vw;
 
-  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  font-size: 10px;
-  line-height: 12px;
+  font-size: 0.521vw;
+  line-height: 0.625vw;
   text-transform: uppercase;
 
   /* text in a player card */
@@ -844,14 +832,13 @@
 }
 
 .bottomOfferBlockNickname {
-  margin-left: 90px;
-  margin-top: 11px;
+  margin-left: 4.688vw;
+  margin-top: 0.573vw;
 
-  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  font-size: 10px;
-  line-height: 12px;
+  font-size: 0.521vw;
+  line-height: 0.625vw;
 
   /* text in a player card */
 

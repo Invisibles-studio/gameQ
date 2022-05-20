@@ -168,12 +168,14 @@ export default function Game() {
   function createGame() {
     document.querySelector(".GameWindow1").classList.remove("hidden");
     document.querySelector(".GameWindowStart").classList.add("hidden");
+    document.querySelector(".coin").classList.add("coinWork")
     window.isCreate = true;
   }
 
   function findGame() {
     document.querySelector(".GameWindow1").classList.remove("hidden");
     document.querySelector(".GameWindowStart").classList.add("hidden");
+    document.querySelector(".coin").classList.add("coinWork")
 
     document.querySelector(".line1").classList.add("line1SelectedNft2");
     document.querySelector(".line2").classList.add("line2SelectedNft2");
@@ -594,7 +596,7 @@ export default function Game() {
       .querySelector("#CoinFlip")
       .style.setProperty(
         "--animation-time",
-        (Math.floor(Math.random() * 10) * 180 + 180).toString() + "deg",
+        (Math.floor(Math.random() * 10) * 180 + 180*15).toString() + "deg",
       );
     document.querySelector("#CoinFlip").classList.toggle("flip-container-hover");
   }
