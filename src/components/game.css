@@ -66,8 +66,8 @@
 }
 
 .anticon-down {
-  width: 27px;
-  height: 16px;
+  width: 1.406vw;
+  height: 0.833vw;
   color: white;
 }
 
@@ -144,12 +144,12 @@
 
 .DropDownChains:hover {
   background: black;
-  border: 1px solid #F7931E;
+  border: 0.052vw solid #F7931E;
 }
 
 .DropDownChains:focus {
   background: black;
-  border: 1px solid #F7931E;
+  border: 0.052vw solid #F7931E;
 }
 
 .coin {
@@ -210,7 +210,7 @@
 .line1 {
   position: absolute;
   width: 51.094vw;
-  height: 0px;
+  height: 0;
   left: 24.479vw;
   top: 21.615vw;
 
@@ -222,7 +222,7 @@
 .line2 {
   position: absolute;
   width: 51.094vw;
-  height: 0px;
+  height: 0;
   left: 24.479vw;
   top: 32.813vw;
 
@@ -312,7 +312,7 @@
 }
 
 .NftItem:last-child {
-  margin-right: 10px;
+  margin-right: 0.521vw;
 }
 
 .ScrollableNft {
@@ -408,7 +408,7 @@
 
   background: #F7931E;
   box-shadow: 0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.25), inset 0.521vw 0.521vw 1.042vw #FFC940;
-  border-radius: 15px;
+  border-radius: 0.781vw;
 
   font-family: 'Inter';
   font-style: normal;
@@ -623,7 +623,7 @@
 
   background: #F7931E;
   box-shadow: 0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.25), inset 0.521vw 0.521vw 1.042vw #FFC940;
-  border-radius: 15px;
+  border-radius: 0.781vw;
 
   font-style: normal;
   font-weight: 700;
