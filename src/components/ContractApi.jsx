@@ -1,7 +1,8 @@
 /* eslint-disable */
 import { useMoralis } from "react-moralis";
 
-const contract = "0x9f5C103D0641f536272917a16172FaC7211d791f";
+const contract = process.env["REACT_APP_CONTRACT_HASH "]
+console.log(contract)
 
 // получить разрешение на контракт
 export function GetApproval(nft, Moralis, callback) {
