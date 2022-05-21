@@ -193,9 +193,9 @@
 
 #statusBlock {
   position: absolute;
-  width: 19.375vw;
+  width: 21.375vw;
 
-  left: 40.625vw;
+  left: 38.542vw;
   top: 16.198vw;
 
   font-style: normal;
@@ -355,27 +355,28 @@
   box-sizing: border-box;
 
   position: absolute;
-  width: 355px;
-  height: 405px;
-  left: 212px;
-  top: 410px;
+  width: 18.490vw;
+  height: 21.094vw;
+  left: 11.042vw;
+  top: 21.354vw;
 
-  border: 1px solid #F7931E;
-  border-radius: 20px;
+  border: 0.052vw solid #F7931E;
+  border-radius: 1.042vw;
 }
 
 .PlayerBlockWaitText{
   position: absolute;
-  width: 130px;
-  height: 34px;
-  left: 128px;
-  top: 23px;
+  width: 7.240vw;
+  height: 1.771vw;
+  left: 5.573vw;
+  top: 1.198vw;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 30px;
-  line-height: 36px;
+  font-size: 1.563vw;
+  line-height: 1.875vw;
+
+  text-align: center;
 
   color: #D0D0CF;
 }
@@ -384,36 +385,36 @@
   box-sizing: border-box;
 
   position: absolute;
-  width: 299px;
-  height: 296px;
-  left: 28px;
-  top: 81px;
+  width: 15.573vw;
+  height: 15.417vw;
+  left: 1.458vw;
+  top: 4.219vw;
 
-  border: 1px solid #6C6661;
-  border-radius: 20px;
+  border: 0.052vw solid #6C6661;
+  border-radius: 1.042vw;
 }
 
 .Player2BlockWait {
-  left: 1353px;
-  top: 410px;
+  left: 70.469vw;
+  top: 21.354vw;
 }
 
 .CancelOfferBlockWait {
   position: absolute;
-  width: 500px;
-  height: 120px;
-  left: 710px;
-  top: 800px;
+  width: 26.042vw;
+  height: 6.250vw;
+  left: 36.979vw;
+  top: 41.667vw;
 
   background: #F7931E;
-  box-shadow: 4px 4px 10px rgba(255, 201, 64, 0.25), inset 10px 10px 20px #FFC940;
+  box-shadow: 0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.25), inset 0.521vw 0.521vw 1.042vw #FFC940;
   border-radius: 15px;
 
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 36px;
-  line-height: 44px;
+  font-size: 1.875vw;
+  line-height: 2.292vw;
 
   text-align: center;
   text-transform: uppercase;
@@ -423,60 +424,59 @@
 
 .TopBlockGR {
   position: absolute;
-  width: 976px;
-  height: 81px;
-  left: 472px;
-  top: -20px;
+  width: 50.833vw;
+  height: 4.219vw;
+  left: 24.583vw;
+  top: -1.042vw;
 }
 
 .CoinBackgroundGR {
   position: absolute;
-  width: 568px;
-  height: 583px;
-  left: 688px;
-  top: 177px;
+  width: 29.583vw;
+  height: 30.365vw;
+  left: 35.833vw;
+  top: 9.219vw;
 }
 
 .Player1CardGR, .Player2CardGR {
   box-sizing: border-box;
 
   position: absolute;
-  width: 355px;
-  height: 405px;
-  left: 167px;
-  top: 268px;
+  width: 18.490vw;
+  height: 21.094vw;
+  left: 8.698vw;
+  top: 13.958vw;
 
-  border: 1px solid #F7931E;
-  border-radius: 20px;
+  border: 0.052vw solid #F7931E;
+  border-radius: 1.042vw;
 }
 
 .Player2CardGR {
-  left: 1446px;
-  top: 269px;
+  left: 75.313vw;
+  top: 14.010vw;
 }
 
 .PlayerTextGR{
   position: absolute;
-  width: 130px;
-  height: 34px;
-  left: 120px;
-  top: 23px;
+  width: 6.771vw;
+  height: 1.771vw;
+  left: 6.250vw;
+  top: 1.198vw;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 30px;
-  line-height: 36px;
+  font-size: 1.563vw;
+  line-height: 1.875vw;
 
   color: #D0D0CF;
 }
 
 .BottomBlockGR {
   position: absolute;
-  width: 829px;
-  height: 50px;
-  left: 545px;
-  top: 895px;
+  width: 43.177vw;
+  height: 2.604vw;
+  left: 28.385vw;
+  top: 46.615vw;
 }
 
 .BottomBlockGR img {
@@ -487,45 +487,43 @@
   box-sizing: border-box;
 
   position: absolute;
-  width: 299px;
-  height: 296px;
-  left: 28px;
-  top: 81px;
+  width: 15.573vw;
+  height: 15.417vw;
+  left: 1.458vw;
+  top: 4.219vw;
 
-  border: 1px solid #6C6661;
-  border-radius: 20px;
+  border: 0.052vw solid #6C6661;
+  border-radius: 1.042vw;
 }
 
 .Player1HashGR, .Player2HashGR {
   box-sizing: border-box;
 
   position: absolute;
-  width: 355px;
-  height: 102px;
-  left: 167px;
-  top: 711px;
+  width: 18.490vw;
+  height: 5.313vw;
+  left: 8.698vw;
+  top: 37.031vw;
 
-  border: 1px solid #F7931E;
-  border-radius: 30px;
+  border: 0.052vw solid #F7931E;
+  border-radius: 1.563vw;
 }
 
 .Player2HashGR {
-  left: 1446px;
-  top: 711px;
+  left: 75.313vw;
 }
 
 .Player1HashGR p, .Player2HashGR p {
   position: absolute;
-  width: 267px;
-  height: 34px;
-  left: 10px;
-  top: 35px;
+  width: 13.906vw;
+  height: 1.771vw;
+  left: 0.521vw;
+  top: 1.823vw;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 1.250vw;
+  line-height: 1.510vw;
 
   color: #D0D0CF;
 
@@ -534,24 +532,23 @@
 
 #CoinFlip {
   position: absolute;
-  width: 327px;
-  height: 326px;
-  left: 810px;
-  top: 307px;
+  width: 52.083vw;
+  height: 16.979vw;
+  left: 42.188vw;
+  top: 15.990vw;
 }
 
 .CurrentBlockTBGR {
   position: absolute;
-  width: 315px;
-  height: 29px;
-  left: 61px;
-  top: 21px;
+  width: 16.406vw;
+  height: 1.510vw;
+  left: 3.177vw;
+  top: 1.094vw;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 1.250vw;
+  line-height: 1.510vw;
 
   color: #D0D0CF;
 
@@ -562,16 +559,15 @@
 
 .PositionTBGR {
   position: absolute;
-  width: 300px;
-  height: 29px;
-  left: 427px;
-  top: 21px;
+  width: 15.625vw;
+  height: 1.510vw;
+  left: 22.240vw;
+  top: 1.094vw;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 1.250vw;
+  line-height: 1.510vw;
 
   color: #D0D0CF;
 
@@ -582,16 +578,15 @@
 
 .GameHashBBGR {
   position: absolute;
-  width: 758px;
-  height: 29px;
-  left: 35px;
-  top: 17px;
+  width: 39.479vw;
+  height: 1.510vw;
+  left: 1.823vw;
+  top: 0.885vw;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 17px;
-  line-height: 29px;
+  font-size: 0.885vw;
+  line-height: 1.510vw;
 
   color: #D0D0CF;
 }
@@ -602,16 +597,15 @@
 
 .GameBlockTBGR {
   position: absolute;
-  width: 315px;
-  height: 29px;
-  left: 642px;
-  top: 21px;
+  width: 16.406vw;
+  height: 1.510vw;
+  left: 33.438vw;
+  top: 1.094vw;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 1.250vw;
+  line-height: 1.510vw;
 
   color: #D0D0CF;
 
@@ -622,20 +616,19 @@
 
 .ClaimWinningsGR{
   position: absolute;
-  width: 355px;
-  height: 69px;
-  left: 167px;
-  top: 841px;
+  width: 18.490vw;
+  height: 3.594vw;
+  left: 8.698vw;
+  top: 43.802vw;
 
   background: #F7931E;
-  box-shadow: 4px 4px 10px rgba(255, 201, 64, 0.25), inset 10px 10px 20px #FFC940;
+  box-shadow: 0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.25), inset 0.521vw 0.521vw 1.042vw #FFC940;
   border-radius: 15px;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 1.042vw;
+  line-height: 1.250vw;
   text-transform: uppercase;
 
   color: #FFFFFF;
@@ -644,27 +637,26 @@
 
 .NftNotSelected {
   position: absolute;
-  width: 400px;
-  height: 150px;
-  left: 1308px;
-  top: 95px;
+  width: 20.833vw;
+  height: 7.813vw;
+  left: 68.125vw;
+  top: 4.948vw;
 
   background: #F71E1E;
-  border-radius: 10px;
+  border-radius: 0.521vw;
 }
 
 .NftNotSelected p {
   position: absolute;
-  width: 307px;
-  height: 78px;
-  left: 47px;
-  top: 36px;
+  width: 15.990vw;
+  height: 4.063vw;
+  left: 2.448vw;
+  top: 1.875vw;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 32px;
-  line-height: 39px;
+  font-size: 1.667vw;
+  line-height: 2.031vw;
   text-align: center;
 
   color: #FFFFFF;
@@ -672,16 +664,15 @@
 
 .Winner1TextGR, .Winner2TextGR{
   position: absolute;
-  width: 98px;
-  height: 29px;
-  left: 301px;
-  top: 218px;
+  width: 5.104vw;
+  height: 1.510vw;
+  left: 15.677vw;
+  top: 11.354vw;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 1.250vw;
+  line-height: 1.510vw;
   /* identical to box height */
 
   text-transform: uppercase;
@@ -692,22 +683,20 @@
 }
 
 .Winner2TextGR{
-  left: 1570px;
-  right: 0px;
+  left: 81.771vw;
 }
 
 .VsTextOnBlockWait {
   position: absolute;
-  width: 135px;
-  height: 116px;
-  left: 893px;
-  top: 566px;
+  width: 7.031vw;
+  height: 6.042vw;
+  left: 46.510vw;
+  top: 29.479vw;
 
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 96px;
-  line-height: 116px;
+  font-size: 5vw;
+  line-height: 6.042vw;
 
   color: #FFFFFF;
 }

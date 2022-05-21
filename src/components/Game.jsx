@@ -168,14 +168,14 @@ export default function Game() {
   function createGame() {
     document.querySelector(".GameWindow1").classList.remove("hidden");
     document.querySelector(".GameWindowStart").classList.add("hidden");
-    document.querySelector(".coin").classList.add("coinWork")
+    //document.querySelector(".coin").classList.add("coinWork")
     window.isCreate = true;
   }
 
   function findGame() {
     document.querySelector(".GameWindow1").classList.remove("hidden");
     document.querySelector(".GameWindowStart").classList.add("hidden");
-    document.querySelector(".coin").classList.add("coinWork")
+    //document.querySelector(".coin").classList.add("coinWork")
 
     document.querySelector(".line1").classList.add("line1SelectedNft2");
     document.querySelector(".line2").classList.add("line2SelectedNft2");
@@ -616,7 +616,7 @@ export default function Game() {
     <div className="background">
       <img className="gameIcon" src={gameIcon}  onClick={() => rotate()}/>
       <div className="GameWindow1 hidden">
-        <img className="coin" src={coinMain} />
+        <img className="coin coinWork" src={coinMain} />
         <p id="statusBlock">Select NFT you want to play for</p>
         <div className="line1" />
         <div className="selectedNft">
@@ -685,10 +685,10 @@ export default function Game() {
       </div>
       <div className="WaitGameStart hidden">
         <div>
-          <img className="coin" src={coinMain} />
+          <img className="coin coinWork" src={coinMain} />
         </div>
         <p id="statusBlock">Just wait...</p>
-        <div className="NftNotSelected hidden"><p>Your game offer was not selected</p></div>
+        <div className="NftNotSelected"><p>Your game offer was not selected</p></div>
         <div className="Player1BlockWait">
           <p className="PlayerBlockWaitText">Player 1</p>
           <img className="PlayerBlockWaitImage" id="PlayerBlockWaitImage1" />
