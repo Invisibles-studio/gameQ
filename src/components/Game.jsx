@@ -377,8 +377,31 @@ export default function Game() {
       window.CreatorHash = creatorHash
       window.OpponentHash = opponentHash
 
-      setPlayerHashGameResult(1, creatorHash)
-      setPlayerHashGameResult(2, opponentHash)
+      let oHashLetters = ""
+      let oHashDigits = ""
+
+      for (let i in window.CreatorHash){
+        if (i <= 5) continue
+
+        let letter = window.CreatorHash[i]
+        if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += letter+" "
+        else if (letter !== "0") oHashLetters += letter+" "
+      }
+
+      setPlayerHashGameResult(1, oHashLetters, oHashDigits)
+
+      let oHashLetters2 = ""
+      let oHashDigits2 = ""
+
+      for (let i in window.OpponentHash){
+        if (i <= 5) continue
+
+        let letter = window.OpponentHash[i]
+        if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits2 += letter+" "
+        else if (letter !== "0") oHashLetters2 += letter+" "
+      }
+
+      setPlayerHashGameResult(2, oHashLetters2, oHashDigits2)
 
       setDataInTopBlock(position, blockNumber)
     })
@@ -480,9 +503,31 @@ export default function Game() {
       window.CreatorHash = creatorHash
       window.OpponentHash = opponentHash
 
+      let oHashLetters = ""
+      let oHashDigits = ""
 
-      setPlayerHashGameResult(2, creatorHash)
-      setPlayerHashGameResult(1, opponentHash)
+      for (let i in window.CreatorHash){
+        if (i <= 5) continue
+
+        let letter = window.CreatorHash [i]
+        if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += letter+" "
+        else if (letter !== "0") oHashLetters += letter+" "
+      }
+
+      setPlayerHashGameResult(2, oHashLetters, oHashDigits)
+
+      let oHashLetters2 = ""
+      let oHashDigits2 = ""
+
+      for (let i in window.OpponentHash){
+        if (i <= 5) continue
+
+        let letter = window.OpponentHash[i]
+        if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits2 += letter+" "
+        else if (letter !== "0") oHashLetters2 += letter+" "
+      }
+
+      setPlayerHashGameResult(1, oHashLetters2, oHashDigits2)
 
       setDataInTopBlock(position, blockNumber)
     })
