@@ -404,28 +404,42 @@ export default function Game() {
         if (winnerAccount === account.toString().toLowerCase()) {
           setWinnerTextGameResult(1)
 
-          let oHash = ""
+          let oHashLetters = ""
+          let oHashDigits = ""
 
-          for (let i in CreatorHash){
-            if (CreatorHash[i] === blockHash[position]) oHash += '<span class="yellowForHash">'+CreatorHash[i]+'</span>'
-            else oHash += CreatorHash[i]
+          for (let i in window.OpponentHash){
+            if (i <= 5) continue
+
+            let letter = window.OpponentHash[i]
+            if (letter === blockHash[position] && letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += '<span class="yellowForHash">'+letter+'</span>'+" "
+            else if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += letter+" "
+            else if (letter !== "0" && letter === blockHash[position]) oHashLetters += '<span class="yellowForHash">'+letter+'</span>'+" "
+            else if (letter !== "0") oHashLetters += letter+" "
           }
 
 
-          setPlayerHashGameResult(1, oHash)
+
+          setPlayerHashGameResult(1, oHashLetters, oHashDigits)
 
         }
         else {
           setWinnerTextGameResult(2)
 
-          let oHash = ""
+          let oHashLetters = ""
+          let oHashDigits = ""
 
-          for (let i in OpponentHash){
-            if (OpponentHash[i] === blockHash[position]) oHash += '<span class="yellowForHash">'+OpponentHash[i]+'</span>'
-            else oHash += OpponentHash[i]
+          for (let i in window.OpponentHash){
+            if (i <= 5) continue
+
+            let letter = window.OpponentHash[i]
+            if (letter === blockHash[position] && letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += '<span class="yellowForHash">'+letter+'</span>'+" "
+            else if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += letter+" "
+            else if (letter !== "0" && letter === blockHash[position]) oHashLetters += '<span class="yellowForHash">'+letter+'</span>'+" "
+            else if (letter !== "0") oHashLetters += letter+" "
           }
 
-          setPlayerHashGameResult(2, oHash)
+
+          setPlayerHashGameResult(2, oHashLetters, oHashDigits)
         }
 
         let bHash = "Hash: "
@@ -493,29 +507,40 @@ export default function Game() {
         if (winnerAccount === account.toString().toLowerCase()) {
           setWinnerTextGameResult(1)
 
-          let oHash = ""
+          let oHashLetters = ""
+          let oHashDigits = ""
 
           for (let i in window.OpponentHash){
-            if (window.OpponentHash[i] === blockHash[position]) oHash += '<span class="yellowForHash">'+window.OpponentHash[i]+'</span>'
-            else oHash += window.OpponentHash[i]
+            if (i <= 5) continue
+
+            let letter = window.OpponentHash[i]
+            if (letter === blockHash[position] && letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += '<span class="yellowForHash">'+letter+'</span>'+" "
+            else if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += letter+" "
+            else if (letter !== "0" && letter === blockHash[position]) oHashLetters += '<span class="yellowForHash">'+letter+'</span>'+" "
+            else if (letter !== "0") oHashLetters += letter+" "
           }
 
-
-          setPlayerHashGameResult(1, oHash)
+          setPlayerHashGameResult(1, oHashLetters, oHashDigits)
 
         }
         else {
           setWinnerTextGameResult(2)
 
-          let oHash = ""
+          let oHashLetters = ""
+          let oHashDigits = ""
 
-          for (let i in window.CreatorHash){
-            if (window.CreatorHash[i] === blockHash[position]) oHash += '<span class="yellowForHash">'+window.CreatorHash[i]+'</span>'
-            else oHash += window.CreatorHash[i]
+          for (let i in window.OpponentHash){
+            if (i <= 5) continue
+
+            let letter = window.OpponentHash[i]
+            if (letter === blockHash[position] && letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += '<span class="yellowForHash">'+letter+'</span>'+" "
+            else if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += letter+" "
+            else if (letter !== "0" && letter === blockHash[position]) oHashLetters += '<span class="yellowForHash">'+letter+'</span>'+" "
+            else if (letter !== "0") oHashLetters += letter+" "
           }
 
 
-          setPlayerHashGameResult(2, oHash)
+          setPlayerHashGameResult(2, oHashLetters, oHashDigits)
 
         }
 
@@ -545,6 +570,7 @@ export default function Game() {
       case 1:
         document.querySelector("#WinnerBlockGR").classList.add("Winner1TextGR")
         document.querySelector(".ClaimWinningsGR").classList.remove("hidden")
+        document.querySelector(".ClaimWinningsArrowDown").classList.remove("hidden")
         break
       case 2:
         document.querySelector("#WinnerBlockGR").classList.add("Winner2TextGR")
@@ -552,13 +578,13 @@ export default function Game() {
     }
   }
 
-  function setPlayerHashGameResult(player = 1, hash){
+  function setPlayerHashGameResult(player = 1, hashLetters, hashDigits){
     switch (player) {
       case 1:
-        document.querySelector(".Player1HashGR p").innerHTML = hash
+        document.querySelector(".Player1HashGR p").innerHTML = hashLetters+"<br/>"+hashDigits
         break
       case 2:
-        document.querySelector(".Player2HashGR p").innerHTML = hash
+        document.querySelector(".Player2HashGR p").innerHTML = hashLetters+"<br/>"+hashDigits
         break
     }
   }
@@ -610,6 +636,26 @@ export default function Game() {
 
   function setDataInBottomBlock(hash){
     document.querySelector(".GameHashBBGR").innerHTML = hash
+  }
+
+  function test(){
+    let hash = "0x000009080706050f0e0d"
+
+    let oHashLetters = ""
+    let oHashDigits = ""
+
+    for (let i in hash){
+      if (i <= 5) continue
+
+      let letter = hash[i]
+      if (letter === 'd' && letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += '<span class="yellowForHash">'+letter+'</span>'+" "
+      else if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += letter+" "
+      else if (letter !== "0" && letter === 'd') oHashLetters += '<span class="yellowForHash">'+letter+'</span>'+" "
+      else if (letter !== "0") oHashLetters += letter+" "
+    }
+
+    setPlayerHashGameResult(1, oHashLetters, oHashDigits)
+
   }
 
   return (
@@ -708,13 +754,15 @@ export default function Game() {
           <div className="GameBlockTBGR"><span>Game block: </span> <span id="gameBlockTBGR" style={{ color:"#F7931E" }} ></span></div>
         </div>
         <img src={coinBackgroundGR} className="CoinBackgroundGR"/>
-        <div className="flip-container vertical" id="CoinFlip">
-          <div className="flipper">
-            <div className="front">
-              <img src={FontCoin} />
-            </div>
-            <div className="back">
-              <img src={BackCoin} />
+        <div className="CoinDiv">
+          <div className="flip-container vertical" id="CoinFlip">
+            <div className="flipper">
+              <div className="front">
+                <img src={FontCoin} />
+              </div>
+              <div className="back">
+                <img src={BackCoin} />
+              </div>
             </div>
           </div>
         </div>
@@ -740,6 +788,7 @@ export default function Game() {
           <p></p>
         </div>
         <p className="hidden" id="WinnerBlockGR">WINNER</p>
+        <div className="ClaimWinningsArrowDown hidden"/>
         <input type="button" className="ClaimWinningsGR hidden" value="claim winnings" onClick={() => claimWinning()}/>
       </div>
     </div>

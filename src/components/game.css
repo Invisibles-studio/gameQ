@@ -195,7 +195,7 @@
   position: absolute;
   width: 21.375vw;
 
-  left: 38.542vw;
+  left: 39.297vw;
   top: 16.198vw;
 
   font-style: normal;
@@ -502,10 +502,11 @@
   width: 18.490vw;
   height: 5.313vw;
   left: 8.698vw;
-  top: 37.031vw;
+  top: 37.231vw;
 
   border: 0.052vw solid #F7931E;
   border-radius: 1.563vw;
+
 }
 
 .Player2HashGR {
@@ -518,7 +519,7 @@
   height: 1.667vw;
 
   left: 16.563vw;
-  top: 35.208vw;
+  top: 35.308vw;
 
   background-image: url("../arrowDown.png");
   background-size: contain;
@@ -530,24 +531,36 @@
   left: 82.720vw;
 }
 
+.ClaimWinningsArrowDown {
+  position: absolute;
+  width: 2.813vw;
+  height: 1.667vw;
+
+  left: 16.563vw;
+  top: 42.808vw;
+
+  background-image: url("../arrowDown.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .Player1HashGR p, .Player2HashGR p {
   position: absolute;
-  width: 13.906vw;
-  height: 1.771vw;
-  left: 0.521vw;
-  top: 1.823vw;
+
+  left: 6.771vw;
+  top: 0.313vw;
 
   font-style: normal;
   font-weight: 400;
   font-size: 1.250vw;
-  line-height: 1.510vw;
+  line-height: 2.010vw;
 
   color: #D0D0CF;
 
-  justify-content: center;
+  text-align: center;
 }
 
-#CoinFlip {
+.CoinDiv {
   position: absolute;
   width: 52.083vw;
   height: 16.979vw;
@@ -636,7 +649,7 @@
   width: 18.490vw;
   height: 3.594vw;
   left: 8.698vw;
-  top: 43.802vw;
+  top: 44.802vw;
 
   background: #F7931E;
   box-shadow: 0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.25), inset 0.521vw 0.521vw 1.042vw #FFC940;
