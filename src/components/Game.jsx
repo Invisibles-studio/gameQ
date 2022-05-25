@@ -688,7 +688,7 @@ export default function Game() {
           <img className="coin coinWork" src={coinMain} />
         </div>
         <p id="statusBlock">Just wait...</p>
-        <div className="NftNotSelected"><p>Your game offer was not selected</p></div>
+        <div className="NftNotSelected hidden"><p>Your game offer was not selected</p></div>
         <div className="Player1BlockWait">
           <p className="PlayerBlockWaitText">Player 1</p>
           <img className="PlayerBlockWaitImage" id="PlayerBlockWaitImage1" />
@@ -734,6 +734,8 @@ export default function Game() {
         <div className="Player1HashGR">
           <p></p>
         </div>
+        <div className="Player1ArrowDown"/>
+        <div className="Player2ArrowDown"/>
         <div className="Player2HashGR">
           <p></p>
         </div>

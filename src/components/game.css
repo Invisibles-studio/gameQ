@@ -512,6 +512,24 @@
   left: 75.313vw;
 }
 
+.Player1ArrowDown, .Player2ArrowDown{
+  position: absolute;
+  width: 2.813vw;
+  height: 1.667vw;
+
+  left: 16.563vw;
+  top: 35.208vw;
+
+  background-image: url("../arrowDown.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+}
+
+.Player2ArrowDown {
+  left: 82.720vw;
+}
+
 .Player1HashGR p, .Player2HashGR p {
   position: absolute;
   width: 13.906vw;
