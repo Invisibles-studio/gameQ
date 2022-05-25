@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/gameQ/static/css/main.3a9368a1.css",
-    "main.js": "/gameQ/static/js/main.1bcfe7f0.js",
+    "main.css": "/gameQ/static/css/main.c00687b8.css",
+    "main.js": "/gameQ/static/js/main.0215b8a2.js",
     "static/media/gameIcon.png": "/gameQ/static/media/gameIcon.0f103bc7890fec07734d.png",
     "static/media/back.png": "/gameQ/static/media/back.7b047f20693dbc2c63be.png",
     "static/media/font.png": "/gameQ/static/media/font.33aab387727ca1fd839a.png",
+    "static/media/coin2.png": "/gameQ/static/media/coin2.a5b9bc7fc71cbb1b10ac.png",
     "static/media/coin.png": "/gameQ/static/media/coin.17cf175d364ec6797860.png",
     "static/media/coinBackgroundGR.png": "/gameQ/static/media/coinBackgroundGR.59421970ea0ddf1cd7a3.png",
-    "static/media/coin2.png": "/gameQ/static/media/coin2.9e4f4229030cbaa1d49f.png",
     "service-worker.js": "/gameQ/service-worker.js",
     "static/media/notFoundNft.jpg": "/gameQ/static/media/notFoundNft.13b27766b48033ac05b0.jpg",
     "static/media/Coin98.png": "/gameQ/static/media/Coin98.1e4e40738d77467e19ba.png",
@@ -16,11 +16,11 @@
     "static/media/MathWallet.svg": "/gameQ/static/media/MathWallet.19212234cfaec388ea6f339d0cea9df9.svg",
     "SafePal.svg": "/gameQ/e7068bbce0757878c2ef3e30191ce580.svg",
     "index.html": "/gameQ/index.html",
-    "main.3a9368a1.css.map": "/gameQ/static/css/main.3a9368a1.css.map",
-    "main.1bcfe7f0.js.map": "/gameQ/static/js/main.1bcfe7f0.js.map"
+    "main.c00687b8.css.map": "/gameQ/static/css/main.c00687b8.css.map",
+    "main.0215b8a2.js.map": "/gameQ/static/js/main.0215b8a2.js.map"
   },
   "entrypoints": [
-    "static/css/main.3a9368a1.css",
-    "static/js/main.1bcfe7f0.js"
+    "static/css/main.c00687b8.css",
+    "static/js/main.0215b8a2.js"
   ]
 }
