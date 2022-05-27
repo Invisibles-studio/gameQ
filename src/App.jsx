@@ -70,8 +70,6 @@ const App = ({ isServerInfo }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, isWeb3Enabled]);
 
-  return (
-    <Game/>
-  );
+  return <Game />;
 };
 export default App;
