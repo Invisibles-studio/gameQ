@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/gameQ/static/css/main.c00687b8.css",
-    "main.js": "/gameQ/static/js/main.0215b8a2.js",
+    "main.js": "/gameQ/static/js/main.1a86824a.js",
     "static/media/gameIcon.png": "/gameQ/static/media/gameIcon.0f103bc7890fec07734d.png",
     "static/media/back.png": "/gameQ/static/media/back.7b047f20693dbc2c63be.png",
     "static/media/font.png": "/gameQ/static/media/font.33aab387727ca1fd839a.png",
@@ -17,10 +17,10 @@
     "SafePal.svg": "/gameQ/e7068bbce0757878c2ef3e30191ce580.svg",
     "index.html": "/gameQ/index.html",
     "main.c00687b8.css.map": "/gameQ/static/css/main.c00687b8.css.map",
-    "main.0215b8a2.js.map": "/gameQ/static/js/main.0215b8a2.js.map"
+    "main.1a86824a.js.map": "/gameQ/static/js/main.1a86824a.js.map"
   },
   "entrypoints": [
     "static/css/main.c00687b8.css",
-    "static/js/main.0215b8a2.js"
+    "static/js/main.1a86824a.js"
   ]
 }
