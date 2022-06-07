@@ -370,7 +370,9 @@ export default function Game() {
     GetLobbyById(selectedLobby.lobby.lobbyId, Moralis, (json) => {
       let blockNumber = json.blockNumber
       let position = json.gameNumber
-
+      if (blockNumber > position){
+        blockNumber = position;
+      }
       let creatorHash = json.creatorHash
       let opponentHash = json.opponentHash
 
@@ -495,9 +497,12 @@ export default function Game() {
 
 
     GetLobbyById(selectedLobby.id, Moralis, (json) => {
-      let blockNumber = json.blockNumber
-      let position = json.gameNumber
 
+      let position = json.gameNumber
+      let blockNumber = json.blockNumber
+      if (blockNumber > position){
+        blockNumber = position;
+      }
       let creatorHash = json.creatorHash
       let opponentHash = json.opponentHash
       window.CreatorHash = creatorHash
