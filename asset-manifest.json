@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/gameQ/static/css/main.c00687b8.css",
-    "main.js": "/gameQ/static/js/main.1a86824a.js",
+    "main.css": "/gameQ/static/css/main.688fe986.css",
+    "main.js": "/gameQ/static/js/main.a284f1e0.js",
     "static/media/gameIcon.png": "/gameQ/static/media/gameIcon.0f103bc7890fec07734d.png",
     "static/media/back.png": "/gameQ/static/media/back.7b047f20693dbc2c63be.png",
     "static/media/font.png": "/gameQ/static/media/font.33aab387727ca1fd839a.png",
@@ -11,16 +11,16 @@
     "service-worker.js": "/gameQ/service-worker.js",
     "static/media/notFoundNft.jpg": "/gameQ/static/media/notFoundNft.13b27766b48033ac05b0.jpg",
     "static/media/Coin98.png": "/gameQ/static/media/Coin98.1e4e40738d77467e19ba.png",
-    "static/media/wallet-connect.svg": "/gameQ/static/media/wallet-connect.304e327744ae5c9b1b62b58f50df6734.svg",
-    "TokenPocket.svg": "/gameQ/0ba487424539ab81b79fe14307e77334.svg",
-    "static/media/MathWallet.svg": "/gameQ/static/media/MathWallet.19212234cfaec388ea6f339d0cea9df9.svg",
-    "SafePal.svg": "/gameQ/e7068bbce0757878c2ef3e30191ce580.svg",
+    "static/media/wallet-connect.svg": "/gameQ/static/media/wallet-connect.488dc369fbb265f431a7f8e741623b76.svg",
+    "TokenPocket.svg": "/gameQ/977e38abcfea26d4cced8b37ec8d6cab.svg",
+    "static/media/MathWallet.svg": "/gameQ/static/media/MathWallet.c8223809d3ba0bafeecf97c803735776.svg",
+    "SafePal.svg": "/gameQ/482d45d25d127b97fea4f6b7e962ce7d.svg",
     "index.html": "/gameQ/index.html",
-    "main.c00687b8.css.map": "/gameQ/static/css/main.c00687b8.css.map",
-    "main.1a86824a.js.map": "/gameQ/static/js/main.1a86824a.js.map"
+    "main.688fe986.css.map": "/gameQ/static/css/main.688fe986.css.map",
+    "main.a284f1e0.js.map": "/gameQ/static/js/main.a284f1e0.js.map"
   },
   "entrypoints": [
-    "static/css/main.c00687b8.css",
-    "static/js/main.1a86824a.js"
+    "static/css/main.688fe986.css",
+    "static/js/main.a284f1e0.js"
   ]
 }
