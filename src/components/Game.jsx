@@ -56,7 +56,7 @@ export default function Game() {
   const allNftItems = [...document.querySelectorAll(".NftItem")];
 
   function selectNft(nft, index) {
-    console.log(nft)
+    console.log(nft);
     allNftItems.map((el) => {
       el.classList.remove("NftItemSelected");
     });
@@ -292,7 +292,6 @@ export default function Game() {
         fetch(nftData)
           .then((result) => result.json())
           .then((out) => {
-
             tmp.push({
               nftTransfer: {
                 tokenImage: "https://ipfs.io/ipfs/" + out.image.split("//")[1],
@@ -406,7 +405,7 @@ export default function Game() {
     GetLobbyById(selectedLobby.lobby.lobbyId, Moralis, (json) => {
       let blockNumber = json.blockNumber;
       let position = json.gameNumber;
-     /* if (blockNumber > position) {
+      /* if (blockNumber > position) {
         blockNumber = position;
       }*/
       bn = blockNumber;
@@ -449,7 +448,7 @@ export default function Game() {
 
     let interval2 = setInterval(() => {
       GetBlock(Web3Api, chainId.toString()).then((json) => {
-        if(json> bn) return;
+        if (json > bn) return;
         document.querySelector("#currentBlockTBGR").innerHTML = json;
       });
     }, gameInterval);
@@ -552,10 +551,10 @@ export default function Game() {
     GetLobbyById(selectedLobby.id, Moralis, (json) => {
       let position = json.gameNumber;
       let blockNumber = json.blockNumber;
-     /* if (blockNumber > position) {
+      /* if (blockNumber > position) {
         blockNumber = position;
       }*/
-      bn = blockNumber
+      bn = blockNumber;
       let creatorHash = json.creatorHash;
       let opponentHash = json.opponentHash;
       window.CreatorHash = creatorHash;
@@ -594,7 +593,7 @@ export default function Game() {
 
     let interval2 = setInterval(() => {
       GetBlock(Web3Api, chainId.toString()).then((json) => {
-        if(json> bn) return;
+        if (json > bn) return;
         document.querySelector("#currentBlockTBGR").innerHTML = json;
       });
     }, gameInterval);

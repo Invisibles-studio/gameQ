@@ -81,7 +81,7 @@ export const useVerifyMetadata = () => {
         } //Valid Result
       })
       .catch((err) => {
-        console.log("err but похуй");
+        //console.log("err but похуй");
         //console.error("useVerifyMetadata.getMetadata() Error Caught:", {
         //err,
         //NFT,
