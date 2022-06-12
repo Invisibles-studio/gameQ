@@ -50,7 +50,6 @@ const menuItems = [
 ];
 
 const menuItemsTest = [
-
   //ethereum
 
   {
@@ -106,10 +105,10 @@ const menuItemsTest = [
     value: "Avalanche Testnet",
     icon: <AvaxLogo />,
   },
-]
+];
 
 function Chains() {
-  const { switchNetwork, chainId} = useChain();
+  const { switchNetwork, chainId } = useChain();
   const { isAuthenticated } = useMoralis();
   const [selected, setSelected] = useState({});
 

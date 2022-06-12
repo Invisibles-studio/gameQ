@@ -18,7 +18,7 @@
   left: 71.354vw;
   top: 6.146vw;
 
-  border: 0.052vw solid #F7931E;
+  border: 0.052vw solid #f7931e;
   border-radius: 0.521vw;
   filter: drop-shadow(0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.5));
 
@@ -28,19 +28,18 @@
 
   font-style: normal;
   font-weight: 400;
-  font-size: 1.250vw;
-  line-height: 1.510vw;
+  font-size: 1.25vw;
+  line-height: 1.51vw;
 
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .UserBlock {
   position: absolute;
-  width: 37.500vw;
+  width: 37.5vw;
   height: 3.385vw;
   left: 59.375vw;
   top: 6.146vw;
-
 }
 
 .ChainsChoose {
@@ -52,7 +51,7 @@
 
   background: black;
 
-  border: 0.052vw solid #F7931E;
+  border: 0.052vw solid #f7931e;
   filter: drop-shadow(0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.5));
   border-radius: 0.521vw;
 }
@@ -61,7 +60,7 @@
   width: 15.625vw;
   height: 3.385vw;
   background: black;
-  border: 0.052vw solid #F7931E;
+  border: 0.052vw solid #f7931e;
   border-radius: 0.521vw;
 }
 
@@ -74,16 +73,16 @@
 .NativeBalance {
   position: absolute;
   width: 3.646vw;
-  height: 1.510vw;
+  height: 1.51vw;
   left: 16.927vw;
   top: 0.938vw;
 
   font-style: normal;
   font-weight: 400;
-  font-size: 1.250vw;
-  line-height: 1.510vw;
+  font-size: 1.25vw;
+  line-height: 1.51vw;
 
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .accountAddress {
@@ -92,44 +91,44 @@
   height: 3.385vw;
   left: 27.083vw;
 
-  background: #0A0A0A;
+  background: #0a0a0a;
   border-radius: 0.521vw;
 }
 
 .accountAddress p {
   position: absolute;
   width: 8.542vw;
-  height: 1.510vw;
+  height: 1.51vw;
   left: 1.042vw;
   top: 0.938vw;
 
   font-style: normal;
   font-weight: 400;
-  font-size: 1.250vw;
-  line-height: 1.510vw;
+  font-size: 1.25vw;
+  line-height: 1.51vw;
 
-  color: #F7931E;
+  color: #f7931e;
 }
 
 .ChainName {
   position: absolute;
   width: 5vw;
-  height: 1.510vw;
+  height: 1.51vw;
   left: 4.271vw;
   top: 0.938vw;
 
   font-style: normal;
   font-weight: 400;
-  font-size: 1.250vw;
-  line-height: 1.510vw;
+  font-size: 1.25vw;
+  line-height: 1.51vw;
 
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .ChainName:focus {
   position: absolute;
   width: 5vw;
-  height: 1.510vw;
+  height: 1.51vw;
   left: 4.271vw;
   top: 0.938vw;
 }
@@ -144,18 +143,18 @@
 
 .DropDownChains:hover {
   background: black;
-  border: 0.052vw solid #F7931E;
+  border: 0.052vw solid #f7931e;
 }
 
 .DropDownChains:focus {
   background: black;
-  border: 0.052vw solid #F7931E;
+  border: 0.052vw solid #f7931e;
 }
 
 .coin {
   position: absolute;
-  width: 13.750vw;
-  height: 13.750vw;
+  width: 13.75vw;
+  height: 13.75vw;
 
   left: 43.125vw;
   top: 5.625vw;
@@ -166,12 +165,14 @@
   transform: translateY(-3.229vw);
 }
 
-.CreateGameButton, .FindGameButton {
+.CreateGameButton,
+.FindGameButton {
   position: absolute;
   width: 23.958vw;
   height: 5.208vw;
-  background: #F7931E;
-  box-shadow: 0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.25), inset 0.521vw 0.521vw 1.042vw #FFC940;
+  background: #f7931e;
+  box-shadow: 0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.25),
+    inset 0.521vw 0.521vw 1.042vw #ffc940;
   border-radius: 0.781vw;
 
   font-style: normal;
@@ -181,7 +182,7 @@
 
   text-transform: uppercase;
 
-  color: #FFFFFF;
+  color: #ffffff;
 
   left: 38.021vw;
   top: 25.573vw;
@@ -289,8 +290,8 @@
   width: 7.813vw;
   height: 7.813vw;
 
-  min-width: 6.510vw;
-  min-height: 6.510vw;
+  min-width: 6.51vw;
+  min-height: 6.51vw;
 
   max-height: 7.813vw;
   max-width: 7.813vw;
@@ -301,8 +302,8 @@
 }
 
 .NftItem img {
-  width: 6.510vw;
-  height: 6.510vw;
+  width: 6.51vw;
+  height: 6.51vw;
 
   border: 0.104vw solid #6c6661;
   box-sizing: border-box;
@@ -351,22 +352,23 @@
   display: none;
 }
 
-.Player1BlockWait, .Player2BlockWait {
+.Player1BlockWait,
+.Player2BlockWait {
   box-sizing: border-box;
 
   position: absolute;
-  width: 18.490vw;
+  width: 18.49vw;
   height: 21.094vw;
   left: 11.042vw;
   top: 21.354vw;
 
-  border: 0.052vw solid #F7931E;
+  border: 0.052vw solid #f7931e;
   border-radius: 1.042vw;
 }
 
-.PlayerBlockWaitText{
+.PlayerBlockWaitText {
   position: absolute;
-  width: 7.240vw;
+  width: 7.24vw;
   height: 1.771vw;
   left: 5.573vw;
   top: 1.198vw;
@@ -378,7 +380,7 @@
 
   text-align: center;
 
-  color: #D0D0CF;
+  color: #d0d0cf;
 }
 
 .PlayerBlockWaitImage {
@@ -390,7 +392,7 @@
   left: 1.458vw;
   top: 4.219vw;
 
-  border: 0.052vw solid #6C6661;
+  border: 0.052vw solid #6c6661;
   border-radius: 1.042vw;
 }
 
@@ -402,12 +404,13 @@
 .CancelOfferBlockWait {
   position: absolute;
   width: 26.042vw;
-  height: 6.250vw;
+  height: 6.25vw;
   left: 36.979vw;
   top: 41.667vw;
 
-  background: #F7931E;
-  box-shadow: 0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.25), inset 0.521vw 0.521vw 1.042vw #FFC940;
+  background: #f7931e;
+  box-shadow: 0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.25),
+    inset 0.521vw 0.521vw 1.042vw #ffc940;
   border-radius: 0.781vw;
 
   font-style: normal;
@@ -418,7 +421,7 @@
   text-align: center;
   text-transform: uppercase;
 
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .TopBlockGR {
@@ -437,29 +440,30 @@
   top: 9.219vw;
 }
 
-.Player1CardGR, .Player2CardGR {
+.Player1CardGR,
+.Player2CardGR {
   box-sizing: border-box;
 
   position: absolute;
-  width: 18.490vw;
+  width: 18.49vw;
   height: 21.094vw;
   left: 8.698vw;
   top: 13.958vw;
 
-  border: 0.052vw solid #F7931E;
+  border: 0.052vw solid #f7931e;
   border-radius: 1.042vw;
 }
 
 .Player2CardGR {
   left: 75.313vw;
-  top: 14.010vw;
+  top: 14.01vw;
 }
 
-.PlayerTextGR{
+.PlayerTextGR {
   position: absolute;
   width: 6.771vw;
   height: 1.771vw;
-  left: 6.250vw;
+  left: 6.25vw;
   top: 1.198vw;
 
   font-style: normal;
@@ -467,7 +471,7 @@
   font-size: 1.563vw;
   line-height: 1.875vw;
 
-  color: #D0D0CF;
+  color: #d0d0cf;
 }
 
 .BottomBlockGR {
@@ -482,7 +486,7 @@
   transform: scale(1, -1);
 }
 
-.PlayerImageGR{
+.PlayerImageGR {
   box-sizing: border-box;
 
   position: absolute;
@@ -491,29 +495,30 @@
   left: 1.458vw;
   top: 4.219vw;
 
-  border: 0.052vw solid #6C6661;
+  border: 0.052vw solid #6c6661;
   border-radius: 1.042vw;
 }
 
-.Player1HashGR, .Player2HashGR {
+.Player1HashGR,
+.Player2HashGR {
   box-sizing: border-box;
 
   position: absolute;
-  width: 18.490vw;
+  width: 18.49vw;
   height: 5.313vw;
   left: 8.698vw;
   top: 37.231vw;
 
-  border: 0.052vw solid #F7931E;
+  border: 0.052vw solid #f7931e;
   border-radius: 1.563vw;
-
 }
 
 .Player2HashGR {
   left: 75.313vw;
 }
 
-.Player1ArrowDown, .Player2ArrowDown{
+.Player1ArrowDown,
+.Player2ArrowDown {
   position: absolute;
   width: 2.813vw;
   height: 1.667vw;
@@ -524,11 +529,10 @@
   background-image: url("../arrowDown.png");
   background-size: contain;
   background-repeat: no-repeat;
-
 }
 
 .Player2ArrowDown {
-  left: 82.720vw;
+  left: 82.72vw;
 }
 
 .ClaimWinningsArrowDown {
@@ -544,7 +548,8 @@
   background-repeat: no-repeat;
 }
 
-.Player1HashGR p, .Player2HashGR p {
+.Player1HashGR p,
+.Player2HashGR p {
   position: absolute;
 
   left: 6.771vw;
@@ -552,10 +557,10 @@
 
   font-style: normal;
   font-weight: 400;
-  font-size: 1.250vw;
-  line-height: 2.010vw;
+  font-size: 1.25vw;
+  line-height: 2.01vw;
 
-  color: #D0D0CF;
+  color: #d0d0cf;
 
   text-align: center;
 }
@@ -565,22 +570,22 @@
   width: 52.083vw;
   height: 16.979vw;
   left: 42.188vw;
-  top: 15.990vw;
+  top: 15.99vw;
 }
 
 .CurrentBlockTBGR {
   position: absolute;
   width: 16.406vw;
-  height: 1.510vw;
+  height: 1.51vw;
   left: 3.177vw;
   top: 1.094vw;
 
   font-style: normal;
   font-weight: 700;
-  font-size: 1.250vw;
-  line-height: 1.510vw;
+  font-size: 1.25vw;
+  line-height: 1.51vw;
 
-  color: #D0D0CF;
+  color: #d0d0cf;
 
   flex: none;
   order: 0;
@@ -590,16 +595,16 @@
 .PositionTBGR {
   position: absolute;
   width: 15.625vw;
-  height: 1.510vw;
-  left: 22.240vw;
+  height: 1.51vw;
+  left: 22.24vw;
   top: 1.094vw;
 
   font-style: normal;
   font-weight: 700;
-  font-size: 1.250vw;
-  line-height: 1.510vw;
+  font-size: 1.25vw;
+  line-height: 1.51vw;
 
-  color: #D0D0CF;
+  color: #d0d0cf;
 
   flex: none;
   order: 0;
@@ -609,60 +614,60 @@
 .GameHashBBGR {
   position: absolute;
   width: 39.479vw;
-  height: 1.510vw;
+  height: 1.51vw;
   left: 1.823vw;
   top: 0.885vw;
 
   font-style: normal;
   font-weight: 700;
   font-size: 0.885vw;
-  line-height: 1.510vw;
+  line-height: 1.51vw;
 
-  color: #D0D0CF;
+  color: #d0d0cf;
 }
 
 .yellowForHash {
-  color: #F7931E;
+  color: #f7931e;
 }
 
 .GameBlockTBGR {
   position: absolute;
   width: 16.406vw;
-  height: 1.510vw;
+  height: 1.51vw;
   left: 33.438vw;
   top: 1.094vw;
 
   font-style: normal;
   font-weight: 700;
-  font-size: 1.250vw;
-  line-height: 1.510vw;
+  font-size: 1.25vw;
+  line-height: 1.51vw;
 
-  color: #D0D0CF;
+  color: #d0d0cf;
 
   flex: none;
   order: 0;
   flex-grow: 0;
 }
 
-.ClaimWinningsGR{
+.ClaimWinningsGR {
   position: absolute;
-  width: 18.490vw;
+  width: 18.49vw;
   height: 3.594vw;
   left: 8.698vw;
   top: 44.802vw;
 
-  background: #F7931E;
-  box-shadow: 0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.25), inset 0.521vw 0.521vw 1.042vw #FFC940;
+  background: #f7931e;
+  box-shadow: 0.208vw 0.208vw 0.521vw rgba(255, 201, 64, 0.25),
+    inset 0.521vw 0.521vw 1.042vw #ffc940;
   border-radius: 0.781vw;
 
   font-style: normal;
   font-weight: 700;
   font-size: 1.042vw;
-  line-height: 1.250vw;
+  line-height: 1.25vw;
   text-transform: uppercase;
 
-  color: #FFFFFF;
-
+  color: #ffffff;
 }
 
 .NftNotSelected {
@@ -672,13 +677,13 @@
   left: 68.125vw;
   top: 4.948vw;
 
-  background: #F71E1E;
+  background: #f71e1e;
   border-radius: 0.521vw;
 }
 
 .NftNotSelected p {
   position: absolute;
-  width: 15.990vw;
+  width: 15.99vw;
   height: 4.063vw;
   left: 2.448vw;
   top: 1.875vw;
@@ -689,30 +694,31 @@
   line-height: 2.031vw;
   text-align: center;
 
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
-.Winner1TextGR, .Winner2TextGR{
+.Winner1TextGR,
+.Winner2TextGR {
   position: absolute;
   width: 5.104vw;
-  height: 1.510vw;
+  height: 1.51vw;
   left: 15.677vw;
   top: 11.354vw;
 
   font-style: normal;
   font-weight: 700;
-  font-size: 1.250vw;
-  line-height: 1.510vw;
+  font-size: 1.25vw;
+  line-height: 1.51vw;
   /* identical to box height */
 
   text-transform: uppercase;
 
   /* button */
 
-  color: #F7931E;
+  color: #f7931e;
 }
 
-.Winner2TextGR{
+.Winner2TextGR {
   left: 81.771vw;
 }
 
@@ -720,7 +726,7 @@
   position: absolute;
   width: 7.031vw;
   height: 6.042vw;
-  left: 46.510vw;
+  left: 46.51vw;
   top: 29.479vw;
 
   font-style: normal;
@@ -728,7 +734,7 @@
   font-size: 5vw;
   line-height: 6.042vw;
 
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .offersContainer {
@@ -740,7 +746,7 @@
   height: 16.667vw;
   top: 19.792vw;
   vertical-align: middle;
-  margin: 0 6.510vw 0 24.479vw;
+  margin: 0 6.51vw 0 24.479vw;
   justify-content: center;
 }
 
@@ -824,16 +830,16 @@
 
 .bottomOfferBlock {
   display: flex;
-  width: 10.990vw;
+  width: 10.99vw;
   height: 1.823vw;
-  margin-top: 1.510vw;
+  margin-top: 1.51vw;
 
   background: #000000;
   border-radius: 0 0 1.042vw 1.042vw;
 }
 
 .bottomOfferBlockItem {
-  width: 1.510vw;
+  width: 1.51vw;
   height: 0.625vw;
 
   margin-left: 0.781vw;

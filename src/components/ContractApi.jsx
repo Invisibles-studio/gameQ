@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { useMoralis } from "react-moralis";
 
-const contract = process.env.REACT_APP_CONTRACT_HASH;
+const contract = process.env.REACT_APP_CONTRACT_HASH_ROPSTEN; // process.env.REACT_APP_CONTRACT_HASH;
 console.log(contract);
 
 // получить разрешение на контракт
@@ -86,17 +86,17 @@ export function CreateLobby(nft, etherValue = 0, Moralis, callback) {
     }
     val = {
       lobby: {
-        lobbyId: parseInt(value["events"][2]["args"]["lobbyId"]._hex, 16),
-        creator: value["events"][2]["args"]["creator"],
-        creatorBet: parseInt(value["events"][2]["args"]["creatorBet"]._hex, 16),
+        lobbyId: parseInt(value["events"][1]["args"]["lobbyId"]._hex, 16),
+        creator: value["events"][1]["args"]["creator"],
+        creatorBet: parseInt(value["events"][1]["args"]["creatorBet"]._hex, 16),
       },
       bet: {
-        NFTAddress: value["events"][3]["args"]["NFTAddress"],
-        NFTId: parseInt(value["events"][3]["args"]["NFTId"]._hex, 16),
-        betId: parseInt(value["events"][3]["args"]["betId"]._hex, 16),
-        etherValue: parseInt(value["events"][3]["args"]["etherValue"]._hex, 16),
-        lobbyId: parseInt(value["events"][3]["args"]["lobbyId"]._hex, 16),
-        user: value["events"][3]["args"]["user"],
+        NFTAddress: value["events"][2]["args"]["NFTAddress"],
+        NFTId: parseInt(value["events"][2]["args"]["NFTId"]._hex, 16),
+        betId: parseInt(value["events"][2]["args"]["betId"]._hex, 16),
+        etherValue: parseInt(value["events"][2]["args"]["etherValue"]._hex, 16),
+        lobbyId: parseInt(value["events"][2]["args"]["lobbyId"]._hex, 16),
+        user: value["events"][2]["args"]["user"],
       },
     };
     console.log(val);
@@ -430,583 +430,583 @@ export function getNftMetadata(address, id, Moralis, callback) {
 
 const ABI_GAME = [
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "lobbyId",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "lobbyId",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "betId",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "betId",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "address",
-        name: "user",
-        type: "address",
-      },
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
     ],
-    name: "BetCancelled",
-    type: "event",
+    "name": "BetCancelled",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "lobbyId",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "lobbyId",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "betId",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "betId",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "address",
-        name: "user",
-        type: "address",
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "address",
-        name: "NFTAddress",
-        type: "address",
+        "indexed": false,
+        "internalType": "address",
+        "name": "NFTAddress",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "NFTId",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "NFTId",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "etherValue",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "etherValue",
+        "type": "uint256"
+      }
     ],
-    name: "BetPlaced",
-    type: "event",
+    "name": "BetPlaced",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "lobbyId",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "lobbyId",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "betId",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "betId",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "address",
-        name: "user",
-        type: "address",
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "address",
-        name: "NFTAddress",
-        type: "address",
+        "indexed": false,
+        "internalType": "address",
+        "name": "NFTAddress",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "NFTId",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "NFTId",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "etherValue",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "etherValue",
+        "type": "uint256"
+      }
     ],
-    name: "BetSelected",
-    type: "event",
+    "name": "BetSelected",
+    "type": "event"
   },
   {
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "lobbyId",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "lobbyId",
+        "type": "uint256"
       },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "creator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "creatorBet",
+        "type": "uint256"
+      }
     ],
-    name: "claimReward",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "LobbyCreated",
+    "type": "event"
   },
   {
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        internalType: "address",
-        name: "_creatorNFT",
-        type: "address",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "lobbyId",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "_creatorNFTId",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "enum NFTGame.GameWinner",
+        "name": "winner",
+        "type": "uint8"
       },
       {
-        internalType: "uint256",
-        name: "_creatorEtherValue",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "address",
+        "name": "winnerAddress",
+        "type": "address"
       },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "etherValue",
+        "type": "uint256"
+      }
     ],
-    name: "CreateLobby",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
+    "name": "RewardClaimed",
+    "type": "event"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "lobbyId",
-        type: "uint256",
+        "internalType": "address",
+        "name": "_creatorNFT",
+        "type": "address"
       },
       {
-        internalType: "address",
-        name: "_userNFT",
-        type: "address",
+        "internalType": "uint256",
+        "name": "_creatorNFTId",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "_userNFTId",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_userEtherValue",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_creatorEtherValue",
+        "type": "uint256"
+      }
     ],
-    name: "CreateOffer",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
+    "name": "CreateLobby",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    anonymous: false,
-    inputs: [
+    "inputs": [
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "lobbyId",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "lobbyId",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "address",
-        name: "creator",
-        type: "address",
+        "internalType": "address",
+        "name": "_userNFT",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "creatorBet",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_userNFTId",
+        "type": "uint256"
       },
+      {
+        "internalType": "uint256",
+        "name": "_userEtherValue",
+        "type": "uint256"
+      }
     ],
-    name: "LobbyCreated",
-    type: "event",
+    "name": "CreateOffer",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    anonymous: false,
-    inputs: [
+    "inputs": [
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "lobbyId",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "lobbyId",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "enum NFTGame.GameWinner",
-        name: "winner",
-        type: "uint8",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "winnerAddress",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "etherValue",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "betId",
+        "type": "uint256"
+      }
     ],
-    name: "RewardClaimed",
-    type: "event",
+    "name": "SelectOffer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "lobbyId",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "betId",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "betId",
+        "type": "uint256"
+      }
     ],
-    name: "SelectOffer",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "WithdrawOffer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "betId",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "WithdrawOffer",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "bets",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "lobbyId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "betId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "NFT",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "NFTId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "etherValue",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isCancelled",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "lobbyId",
+        "type": "uint256"
+      }
     ],
-    name: "bets",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "lobbyId",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "betId",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "user",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "NFT",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "NFTId",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "etherValue",
-        type: "uint256",
-      },
-      {
-        internalType: "bool",
-        name: "isCancelled",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
+    "name": "claimReward",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getActiveLobbies",
-    outputs: [
+    "inputs": [],
+    "name": "getActiveLobbies",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       },
       {
-        components: [
+        "components": [
           {
-            internalType: "uint256",
-            name: "lobbyId",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "lobbyId",
+            "type": "uint256"
           },
           {
-            internalType: "address",
-            name: "creator",
-            type: "address",
+            "internalType": "address",
+            "name": "creator",
+            "type": "address"
           },
           {
-            internalType: "uint256",
-            name: "creatorBet",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "creatorBet",
+            "type": "uint256"
           },
           {
-            internalType: "address",
-            name: "opponent",
-            type: "address",
+            "internalType": "uint256",
+            "name": "opponentBet",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "opponentBet",
-            type: "uint256",
+            "internalType": "bytes10",
+            "name": "creatorHash",
+            "type": "bytes10"
           },
           {
-            internalType: "bytes10",
-            name: "creatorHash",
-            type: "bytes10",
+            "internalType": "bytes10",
+            "name": "opponentHash",
+            "type": "bytes10"
           },
           {
-            internalType: "bytes10",
-            name: "opponentHash",
-            type: "bytes10",
+            "internalType": "enum NFTGame.LobbyStatus",
+            "name": "lobbyStatus",
+            "type": "uint8"
           },
           {
-            internalType: "enum NFTGame.LobbyStatus",
-            name: "lobbyStatus",
-            type: "uint8",
+            "internalType": "enum NFTGame.GameWinner",
+            "name": "winner",
+            "type": "uint8"
           },
           {
-            internalType: "enum NFTGame.GameWinner",
-            name: "winner",
-            type: "uint8",
+            "internalType": "uint256",
+            "name": "gameNumber",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "gameNumber",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "blockNumber",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "blockNumber",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "betCount",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "betCount",
-            type: "uint256",
-          },
+            "internalType": "address",
+            "name": "opponent",
+            "type": "address"
+          }
         ],
-        internalType: "struct NFTGame.Lobby[]",
-        name: "",
-        type: "tuple[]",
-      },
+        "internalType": "struct NFTGame.Lobby[]",
+        "name": "",
+        "type": "tuple[]"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "LobbyId",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "LobbyId",
+        "type": "uint256"
+      }
     ],
-    name: "getBetsOfLobby",
-    outputs: [
+    "name": "getBetsOfLobby",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       },
       {
-        components: [
+        "components": [
           {
-            internalType: "uint256",
-            name: "lobbyId",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "lobbyId",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "betId",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "betId",
+            "type": "uint256"
           },
           {
-            internalType: "address",
-            name: "user",
-            type: "address",
+            "internalType": "address",
+            "name": "user",
+            "type": "address"
           },
           {
-            internalType: "address",
-            name: "NFT",
-            type: "address",
+            "internalType": "address",
+            "name": "NFT",
+            "type": "address"
           },
           {
-            internalType: "uint256",
-            name: "NFTId",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "NFTId",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "etherValue",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "etherValue",
+            "type": "uint256"
           },
           {
-            internalType: "bool",
-            name: "isCancelled",
-            type: "bool",
-          },
+            "internalType": "bool",
+            "name": "isCancelled",
+            "type": "bool"
+          }
         ],
-        internalType: "struct NFTGame.Bet[]",
-        name: "",
-        type: "tuple[]",
-      },
+        "internalType": "struct NFTGame.Bet[]",
+        "name": "",
+        "type": "tuple[]"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getHashes",
-    outputs: [
+    "inputs": [],
+    "name": "getHashes",
+    "outputs": [
       {
-        internalType: "bytes10",
-        name: "creatorHash",
-        type: "bytes10",
+        "internalType": "bytes10",
+        "name": "creatorHash",
+        "type": "bytes10"
       },
       {
-        internalType: "bytes10",
-        name: "opponentHash",
-        type: "bytes10",
-      },
+        "internalType": "bytes10",
+        "name": "opponentHash",
+        "type": "bytes10"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "lobbyId",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "lobbyId",
+        "type": "uint256"
+      }
     ],
-    name: "getWinner",
-    outputs: [
+    "name": "getWinner",
+    "outputs": [
       {
-        internalType: "enum NFTGame.GameWinner",
-        name: "",
-        type: "uint8",
+        "internalType": "enum NFTGame.GameWinner",
+        "name": "",
+        "type": "uint8"
       },
       {
-        internalType: "address",
-        name: "",
-        type: "address",
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       },
       {
-        internalType: "bytes32",
-        name: "blockHash",
-        type: "bytes32",
+        "internalType": "bytes32",
+        "name": "blockHash",
+        "type": "bytes32"
       },
       {
-        internalType: "uint256",
-        name: "gameNumber",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "gameNumber",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "lobbies",
-    outputs: [
+    "name": "lobbies",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "lobbyId",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "lobbyId",
+        "type": "uint256"
       },
       {
-        internalType: "address",
-        name: "creator",
-        type: "address",
+        "internalType": "address",
+        "name": "creator",
+        "type": "address"
       },
       {
-        internalType: "uint256",
-        name: "creatorBet",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "creatorBet",
+        "type": "uint256"
       },
       {
-        internalType: "address",
-        name: "opponent",
-        type: "address",
+        "internalType": "uint256",
+        "name": "opponentBet",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "opponentBet",
-        type: "uint256",
+        "internalType": "bytes10",
+        "name": "creatorHash",
+        "type": "bytes10"
       },
       {
-        internalType: "bytes10",
-        name: "creatorHash",
-        type: "bytes10",
+        "internalType": "bytes10",
+        "name": "opponentHash",
+        "type": "bytes10"
       },
       {
-        internalType: "bytes10",
-        name: "opponentHash",
-        type: "bytes10",
+        "internalType": "enum NFTGame.LobbyStatus",
+        "name": "lobbyStatus",
+        "type": "uint8"
       },
       {
-        internalType: "enum NFTGame.LobbyStatus",
-        name: "lobbyStatus",
-        type: "uint8",
+        "internalType": "enum NFTGame.GameWinner",
+        "name": "winner",
+        "type": "uint8"
       },
       {
-        internalType: "enum NFTGame.GameWinner",
-        name: "winner",
-        type: "uint8",
+        "internalType": "uint256",
+        "name": "gameNumber",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "gameNumber",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "blockNumber",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "blockNumber",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "betCount",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "betCount",
-        type: "uint256",
-      },
+        "internalType": "address",
+        "name": "opponent",
+        "type": "address"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
-  },
+    "stateMutability": "view",
+    "type": "function"
+  }
 ];
 
 const ABI_ERC721 = [

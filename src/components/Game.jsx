@@ -9,23 +9,33 @@ import notFoundNft from "notFoundNft.jpg";
 import Scrollable from "./Scrollable";
 import { useVerifyMetadata } from "../hooks/useVerifyMetadata";
 import { Skeleton } from "antd";
-import { addNftToSearch, getAllOffersWithoutMy } from "./FirebaseApi/FirebaseAPI";
+import {
+  addNftToSearch,
+  getAllOffersWithoutMy,
+} from "./FirebaseApi/FirebaseAPI";
 import { useState } from "react";
 import CustomAuth from "components/CustomAuth";
-import topBlockGR from "TopBlockGR.png"
-import coinBackgroundGR from "coinBackgroundGR.png"
-import FontCoin from "images/font.png"
-import BackCoin from "images/back.png"
+import topBlockGR from "TopBlockGR.png";
+import coinBackgroundGR from "coinBackgroundGR.png";
+import FontCoin from "images/font.png";
+import BackCoin from "images/back.png";
 import { useMoralisWeb3Api } from "react-moralis";
 import "./coinFlip.css";
 import {
   AcceptOffer,
-  CheckApproval, ClaimReward,
-  CreateLobby, CreateOffer, GetActiveLobbies,
-  GetApproval, GetBetById,
-  GetBetsInLobby, GetBlock,
+  CheckApproval,
+  ClaimReward,
+  CreateLobby,
+  CreateOffer,
+  GetActiveLobbies,
+  GetApproval,
+  GetBetById,
+  GetBetsInLobby,
+  GetBlock,
   GetLobbyById,
-  getNftMetadata, GetWinner, WithdrawOffer,
+  getNftMetadata,
+  GetWinner,
+  WithdrawOffer,
 } from "components/ContractApi";
 
 export default function Game() {
@@ -39,13 +49,14 @@ export default function Game() {
   const { data: NFTBalances } = useNFTBalances();
   const { verifyMetadata } = useVerifyMetadata();
 
-  const gameInterval = 5000
+  const gameInterval = 5000;
 
   const Web3Api = useMoralisWeb3Api();
 
   const allNftItems = [...document.querySelectorAll(".NftItem")];
 
   function selectNft(nft, index) {
+    console.log(nft)
     allNftItems.map((el) => {
       el.classList.remove("NftItemSelected");
     });
@@ -67,14 +78,12 @@ export default function Game() {
 
   function addOffer() {
     if (!window.isOffersShow && window.isCreate) {
-
       document.querySelector(".nftsContainer").classList.add("hidden");
       document.querySelector(".line1").classList.add("line1SelectedNft2");
       document.querySelector(".line2").classList.add("line2SelectedNft2");
       editStatus("Select game offer");
 
       createLobby();
-
     } else {
       const offerID = document.getElementById("selectedOffer").value;
       if (offerID != "") {
@@ -94,29 +103,38 @@ export default function Game() {
       CheckApproval(selectedNft, account, Moralis, (isApproval) => {
         if (!isApproval) {
           GetApproval(selectedNft, Moralis, (isA, json) => {
-            CreateOffer(selectedLobby.id, selectedNft, 0, Moralis, (isSigned, bet) => {
+            CreateOffer(
+              selectedLobby.id,
+              selectedNft,
+              0,
+              Moralis,
+              (isSigned, bet) => {
+                if (isSigned) {
+                  setCreatedOffer(bet);
+                  waitNftSelect();
+                }
+              },
+            );
+          });
+        } else {
+          CreateOffer(
+            selectedLobby.id,
+            selectedNft,
+            0,
+            Moralis,
+            (isSigned, bet) => {
               if (isSigned) {
                 setCreatedOffer(bet);
                 waitNftSelect();
               }
-            });
-          });
-
-        } else {
-          CreateOffer(selectedLobby.id, selectedNft, 0, Moralis, (isSigned, bet) => {
-            if (isSigned) {
-              setCreatedOffer(bet);
-              waitNftSelect();
-            }
-          });
+            },
+          );
         }
       });
-
-
     }
 
-    if (window.isCreate && window.isOffersShow && selectedOfferNft != null){
-      offerSelect()
+    if (window.isCreate && window.isOffersShow && selectedOfferNft != null) {
+      offerSelect();
     }
   }
 
@@ -129,20 +147,26 @@ export default function Game() {
 
     let interval = setInterval(() => {
       GetLobbyById(selectedLobby.id, Moralis, (json) => {
-        console.log(json)
+        console.log(json);
 
-        if (json.opponent.toString().toLowerCase() === "0x0000000000000000000000000000000000000000") return
+        if (
+          json.opponent.toString().toLowerCase() ===
+          "0x0000000000000000000000000000000000000000"
+        )
+          return;
 
-        if (json.opponent.toString().toLowerCase() === account.toString().toLowerCase()){
-          showGameResults()
-          clearInterval(interval)
+        if (
+          json.opponent.toString().toLowerCase() ===
+          account.toString().toLowerCase()
+        ) {
+          showGameResults();
+          clearInterval(interval);
+        } else {
+          document.querySelector(".NftNotSelected").classList.remove("hidden");
+          clearInterval(interval);
         }
-        else{
-          document.querySelector(".NftNotSelected").classList.remove("hidden")
-          clearInterval(interval)
-        }
-      })
-    }, 1000)
+      });
+    }, 1000);
   }
 
   function selectOffer(el, index) {
@@ -159,10 +183,9 @@ export default function Game() {
 
     if (!window.isCreate) {
       setSelectedLobby(el);
-    }else{
+    } else {
       setSelectedOfferNft(el);
     }
-
   }
 
   function createGame() {
@@ -196,30 +219,38 @@ export default function Game() {
     for (let lobbyIndex in lobbies) {
       let lobby = lobbies[lobbyIndex];
 
-      if (lobby.creator.toString().toLowerCase() === account.toString().toLowerCase()) continue;
-      if (lobby.creator.toString().toLowerCase() === "0x0000000000000000000000000000000000000000") continue
+      if (
+        lobby.creator.toString().toLowerCase() ===
+        account.toString().toLowerCase()
+      )
+        continue;
+      if (
+        lobby.creator.toString().toLowerCase() ===
+        "0x0000000000000000000000000000000000000000"
+      )
+        continue;
 
       count++;
 
       GetBetById(lobby.creatorBet, Moralis, (offer) => {
         getNftMetadata(offer.NFT, offer.NFTId, Moralis, (nftData) => {
           fetch(nftData)
-            .then(result => result.json())
-            .then(out => {
+            .then((result) => result.json())
+            .then((out) => {
               tmp.push({
-                "nftTransfer": {
-                  "tokenImage": "https://ipfs.io/ipfs/" + out.image.split("//")[1],
-                  "tokenName": out.name,
-                  "tokenAddress": offer.NFT,
-                  "tokenID": offer.NFTId,
+                nftTransfer: {
+                  tokenImage:
+                    "https://ipfs.io/ipfs/" + out.image.split("//")[1],
+                  tokenName: out.name,
+                  tokenAddress: offer.NFT,
+                  tokenID: offer.NFTId,
                 },
-                "UserID": offer.user,
-                "id": lobby.lobbyId,
+                UserID: offer.user,
+                id: lobby.lobbyId,
               });
             });
         });
       });
-
     }
 
     if (count > 0) {
@@ -230,7 +261,9 @@ export default function Game() {
           visibledLobby++;
         }
 
-        console.log("have: " + count.toString() + " : loaded: " + tmp.length.toString());
+        console.log(
+          "have: " + count.toString() + " : loaded: " + tmp.length.toString(),
+        );
 
         if (tmp.length === count) {
           setOffers([]);
@@ -250,21 +283,25 @@ export default function Game() {
     for (let nftIndex in offersList) {
       let nft = offersList[nftIndex];
 
-      if (nft.user.toString().toLowerCase() === account.toString().toLowerCase()) continue;
+      if (
+        nft.user.toString().toLowerCase() === account.toString().toLowerCase()
+      )
+        continue;
       count++;
       getNftMetadata(nft.NFT, nft.NFTId, Moralis, (nftData) => {
         fetch(nftData)
-          .then(result => result.json())
-          .then(out => {
+          .then((result) => result.json())
+          .then((out) => {
+
             tmp.push({
-              "nftTransfer": {
-                "tokenImage": "https://ipfs.io/ipfs/" + out.image.split("//")[1],
-                "tokenName": out.name,
-                "tokenAddress": nft.NFT,
-                "tokenID": nft.NFTId,
+              nftTransfer: {
+                tokenImage: "https://ipfs.io/ipfs/" + out.image.split("//")[1],
+                tokenName: out.name,
+                tokenAddress: nft.NFT,
+                tokenID: nft.NFTId,
               },
-              "UserID": account,
-              "id": nft.betId,
+              UserID: account,
+              id: nft.betId,
             });
           });
       });
@@ -278,7 +315,9 @@ export default function Game() {
           visibledOffers++;
         }
 
-        console.log("have: " + count.toString() + " : loaded: " + tmp.length.toString());
+        console.log(
+          "have: " + count.toString() + " : loaded: " + tmp.length.toString(),
+        );
 
         if (tmp.length === count) {
           setOffers([]);
@@ -300,12 +339,10 @@ export default function Game() {
         GetApproval(selectedNft, Moralis, (isA, json) => {
           createLobby();
         });
-
       } else {
         window.isLobbyOpen = true;
         CreateLobby(selectedNft, 0, Moralis, (isSigned, json) => {
-
-          setSelectedLobby(json)
+          setSelectedLobby(json);
 
           let updateOffers = setInterval(() => {
             GetLobbyById(json.lobby.lobbyId, Moralis, (json2) => {
@@ -320,9 +357,7 @@ export default function Game() {
             } else {
               clearInterval(updateOffers);
             }
-
           }, 1000);
-
         });
       }
     });
@@ -352,319 +387,361 @@ export default function Game() {
 
   function cancelOffer() {
     WithdrawOffer(createdOffer.bet.betId, Moralis, (isSign, json) => {
-      if (isSign){
+      if (isSign) {
         window.location.reload();
       }
     });
   }
 
-  function showGameResultsCreator(){
-    window.isLobbyOpen = false
+  function showGameResultsCreator() {
+    window.isLobbyOpen = false;
 
-    document.querySelector(".GameWindow1").classList.add("hidden")
-    document.querySelector(".GameResults").classList.remove("hidden")
+    document.querySelector(".GameWindow1").classList.add("hidden");
+    document.querySelector(".GameResults").classList.remove("hidden");
 
-    setImageInGameResults(1, selectedNft.image)
-    setImageInGameResults(2, selectedOfferNft.nftTransfer.tokenImage)
+    setImageInGameResults(1, selectedNft.image);
+    setImageInGameResults(2, selectedOfferNft.nftTransfer.tokenImage);
 
+    let bn = 0;
     GetLobbyById(selectedLobby.lobby.lobbyId, Moralis, (json) => {
-      let blockNumber = json.blockNumber
-      let position = json.gameNumber
-      if (blockNumber > position){
+      let blockNumber = json.blockNumber;
+      let position = json.gameNumber;
+     /* if (blockNumber > position) {
         blockNumber = position;
-      }
-      let creatorHash = json.creatorHash
-      let opponentHash = json.opponentHash
+      }*/
+      bn = blockNumber;
+      let creatorHash = json.creatorHash;
+      let opponentHash = json.opponentHash;
 
-      window.CreatorHash = creatorHash
-      window.OpponentHash = opponentHash
+      window.CreatorHash = creatorHash;
+      window.OpponentHash = opponentHash;
 
-      let oHashLetters = ""
-      let oHashDigits = ""
+      let oHashLetters = "";
+      let oHashDigits = "";
 
-      for (let i in window.CreatorHash){
-        if (i <= 5) continue
+      for (let i in window.CreatorHash) {
+        if (i <= 5) continue;
 
-        let letter = window.CreatorHash[i]
-        if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += letter+" "
-        else if (letter !== "0") oHashLetters += letter+" "
-      }
-
-      setPlayerHashGameResult(1, oHashLetters, oHashDigits)
-
-      let oHashLetters2 = ""
-      let oHashDigits2 = ""
-
-      for (let i in window.OpponentHash){
-        if (i <= 5) continue
-
-        let letter = window.OpponentHash[i]
-        if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits2 += letter+" "
-        else if (letter !== "0") oHashLetters2 += letter+" "
+        let letter = window.CreatorHash[i];
+        if (letter !== "0" && letter >= "1" && letter <= "9")
+          oHashDigits += letter + " ";
+        else if (letter !== "0") oHashLetters += letter + " ";
       }
 
-      setPlayerHashGameResult(2, oHashLetters2, oHashDigits2)
+      setPlayerHashGameResult(1, oHashLetters, oHashDigits);
 
-      setDataInTopBlock(position, blockNumber)
-    })
+      let oHashLetters2 = "";
+      let oHashDigits2 = "";
+
+      for (let i in window.OpponentHash) {
+        if (i <= 5) continue;
+
+        let letter = window.OpponentHash[i];
+        if (letter !== "0" && letter >= "1" && letter <= "9")
+          oHashDigits2 += letter + " ";
+        else if (letter !== "0") oHashLetters2 += letter + " ";
+      }
+
+      setPlayerHashGameResult(2, oHashLetters2, oHashDigits2);
+
+      setDataInTopBlock(position, blockNumber);
+    });
 
     let interval2 = setInterval(() => {
       GetBlock(Web3Api, chainId.toString()).then((json) => {
-        document.querySelector("#currentBlockTBGR").innerHTML = json
-      })
-    }, gameInterval)
+        if(json> bn) return;
+        document.querySelector("#currentBlockTBGR").innerHTML = json;
+      });
+    }, gameInterval);
 
     let interval = setInterval(() => {
       GetWinner(selectedLobby.lobby.lobbyId, Moralis, (json) => {
-        console.log(json)
+        console.log(json);
 
-        let winnerAccount = json.address.toLowerCase()
+        let winnerAccount = json.address.toLowerCase();
 
-        if (winnerAccount === "0x0000000000000000000000000000000000000000") return
+        if (winnerAccount === "0x0000000000000000000000000000000000000000")
+          return;
 
-        let blockHash = json.blockHash //'Hash: 0x267a78849675F05B86fb0766d6aB6aA466910A6'
-        let position = json.index
-
+        let blockHash = json.blockHash; //'Hash: 0x267a78849675F05B86fb0766d6aB6aA466910A6'
+        let position = json.index;
 
         if (winnerAccount === account.toString().toLowerCase()) {
-          setWinnerTextGameResult(1)
+          setWinnerTextGameResult(1);
 
-          let oHashLetters = ""
-          let oHashDigits = ""
+          let oHashLetters = "";
+          let oHashDigits = "";
 
-          for (let i in window.OpponentHash){
-            if (i <= 5) continue
+          for (let i in window.OpponentHash) {
+            if (i <= 5) continue;
 
-            let letter = window.OpponentHash[i]
-            if (letter === blockHash[position] && letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += '<span class="yellowForHash">'+letter+'</span>'+" "
-            else if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += letter+" "
-            else if (letter !== "0" && letter === blockHash[position]) oHashLetters += '<span class="yellowForHash">'+letter+'</span>'+" "
-            else if (letter !== "0") oHashLetters += letter+" "
+            let letter = window.OpponentHash[i];
+            if (
+              letter === blockHash[position] &&
+              letter !== "0" &&
+              letter >= "1" &&
+              letter <= "9"
+            )
+              oHashDigits +=
+                '<span class="yellowForHash">' + letter + "</span>" + " ";
+            else if (letter !== "0" && letter >= "1" && letter <= "9")
+              oHashDigits += letter + " ";
+            else if (letter !== "0" && letter === blockHash[position])
+              oHashLetters +=
+                '<span class="yellowForHash">' + letter + "</span>" + " ";
+            else if (letter !== "0") oHashLetters += letter + " ";
           }
 
+          setPlayerHashGameResult(1, oHashLetters, oHashDigits);
+        } else {
+          setWinnerTextGameResult(2);
 
+          let oHashLetters = "";
+          let oHashDigits = "";
 
-          setPlayerHashGameResult(1, oHashLetters, oHashDigits)
+          for (let i in window.OpponentHash) {
+            if (i <= 5) continue;
 
-        }
-        else {
-          setWinnerTextGameResult(2)
-
-          let oHashLetters = ""
-          let oHashDigits = ""
-
-          for (let i in window.OpponentHash){
-            if (i <= 5) continue
-
-            let letter = window.OpponentHash[i]
-            if (letter === blockHash[position] && letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += '<span class="yellowForHash">'+letter+'</span>'+" "
-            else if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += letter+" "
-            else if (letter !== "0" && letter === blockHash[position]) oHashLetters += '<span class="yellowForHash">'+letter+'</span>'+" "
-            else if (letter !== "0") oHashLetters += letter+" "
+            let letter = window.OpponentHash[i];
+            if (
+              letter === blockHash[position] &&
+              letter !== "0" &&
+              letter >= "1" &&
+              letter <= "9"
+            )
+              oHashDigits +=
+                '<span class="yellowForHash">' + letter + "</span>" + " ";
+            else if (letter !== "0" && letter >= "1" && letter <= "9")
+              oHashDigits += letter + " ";
+            else if (letter !== "0" && letter === blockHash[position])
+              oHashLetters +=
+                '<span class="yellowForHash">' + letter + "</span>" + " ";
+            else if (letter !== "0") oHashLetters += letter + " ";
           }
 
-
-          setPlayerHashGameResult(2, oHashLetters, oHashDigits)
+          setPlayerHashGameResult(2, oHashLetters, oHashDigits);
         }
 
-        let bHash = "Hash: "
+        let bHash = "Hash: ";
 
-        for (let i in blockHash){
-          if (i == position){
-            bHash += '<span class="yellowForHash">'+blockHash[i]+'</span>'
-          }
-          else bHash += blockHash[i]
+        for (let i in blockHash) {
+          if (i == position) {
+            bHash += '<span class="yellowForHash">' + blockHash[i] + "</span>";
+          } else bHash += blockHash[i];
         }
 
-        setDataInBottomBlock(bHash)
+        setDataInBottomBlock(bHash);
 
-        rotate()
+        rotate();
 
-        clearInterval(interval)
-        clearInterval(interval2)
-      })
-    }, gameInterval)
+        clearInterval(interval);
+        clearInterval(interval2);
+      });
+    }, gameInterval);
   }
 
-  function showGameResults(){
-    window.isLobbyOpen = false
+  function showGameResults() {
+    window.isLobbyOpen = false;
 
-    document.querySelector(".WaitGameStart").classList.add("hidden")
-    document.querySelector(".GameResults").classList.remove("hidden")
+    document.querySelector(".WaitGameStart").classList.add("hidden");
+    document.querySelector(".GameResults").classList.remove("hidden");
 
-    setImageInGameResults(1, selectedNft.image)
-    setImageInGameResults(2, selectedLobby.nftTransfer.tokenImage)
-
-
+    setImageInGameResults(1, selectedNft.image);
+    setImageInGameResults(2, selectedLobby.nftTransfer.tokenImage);
+    let bn = 0;
     GetLobbyById(selectedLobby.id, Moralis, (json) => {
-
-      let position = json.gameNumber
-      let blockNumber = json.blockNumber
-      if (blockNumber > position){
+      let position = json.gameNumber;
+      let blockNumber = json.blockNumber;
+     /* if (blockNumber > position) {
         blockNumber = position;
-      }
-      let creatorHash = json.creatorHash
-      let opponentHash = json.opponentHash
-      window.CreatorHash = creatorHash
-      window.OpponentHash = opponentHash
+      }*/
+      bn = blockNumber
+      let creatorHash = json.creatorHash;
+      let opponentHash = json.opponentHash;
+      window.CreatorHash = creatorHash;
+      window.OpponentHash = opponentHash;
 
-      let oHashLetters = ""
-      let oHashDigits = ""
+      let oHashLetters = "";
+      let oHashDigits = "";
 
-      for (let i in window.CreatorHash){
-        if (i <= 5) continue
+      for (let i in window.CreatorHash) {
+        if (i <= 5) continue;
 
-        let letter = window.CreatorHash [i]
-        if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += letter+" "
-        else if (letter !== "0") oHashLetters += letter+" "
-      }
-
-      setPlayerHashGameResult(2, oHashLetters, oHashDigits)
-
-      let oHashLetters2 = ""
-      let oHashDigits2 = ""
-
-      for (let i in window.OpponentHash){
-        if (i <= 5) continue
-
-        let letter = window.OpponentHash[i]
-        if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits2 += letter+" "
-        else if (letter !== "0") oHashLetters2 += letter+" "
+        let letter = window.CreatorHash[i];
+        if (letter !== "0" && letter >= "1" && letter <= "9")
+          oHashDigits += letter + " ";
+        else if (letter !== "0") oHashLetters += letter + " ";
       }
 
-      setPlayerHashGameResult(1, oHashLetters2, oHashDigits2)
+      setPlayerHashGameResult(2, oHashLetters, oHashDigits);
 
-      setDataInTopBlock(position, blockNumber)
-    })
+      let oHashLetters2 = "";
+      let oHashDigits2 = "";
+
+      for (let i in window.OpponentHash) {
+        if (i <= 5) continue;
+
+        let letter = window.OpponentHash[i];
+        if (letter !== "0" && letter >= "1" && letter <= "9")
+          oHashDigits2 += letter + " ";
+        else if (letter !== "0") oHashLetters2 += letter + " ";
+      }
+
+      setPlayerHashGameResult(1, oHashLetters2, oHashDigits2);
+
+      setDataInTopBlock(position, blockNumber);
+    });
 
     let interval2 = setInterval(() => {
       GetBlock(Web3Api, chainId.toString()).then((json) => {
-        document.querySelector("#currentBlockTBGR").innerHTML = json
-      })
-    }, gameInterval)
+        if(json> bn) return;
+        document.querySelector("#currentBlockTBGR").innerHTML = json;
+      });
+    }, gameInterval);
 
     let interval = setInterval(() => {
       GetWinner(selectedLobby.id, Moralis, (json) => {
-        console.log(json)
+        console.log(json);
 
-        let winnerAccount = json.address.toLowerCase()
+        let winnerAccount = json.address.toLowerCase();
 
-        if (winnerAccount === "0x0000000000000000000000000000000000000000") return
+        if (winnerAccount === "0x0000000000000000000000000000000000000000")
+          return;
 
-        let blockHash = json.blockHash //'Hash: 0x267a78849675F05B86fb0766d6aB6aA466910A6'
-        let position = json.index
+        let blockHash = json.blockHash; //'Hash: 0x267a78849675F05B86fb0766d6aB6aA466910A6'
+        let position = json.index;
 
         if (winnerAccount === account.toString().toLowerCase()) {
-          setWinnerTextGameResult(1)
+          setWinnerTextGameResult(1);
 
-          let oHashLetters = ""
-          let oHashDigits = ""
+          let oHashLetters = "";
+          let oHashDigits = "";
 
-          for (let i in window.OpponentHash){
-            if (i <= 5) continue
+          for (let i in window.OpponentHash) {
+            if (i <= 5) continue;
 
-            let letter = window.OpponentHash[i]
-            if (letter === blockHash[position] && letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += '<span class="yellowForHash">'+letter+'</span>'+" "
-            else if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += letter+" "
-            else if (letter !== "0" && letter === blockHash[position]) oHashLetters += '<span class="yellowForHash">'+letter+'</span>'+" "
-            else if (letter !== "0") oHashLetters += letter+" "
+            let letter = window.OpponentHash[i];
+            if (
+              letter === blockHash[position] &&
+              letter !== "0" &&
+              letter >= "1" &&
+              letter <= "9"
+            )
+              oHashDigits +=
+                '<span class="yellowForHash">' + letter + "</span>" + " ";
+            else if (letter !== "0" && letter >= "1" && letter <= "9")
+              oHashDigits += letter + " ";
+            else if (letter !== "0" && letter === blockHash[position])
+              oHashLetters +=
+                '<span class="yellowForHash">' + letter + "</span>" + " ";
+            else if (letter !== "0") oHashLetters += letter + " ";
           }
 
-          setPlayerHashGameResult(1, oHashLetters, oHashDigits)
+          setPlayerHashGameResult(1, oHashLetters, oHashDigits);
+        } else {
+          setWinnerTextGameResult(2);
 
-        }
-        else {
-          setWinnerTextGameResult(2)
+          let oHashLetters = "";
+          let oHashDigits = "";
 
-          let oHashLetters = ""
-          let oHashDigits = ""
+          for (let i in window.OpponentHash) {
+            if (i <= 5) continue;
 
-          for (let i in window.OpponentHash){
-            if (i <= 5) continue
-
-            let letter = window.OpponentHash[i]
-            if (letter === blockHash[position] && letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += '<span class="yellowForHash">'+letter+'</span>'+" "
-            else if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += letter+" "
-            else if (letter !== "0" && letter === blockHash[position]) oHashLetters += '<span class="yellowForHash">'+letter+'</span>'+" "
-            else if (letter !== "0") oHashLetters += letter+" "
+            let letter = window.OpponentHash[i];
+            if (
+              letter === blockHash[position] &&
+              letter !== "0" &&
+              letter >= "1" &&
+              letter <= "9"
+            )
+              oHashDigits +=
+                '<span class="yellowForHash">' + letter + "</span>" + " ";
+            else if (letter !== "0" && letter >= "1" && letter <= "9")
+              oHashDigits += letter + " ";
+            else if (letter !== "0" && letter === blockHash[position])
+              oHashLetters +=
+                '<span class="yellowForHash">' + letter + "</span>" + " ";
+            else if (letter !== "0") oHashLetters += letter + " ";
           }
 
-
-          setPlayerHashGameResult(2, oHashLetters, oHashDigits)
-
+          setPlayerHashGameResult(2, oHashLetters, oHashDigits);
         }
 
-        let bHash = "Hash: "
+        let bHash = "Hash: ";
 
-        for (let i in blockHash){
-          if (i == position){
-            bHash += '<span class="yellowForHash">'+blockHash[i]+'</span>'
-          }
-          else bHash += blockHash[i]
+        for (let i in blockHash) {
+          if (i == position) {
+            bHash += '<span class="yellowForHash">' + blockHash[i] + "</span>";
+          } else bHash += blockHash[i];
         }
 
-        rotate()
+        rotate();
 
-        setDataInBottomBlock(bHash)
+        setDataInBottomBlock(bHash);
 
-        clearInterval(interval)
-        clearInterval(interval2)
-
-      })
-    }, gameInterval)
+        clearInterval(interval);
+        clearInterval(interval2);
+      });
+    }, gameInterval);
   }
 
-  function setWinnerTextGameResult(player = 1){
-    document.querySelector("#WinnerBlockGR").classList.remove("hidden")
+  function setWinnerTextGameResult(player = 1) {
+    document.querySelector("#WinnerBlockGR").classList.remove("hidden");
     switch (player) {
       case 1:
-        document.querySelector("#WinnerBlockGR").classList.add("Winner1TextGR")
-        document.querySelector(".ClaimWinningsGR").classList.remove("hidden")
-        document.querySelector(".ClaimWinningsArrowDown").classList.remove("hidden")
-        break
+        document.querySelector("#WinnerBlockGR").classList.add("Winner1TextGR");
+        document.querySelector(".ClaimWinningsGR").classList.remove("hidden");
+        document
+          .querySelector(".ClaimWinningsArrowDown")
+          .classList.remove("hidden");
+        break;
       case 2:
-        document.querySelector("#WinnerBlockGR").classList.add("Winner2TextGR")
-        break
+        document.querySelector("#WinnerBlockGR").classList.add("Winner2TextGR");
+        break;
     }
   }
 
-  function setPlayerHashGameResult(player = 1, hashLetters, hashDigits){
+  function setPlayerHashGameResult(player = 1, hashLetters, hashDigits) {
     switch (player) {
       case 1:
-        document.querySelector(".Player1HashGR p").innerHTML = hashLetters+"<br/>"+hashDigits
-        break
+        document.querySelector(".Player1HashGR p").innerHTML =
+          hashLetters + "<br/>" + hashDigits;
+        break;
       case 2:
-        document.querySelector(".Player2HashGR p").innerHTML = hashLetters+"<br/>"+hashDigits
-        break
+        document.querySelector(".Player2HashGR p").innerHTML =
+          hashLetters + "<br/>" + hashDigits;
+        break;
     }
   }
 
-  function offerSelect(){
-    console.log(selectedLobby)
-    console.log(selectedOfferNft)
-    AcceptOffer(selectedLobby.lobby.lobbyId, selectedOfferNft.id, Moralis, (isSign, json) => {
-
-      if (isSign){
-        showGameResultsCreator()
-      }
-
-    })
+  function offerSelect() {
+    console.log(selectedLobby);
+    console.log(selectedOfferNft);
+    AcceptOffer(
+      selectedLobby.lobby.lobbyId,
+      selectedOfferNft.id,
+      Moralis,
+      (isSign, json) => {
+        if (isSign) {
+          showGameResultsCreator();
+        }
+      },
+    );
   }
 
-  function claimWinning(){
+  function claimWinning() {
     let lobbyId;
-    if (window.isCreate){
-      lobbyId = selectedLobby.lobby.lobbyId
+    if (window.isCreate) {
+      lobbyId = selectedLobby.lobby.lobbyId;
+    } else {
+      lobbyId = selectedLobby.id;
     }
-    else{
-      lobbyId = selectedLobby.id
-    }
-    console.log(selectedLobby)
+    console.log(selectedLobby);
     ClaimReward(lobbyId, Moralis, (isSign, json) => {
-      if (isSign){
+      if (isSign) {
         window.location.reload();
       }
-    })
+    });
   }
 
   function rotate() {
@@ -672,45 +749,49 @@ export default function Game() {
       .querySelector("#CoinFlip")
       .style.setProperty(
         "--animation-time",
-        (Math.floor(Math.random() * 10) * 180 + 180*15).toString() + "deg",
+        (Math.floor(Math.random() * 10) * 180 + 180 * 15).toString() + "deg",
       );
-    document.querySelector("#CoinFlip").classList.toggle("flip-container-hover");
+    document
+      .querySelector("#CoinFlip")
+      .classList.toggle("flip-container-hover");
   }
 
-  function setDataInTopBlock(position, gameblock){
-
-    document.querySelector("#positionTBGR").innerHTML = position
-    document.querySelector("#gameBlockTBGR").innerHTML = gameblock
-
+  function setDataInTopBlock(position, gameblock) {
+    document.querySelector("#positionTBGR").innerHTML = position;
+    document.querySelector("#gameBlockTBGR").innerHTML = gameblock;
   }
 
-  function setDataInBottomBlock(hash){
-    document.querySelector(".GameHashBBGR").innerHTML = hash
+  function setDataInBottomBlock(hash) {
+    document.querySelector(".GameHashBBGR").innerHTML = hash;
   }
 
-  function test(){
-    let hash = "0x000009080706050f0e0d"
+  function test() {
+    let hash = "0x000009080706050f0e0d";
 
-    let oHashLetters = ""
-    let oHashDigits = ""
+    let oHashLetters = "";
+    let oHashDigits = "";
 
-    for (let i in hash){
-      if (i <= 5) continue
+    for (let i in hash) {
+      if (i <= 5) continue;
 
-      let letter = hash[i]
-      if (letter === 'd' && letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += '<span class="yellowForHash">'+letter+'</span>'+" "
-      else if (letter !== "0" && letter >= '1' && letter <= '9') oHashDigits += letter+" "
-      else if (letter !== "0" && letter === 'd') oHashLetters += '<span class="yellowForHash">'+letter+'</span>'+" "
-      else if (letter !== "0") oHashLetters += letter+" "
+      let letter = hash[i];
+      if (letter === "d" && letter !== "0" && letter >= "1" && letter <= "9")
+        oHashDigits +=
+          '<span class="yellowForHash">' + letter + "</span>" + " ";
+      else if (letter !== "0" && letter >= "1" && letter <= "9")
+        oHashDigits += letter + " ";
+      else if (letter !== "0" && letter === "d")
+        oHashLetters +=
+          '<span class="yellowForHash">' + letter + "</span>" + " ";
+      else if (letter !== "0") oHashLetters += letter + " ";
     }
 
-    setPlayerHashGameResult(1, oHashLetters, oHashDigits)
-
+    setPlayerHashGameResult(1, oHashLetters, oHashDigits);
   }
 
   return (
     <div className="background">
-      <img className="gameIcon" src={gameIcon}  onClick={() => rotate()}/>
+      <img className="gameIcon" src={gameIcon} onClick={() => rotate()} />
       <div className="GameWindow1 hidden">
         <img className="coin coinWork" src={coinMain} />
         <p id="statusBlock">Select NFT you want to play for</p>
@@ -776,15 +857,27 @@ export default function Game() {
           <img className="coin" src={coinMain} />
           <CustomAuth />
         </div>
-        <input type="button" value="CREATE GAME" className="CreateGameButton" onClick={() => createGame()} />
-        <input type="button" value="FIND GAME" className="FindGameButton" onClick={() => findGame()} />
+        <input
+          type="button"
+          value="CREATE GAME"
+          className="CreateGameButton"
+          onClick={() => createGame()}
+        />
+        <input
+          type="button"
+          value="FIND GAME"
+          className="FindGameButton"
+          onClick={() => findGame()}
+        />
       </div>
       <div className="WaitGameStart hidden">
         <div>
           <img className="coin coinWork" src={coinMain} />
         </div>
         <p id="statusBlock">Just wait...</p>
-        <div className="NftNotSelected hidden"><p>Your game offer was not selected</p></div>
+        <div className="NftNotSelected hidden">
+          <p>Your game offer was not selected</p>
+        </div>
         <div className="Player1BlockWait">
           <p className="PlayerBlockWaitText">Player 1</p>
           <img className="PlayerBlockWaitImage" id="PlayerBlockWaitImage1" />
@@ -794,16 +887,30 @@ export default function Game() {
           <img className="PlayerBlockWaitImage" id="PlayerBlockWaitImage2" />
         </div>
         <p className="VsTextOnBlockWait">VS</p>
-        <input type="button" value="Cancel Game Offer" className="CancelOfferBlockWait" onClick={() => cancelOffer()} />
+        <input
+          type="button"
+          value="Cancel Game Offer"
+          className="CancelOfferBlockWait"
+          onClick={() => cancelOffer()}
+        />
       </div>
       <div className="GameResults hidden">
         <div className="TopBlockGR">
-          <img src={topBlockGR}/>
-          <div className="CurrentBlockTBGR"><span>Current block: </span> <span id="currentBlockTBGR" style={{ color:"#F7931E" }} ></span></div>
-          <div className="PositionTBGR"><span>Position: </span> <span id="positionTBGR" style={{ color:"#F7931E" }} ></span></div>
-          <div className="GameBlockTBGR"><span>Game block: </span> <span id="gameBlockTBGR" style={{ color:"#F7931E" }} ></span></div>
+          <img src={topBlockGR} />
+          <div className="CurrentBlockTBGR">
+            <span>Current block: </span>{" "}
+            <span id="currentBlockTBGR" style={{ color: "#F7931E" }}></span>
+          </div>
+          <div className="PositionTBGR">
+            <span>Position: </span>{" "}
+            <span id="positionTBGR" style={{ color: "#F7931E" }}></span>
+          </div>
+          <div className="GameBlockTBGR">
+            <span>Game block: </span>{" "}
+            <span id="gameBlockTBGR" style={{ color: "#F7931E" }}></span>
+          </div>
         </div>
-        <img src={coinBackgroundGR} className="CoinBackgroundGR"/>
+        <img src={coinBackgroundGR} className="CoinBackgroundGR" />
         <div className="CoinDiv">
           <div className="flip-container vertical" id="CoinFlip">
             <div className="flipper">
@@ -818,28 +925,34 @@ export default function Game() {
         </div>
         <div className="Player1CardGR">
           <p className="PlayerTextGR">Player 1</p>
-          <img className="PlayerImageGR" id="Player1ImgGR"/>
+          <img className="PlayerImageGR" id="Player1ImgGR" />
         </div>
         <div className="Player2CardGR">
           <p className="PlayerTextGR">Player 2</p>
-          <img className="PlayerImageGR" id="Player2ImgGR"/>
+          <img className="PlayerImageGR" id="Player2ImgGR" />
         </div>
         <div className="BottomBlockGR">
-          <img src={topBlockGR}/>
+          <img src={topBlockGR} />
           <div className="GameHashBBGR"></div>
-
         </div>
         <div className="Player1HashGR">
           <p></p>
         </div>
-        <div className="Player1ArrowDown"/>
-        <div className="Player2ArrowDown"/>
+        <div className="Player1ArrowDown" />
+        <div className="Player2ArrowDown" />
         <div className="Player2HashGR">
           <p></p>
         </div>
-        <p className="hidden" id="WinnerBlockGR">WINNER</p>
-        <div className="ClaimWinningsArrowDown hidden"/>
-        <input type="button" className="ClaimWinningsGR hidden" value="claim winnings" onClick={() => claimWinning()}/>
+        <p className="hidden" id="WinnerBlockGR">
+          WINNER
+        </p>
+        <div className="ClaimWinningsArrowDown hidden" />
+        <input
+          type="button"
+          className="ClaimWinningsGR hidden"
+          value="claim winnings"
+          onClick={() => claimWinning()}
+        />
       </div>
     </div>
   );
