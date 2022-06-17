@@ -785,7 +785,7 @@ export default function Game() {
       else if (letter !== "0") oHashLetters += letter + " ";
     }
 
-    setPlayerHashGameResult(1, oHashLetters, oHashDigits);
+    к(1, oHashLetters, oHashDigits);
   }
 
   return (

@@ -84,34 +84,46 @@ export function CreateLobby(nft, etherValue = 0, Moralis, callback) {
       callback(false, null);
       return;
     }
-    try{
-    val = {
-      lobby: {
-        lobbyId: parseInt(value["events"][1]["args"]["lobbyId"]._hex, 16),
-        creator: value["events"][1]["args"]["creator"],
-        creatorBet: parseInt(value["events"][1]["args"]["creatorBet"]._hex, 16),
-      },
-      bet: {
-        NFTAddress: value["events"][2]["args"]["NFTAddress"],
-        NFTId: parseInt(value["events"][2]["args"]["NFTId"]._hex, 16),
-        betId: parseInt(value["events"][2]["args"]["betId"]._hex, 16),
-        etherValue: parseInt(value["events"][2]["args"]["etherValue"]._hex, 16),
-        lobbyId: parseInt(value["events"][2]["args"]["lobbyId"]._hex, 16),
-        user: value["events"][2]["args"]["user"],
-      },
-    };}
-    catch (e){
+    try {
+      val = {
+        lobby: {
+          lobbyId: parseInt(value["events"][1]["args"]["lobbyId"]._hex, 16),
+          creator: value["events"][1]["args"]["creator"],
+          creatorBet: parseInt(
+            value["events"][1]["args"]["creatorBet"]._hex,
+            16,
+          ),
+        },
+        bet: {
+          NFTAddress: value["events"][2]["args"]["NFTAddress"],
+          NFTId: parseInt(value["events"][2]["args"]["NFTId"]._hex, 16),
+          betId: parseInt(value["events"][2]["args"]["betId"]._hex, 16),
+          etherValue: parseInt(
+            value["events"][2]["args"]["etherValue"]._hex,
+            16,
+          ),
+          lobbyId: parseInt(value["events"][2]["args"]["lobbyId"]._hex, 16),
+          user: value["events"][2]["args"]["user"],
+        },
+      };
+    } catch (e) {
       val = {
         lobby: {
           lobbyId: parseInt(value["events"][2]["args"]["lobbyId"]._hex, 16),
           creator: value["events"][2]["args"]["creator"],
-          creatorBet: parseInt(value["events"][2]["args"]["creatorBet"]._hex, 16),
+          creatorBet: parseInt(
+            value["events"][2]["args"]["creatorBet"]._hex,
+            16,
+          ),
         },
         bet: {
           NFTAddress: value["events"][3]["args"]["NFTAddress"],
           NFTId: parseInt(value["events"][3]["args"]["NFTId"]._hex, 16),
           betId: parseInt(value["events"][3]["args"]["betId"]._hex, 16),
-          etherValue: parseInt(value["events"][3]["args"]["etherValue"]._hex, 16),
+          etherValue: parseInt(
+            value["events"][3]["args"]["etherValue"]._hex,
+            16,
+          ),
           lobbyId: parseInt(value["events"][3]["args"]["lobbyId"]._hex, 16),
           user: value["events"][3]["args"]["user"],
         },
@@ -145,24 +157,30 @@ export function CreateOffer(lobbyID, nft, etherValue = 0, Moralis, callback) {
       callback(false, null);
       return;
     }
-    try{
-    val = {
-      bet: {
-        NFTAddress: value["events"][2]["args"]["NFTAddress"],
-        NFTId: parseInt(value["events"][2]["args"]["NFTId"]._hex, 16),
-        betId: parseInt(value["events"][2]["args"]["betId"]._hex, 16),
-        etherValue: parseInt(value["events"][2]["args"]["etherValue"]._hex, 16),
-        lobbyId: parseInt(value["events"][2]["args"]["lobbyId"]._hex, 16),
-        user: value["events"][2]["args"]["user"],
-      },
-    };}
-    catch (e){
+    try {
+      val = {
+        bet: {
+          NFTAddress: value["events"][2]["args"]["NFTAddress"],
+          NFTId: parseInt(value["events"][2]["args"]["NFTId"]._hex, 16),
+          betId: parseInt(value["events"][2]["args"]["betId"]._hex, 16),
+          etherValue: parseInt(
+            value["events"][2]["args"]["etherValue"]._hex,
+            16,
+          ),
+          lobbyId: parseInt(value["events"][2]["args"]["lobbyId"]._hex, 16),
+          user: value["events"][2]["args"]["user"],
+        },
+      };
+    } catch (e) {
       val = {
         bet: {
           NFTAddress: value["events"][1]["args"]["NFTAddress"],
           NFTId: parseInt(value["events"][1]["args"]["NFTId"]._hex, 16),
           betId: parseInt(value["events"][1]["args"]["betId"]._hex, 16),
-          etherValue: parseInt(value["events"][1]["args"]["etherValue"]._hex, 16),
+          etherValue: parseInt(
+            value["events"][1]["args"]["etherValue"]._hex,
+            16,
+          ),
           lobbyId: parseInt(value["events"][1]["args"]["lobbyId"]._hex, 16),
           user: value["events"][1]["args"]["user"],
         },
@@ -386,7 +404,7 @@ export function GetLobbyById(lobbyID, Moralis, callback) {
       winner: res["winner"],
       opponent: res["opponent"],
     };
-    //console.log(val);
+    console.log(val);
     callback(val);
   });
 }
