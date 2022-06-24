@@ -471,10 +471,10 @@ export default function Game() {
           let oHashLetters = "";
           let oHashDigits = "";
 
-          for (let i in window.OpponentHash) {
+          for (let i in window.CreatorHash) {
             if (i <= 5) continue;
 
-            let letter = window.OpponentHash[i];
+            let letter = window.CreatorHash[i];
             if (
               letter === blockHash[position] &&
               letter !== "0" &&
@@ -643,10 +643,10 @@ export default function Game() {
           let oHashLetters = "";
           let oHashDigits = "";
 
-          for (let i in window.OpponentHash) {
+          for (let i in window.CreatorHash) {
             if (i <= 5) continue;
 
-            let letter = window.OpponentHash[i];
+            let letter = window.CreatorHash[i];
             if (
               letter === blockHash[position] &&
               letter !== "0" &&
@@ -701,6 +701,7 @@ export default function Game() {
   }
 
   function setPlayerHashGameResult(player = 1, hashLetters, hashDigits) {
+    console.log("SetPlayerHash: "+player)
     switch (player) {
       case 1:
         document.querySelector(".Player1HashGR p").innerHTML =
